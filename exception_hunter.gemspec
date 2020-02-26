@@ -26,4 +26,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "rails", "~> 6.0.2", ">= 6.0.2.1"
 
   spec.add_development_dependency "pg"
+  spec.add_development_dependency "factory_bot_rails"
 end

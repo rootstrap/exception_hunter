@@ -1,3 +1,45 @@
+GIT
+  remote: https://github.com/rspec/rspec-core
+  revision: da87aa0c5f25a6e6f2db6f0c8fb2a04625b80ac6
+  specs:
+    rspec-core (3.10.0.pre)
+      rspec-support (= 3.10.0.pre)
+
+GIT
+  remote: https://github.com/rspec/rspec-expectations
+  revision: 866dc56065e10ddfded0078a9a108c7d115ed1ed
+  specs:
+    rspec-expectations (3.10.0.pre)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (= 3.10.0.pre)
+
+GIT
+  remote: https://github.com/rspec/rspec-mocks
+  revision: ae6e11d7f5100146c4b58b165975a29e2ccc60db
+  specs:
+    rspec-mocks (3.10.0.pre)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (= 3.10.0.pre)
+
+GIT
+  remote: https://github.com/rspec/rspec-rails
+  revision: 2f22bf33504c1908a3d9ef32f54da0179ebb0a15
+  specs:
+    rspec-rails (4.0.0.pre)
+      actionpack (>= 4.2)
+      activesupport (>= 4.2)
+      railties (>= 4.2)
+      rspec-core (= 3.10.0.pre)
+      rspec-expectations (= 3.10.0.pre)
+      rspec-mocks (= 3.10.0.pre)
+      rspec-support (= 3.10.0.pre)
+
+GIT
+  remote: https://github.com/rspec/rspec-support
+  revision: 9cec8e858228ee1d1395e4e6186ac39c2a83d705
+  specs:
+    rspec-support (3.10.0.pre)
+
 PATH
   remote: .
   specs:
@@ -65,7 +107,13 @@ GEM
     builder (3.2.4)
     concurrent-ruby (1.1.6)
     crass (1.0.6)
+    diff-lcs (1.3)
     erubi (1.9.0)
+    factory_bot (5.1.1)
+      activesupport (>= 4.2.0)
+    factory_bot_rails (5.1.1)
+      factory_bot (~> 5.1.0)
+      railties (>= 4.2.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     i18n (1.8.2)
@@ -137,7 +185,13 @@ PLATFORMS
 
 DEPENDENCIES
   exception_hunter!
+  factory_bot_rails
   pg
+  rspec-core!
+  rspec-expectations!
+  rspec-mocks!
+  rspec-rails!
+  rspec-support!
 
 BUNDLED WITH
    1.17.3
