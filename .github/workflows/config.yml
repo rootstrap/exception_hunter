@@ -37,6 +37,7 @@ jobs:
         env:
           PGHOST: localhost
           PGUSER: postgres
+          PGPASSWORD: postgres
           RAILS_ENV: test
         run: |
           bundle exec rake db:create
@@ -46,6 +47,7 @@ jobs:
         env:
           PGHOST: localhost
           PGUSER: postgres
+          PGPASSWORD: postgres
           RAILS_ENV: test
         run: |
           COVERAGE=true bundle exec rspec --require rails_helper
