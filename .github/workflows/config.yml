@@ -6,9 +6,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    container:
-      env:
-        RAILS_ENV: test
     # Service containers to run with `runner-job`
     services:
       postgres:
