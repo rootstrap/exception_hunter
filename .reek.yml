@@ -124,7 +124,7 @@ detectors:
     exclude: []
 
   UnusedPrivateMethod:
-    enabled: false
+    enabled: true
 
   UtilityFunction:
     enabled: false

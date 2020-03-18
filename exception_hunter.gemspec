@@ -31,4 +31,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rails_best_practices', '~> 1.20'
   spec.add_development_dependency 'reek', '~> 5.6'
   spec.add_development_dependency 'rubocop', '~> 0.80.1'
+  spec.add_development_dependency 'simplecov', '~> 0.18.5'
 end

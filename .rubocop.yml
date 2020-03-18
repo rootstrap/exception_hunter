@@ -11,6 +11,7 @@ Lint/AmbiguousBlockAssociation:
     - spec/**/*
 
 Metrics/AbcSize:
+  Enabled: false
   # The ABC size is a calculated magnitude, so this number can be an Integer or
   # a Float.
   Max: 18
@@ -21,25 +22,31 @@ Metrics/BlockLength:
   Exclude:
     - config/**/*
     - spec/**/*
+  Severity: warning
 
 Metrics/BlockNesting:
   Max: 4
+  Enabled: false
 
 Metrics/ClassLength:
   CountComments: false  # count full line comments?
   Max: 200
+  Enabled: false
 
 # Avoid complex methods.
 Metrics/CyclomaticComplexity:
   Max: 6
+  Enabled: false
 
 Metrics/MethodLength:
   CountComments: false  # count full line comments?
   Max: 24
+  Severity: warning
 
 Metrics/ModuleLength:
   CountComments: false  # count full line comments?
   Max: 200
+  Enabled: false
 
 Metrics/LineLength:
   Max: 100
@@ -51,9 +58,11 @@ Metrics/LineLength:
 Metrics/ParameterLists:
   Max: 5
   CountKeywordArgs: true
+  Enabled: false
 
 Metrics/PerceivedComplexity:
   Max: 12
+  Enabled: false
 
 Naming/AccessorMethodName:
   Exclude: []
