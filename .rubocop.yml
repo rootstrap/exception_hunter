@@ -2,6 +2,7 @@ AllCops:
   TargetRubyVersion: 2.5.4
   Exclude:
     - 'spec/dummy/config/**/*'
+    - 'spec/dummy/db/**/*'
 
 Documentation:
   Enabled: false
