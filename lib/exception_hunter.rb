@@ -1,4 +1,4 @@
-require "exception_hunter/engine"
+require 'exception_hunter/engine'
 
 module ExceptionHunter
   # Your code goes here...
