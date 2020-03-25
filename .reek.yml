@@ -72,12 +72,12 @@ detectors:
     max_instance_variables: 9
 
   TooManyMethods:
-    enabled: true
+    enabled: false
     exclude: []
     max_methods: 25
 
   TooManyStatements:
-    enabled: true
+    enabled: false
     exclude:
     - initialize
     max_statements: 12

@@ -1,4 +1,4 @@
-default: &default
+test:
   adapter: postgresql
   encoding: unicode
   username: <%= ENV['POSTGRES_USER'] %>
@@ -6,5 +6,3 @@ default: &default
   host: <%= ENV['POSTGRES_HOST'] %>
   pool: 5
   database: <%= ENV['POSTGRES_DB'] %>
-test:
-  <<: *default

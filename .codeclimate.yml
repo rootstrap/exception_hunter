@@ -1,7 +1,7 @@
 version: '2'
 checks:
   argument-count:
-    enabled: true
+    enabled: false
     config:
       threshold: 4
   complex-logic:
@@ -9,15 +9,15 @@ checks:
     config:
       threshold: 4
   file-lines:
-    enabled: true
+    enabled: false
     config:
       threshold: 250
   method-complexity:
-    enabled: true
+    enabled: false
     config:
       threshold: 5
   method-count:
-    enabled: true
+    enabled: false
     config:
       threshold: 20
   method-lines:
@@ -33,11 +33,11 @@ checks:
     config:
       threshold: 4
   similar-code:
-    enabled: true
+    enabled: false
     config:
       threshold: #language-specific defaults. overrides affect all languages.
   identical-code:
-    enabled: true
+    enabled: false
     config:
       threshold: #language-specific defaults. overrides affect all languages.
 plugins:
