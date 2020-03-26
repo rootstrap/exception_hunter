@@ -1,13 +1,13 @@
 GIT
   remote: https://github.com/rspec/rspec-core
-  revision: da87aa0c5f25a6e6f2db6f0c8fb2a04625b80ac6
+  revision: 002ebcb65324bca7b3ee044e22f4c02133fce14d
   specs:
     rspec-core (3.10.0.pre)
       rspec-support (= 3.10.0.pre)
 
 GIT
   remote: https://github.com/rspec/rspec-expectations
-  revision: 866dc56065e10ddfded0078a9a108c7d115ed1ed
+  revision: 9f224eaeb5c6d7eaaab0f7f6e355efd9329328f8
   specs:
     rspec-expectations (3.10.0.pre)
       diff-lcs (>= 1.2.0, < 2.0)
@@ -15,7 +15,7 @@ GIT
 
 GIT
   remote: https://github.com/rspec/rspec-mocks
-  revision: ae6e11d7f5100146c4b58b165975a29e2ccc60db
+  revision: 81c17e89b2722cb225d602e08b600e4a4f6148a4
   specs:
     rspec-mocks (3.10.0.pre)
       diff-lcs (>= 1.2.0, < 2.0)
@@ -23,9 +23,9 @@ GIT
 
 GIT
   remote: https://github.com/rspec/rspec-rails
-  revision: 2f22bf33504c1908a3d9ef32f54da0179ebb0a15
+  revision: eb3377bca425f0d74b9f510dbb53b2a161080016
   specs:
-    rspec-rails (4.0.0.pre)
+    rspec-rails (4.1.0.pre)
       actionpack (>= 4.2)
       activesupport (>= 4.2)
       railties (>= 4.2)
@@ -36,7 +36,7 @@ GIT
 
 GIT
   remote: https://github.com/rspec/rspec-support
-  revision: 9cec8e858228ee1d1395e4e6186ac39c2a83d705
+  revision: 63c03e5e6f0ac858398933f820d37087f57c315a
   specs:
     rspec-support (3.10.0.pre)
 
@@ -111,6 +111,7 @@ GEM
       thread_safe (~> 0.3, >= 0.3.1)
     brakeman (4.8.0)
     builder (3.2.4)
+    byebug (11.1.1)
     code_analyzer (0.5.1)
       sexp_processor
     codeclimate-engine-rb (0.4.1)
@@ -146,13 +147,13 @@ GEM
       mini_mime (>= 0.1.1)
     marcel (0.3.3)
       mimemagic (~> 0.3.2)
-    method_source (0.9.2)
+    method_source (1.0.0)
     mimemagic (0.3.4)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.14.0)
     nio4r (2.5.2)
-    nokogiri (1.10.8)
+    nokogiri (1.10.9)
       mini_portile2 (~> 2.4.0)
     parallel (1.19.1)
     parser (2.7.0.4)
@@ -216,6 +217,8 @@ GEM
       unicode-display_width (>= 1.4.0, < 1.7)
     ruby-progressbar (1.10.1)
     sexp_processor (4.14.1)
+    shoulda-matchers (4.3.0)
+      activesupport (>= 4.2.0)
     simplecov (0.18.5)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
@@ -240,13 +243,14 @@ GEM
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
-    zeitwerk (2.2.2)
+    zeitwerk (2.3.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   brakeman (~> 4.8)
+  byebug (~> 11.1)
   exception_hunter!
   factory_bot_rails
   pg
@@ -258,6 +262,7 @@ DEPENDENCIES
   rspec-rails!
   rspec-support!
   rubocop (~> 0.80.1)
+  shoulda-matchers (~> 4.3)
   simplecov (~> 0.18.5)
 
 BUNDLED WITH
