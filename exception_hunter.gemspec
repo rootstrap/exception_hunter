@@ -26,12 +26,12 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails', '~> 6.0.2', '>= 6.0.2.1'
 
   spec.add_development_dependency 'brakeman', '~> 4.8'
+  spec.add_development_dependency 'byebug', '~> 11.1'
   spec.add_development_dependency 'factory_bot_rails'
   spec.add_development_dependency 'pg'
   spec.add_development_dependency 'rails_best_practices', '~> 1.20'
   spec.add_development_dependency 'reek', '~> 5.6'
   spec.add_development_dependency 'rubocop', '~> 0.80.1'
-  spec.add_development_dependency 'simplecov', '~> 0.18.5'
   spec.add_development_dependency 'shoulda-matchers', '~> 4.3'
-  spec.add_development_dependency 'byebug', '~> 11.1'
+  spec.add_development_dependency 'simplecov', '~> 0.18.5'
 end
