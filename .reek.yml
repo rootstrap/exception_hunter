@@ -125,6 +125,8 @@ detectors:
 
   UnusedPrivateMethod:
     enabled: true
+    exclude:
+      - ExceptionHunter::Error
 
   UtilityFunction:
     enabled: false

@@ -22,19 +22,6 @@ GIT
       rspec-support (= 3.10.0.pre)
 
 GIT
-  remote: https://github.com/rspec/rspec-rails
-  revision: eb3377bca425f0d74b9f510dbb53b2a161080016
-  specs:
-    rspec-rails (4.1.0.pre)
-      actionpack (>= 4.2)
-      activesupport (>= 4.2)
-      railties (>= 4.2)
-      rspec-core (= 3.10.0.pre)
-      rspec-expectations (= 3.10.0.pre)
-      rspec-mocks (= 3.10.0.pre)
-      rspec-support (= 3.10.0.pre)
-
-GIT
   remote: https://github.com/rspec/rspec-support
   revision: 63c03e5e6f0ac858398933f820d37087f57c315a
   specs:
@@ -207,6 +194,14 @@ GEM
       rainbow (>= 2.0, < 4.0)
     require_all (3.0.0)
     rexml (3.2.4)
+    rspec-rails (4.0.0)
+      actionpack (>= 4.2)
+      activesupport (>= 4.2)
+      railties (>= 4.2)
+      rspec-core (~> 3.9)
+      rspec-expectations (~> 3.9)
+      rspec-mocks (~> 3.9)
+      rspec-support (~> 3.9)
     rubocop (0.80.1)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
@@ -259,7 +254,7 @@ DEPENDENCIES
   rspec-core!
   rspec-expectations!
   rspec-mocks!
-  rspec-rails!
+  rspec-rails (~> 4.0)
   rspec-support!
   rubocop (~> 0.80.1)
   shoulda-matchers (~> 4.3)

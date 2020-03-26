@@ -16,12 +16,12 @@ ActiveRecord::Schema.define(version: 2020_03_25_132733) do
   enable_extension "plpgsql"
 
   create_table "exception_hunter_errors", force: :cascade do |t|
-    t.string "name", null: false
-    t.text "message"
+    t.string "class_name", null: false
+    t.string "message"
     t.datetime "ocurred_at", null: false
     t.json "environment_data"
     t.json "custom_data"
-    t.text "backtrace"
+    t.string "backtrace", default: [], array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
