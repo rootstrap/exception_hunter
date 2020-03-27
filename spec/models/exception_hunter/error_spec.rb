@@ -9,18 +9,17 @@ module ExceptionHunter
 
     describe 'ocurred at' do
       let!(:error) { create(:error, ocurred_at: nil) }
-      let!(:ocurred_at) { error.ocurred_at }
 
       context 'when creating' do
         it 'sets timestamp' do
-          expect(error.ocurred_at).not_to be_nil
+          expect(error.ocurred_at).to be_within(1.second).of(Time.now)
         end
       end
 
       context 'when updating' do
         it "doesn't modify timestamp" do
-          error.update!(class_name: 'AnotherOne')
-          expect(error.reload.ocurred_at).to eq(ocurred_at)
+          expect { error.update!(class_name: 'AnotherOne') }
+            .not_to change { error.reload.ocurred_at }
         end
       end
     end
