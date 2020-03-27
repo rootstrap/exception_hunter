@@ -22,9 +22,9 @@ gem 'rspec-support', git: 'https://github.com/rspec/rspec-support'
 
 group :development, :test do
   gem 'byebug', '~> 11.1'
-  gem 'rspec-rails', '~> 4.0'
 end
 
 group :test do
+  gem 'rspec-rails', '~> 4.0'
   gem 'shoulda-matchers', '~> 4.3'
 end
