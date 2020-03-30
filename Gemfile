@@ -10,7 +10,6 @@ gemspec
 gem 'rspec-core', git: 'https://github.com/rspec/rspec-core'
 gem 'rspec-expectations', git: 'https://github.com/rspec/rspec-expectations'
 gem 'rspec-mocks', git: 'https://github.com/rspec/rspec-mocks'
-gem 'rspec-rails', git: 'https://github.com/rspec/rspec-rails'
 gem 'rspec-support', git: 'https://github.com/rspec/rspec-support'
 
 # Declare any dependencies that are still in development here instead of in
@@ -20,3 +19,12 @@ gem 'rspec-support', git: 'https://github.com/rspec/rspec-support'
 
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
+
+group :development, :test do
+  gem 'byebug', '~> 11.1'
+end
+
+group :test do
+  gem 'rspec-rails', '~> 4.0'
+  gem 'shoulda-matchers', '~> 4.3'
+end

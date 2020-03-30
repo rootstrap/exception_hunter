@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2020_03_25_132733) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "exception_hunter_errors", force: :cascade do |t|
+    t.string "class_name", null: false
+    t.string "message"
+    t.datetime "ocurred_at", null: false
+    t.json "environment_data"
+    t.json "custom_data"
+    t.string "backtrace", default: [], array: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
 end
