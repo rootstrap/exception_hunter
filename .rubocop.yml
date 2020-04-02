@@ -11,6 +11,10 @@ Lint/AmbiguousBlockAssociation:
   Exclude:
     - spec/**/*
 
+Lint/RescueException:
+  Exclude:
+    - lib/exception_hunter/hunt.rb
+
 Metrics/AbcSize:
   Enabled: false
   # The ABC size is a calculated magnitude, so this number can be an Integer or
