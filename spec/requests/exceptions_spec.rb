@@ -29,12 +29,12 @@ module ExceptionHunter
 
       it 'tracks the environment data' do
         expect(error.environment_data).to include(
-                                            'HTTP_HOST' => 'www.example.com',
-                                            'PATH_INFO' => '/raising_endpoint',
-                                            'QUERY_STRING' => '',
-                                            'REQUEST_METHOD' => 'GET',
-                                            'REQUEST_URI' => '/raising_endpoint'
-                                          )
+          'HTTP_HOST' => 'www.example.com',
+          'PATH_INFO' => '/raising_endpoint',
+          'QUERY_STRING' => '',
+          'REQUEST_METHOD' => 'GET',
+          'REQUEST_URI' => '/raising_endpoint'
+        )
       end
     end
   end
