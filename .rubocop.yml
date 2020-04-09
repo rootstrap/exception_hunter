@@ -13,7 +13,7 @@ Lint/AmbiguousBlockAssociation:
 
 Lint/RescueException:
   Exclude:
-    - lib/exception_hunter/hunt.rb
+    - lib/exception_hunter/request_hunter.rb
 
 Metrics/AbcSize:
   Enabled: false
@@ -71,6 +71,10 @@ Metrics/PerceivedComplexity:
 
 Naming/AccessorMethodName:
   Exclude: []
+
+Naming/RescuedExceptionsVariableName:
+  Exclude:
+    - lib/exception_hunter/request_hunter.rb
 
 Style/FrozenStringLiteralComment:
   Enabled: false
