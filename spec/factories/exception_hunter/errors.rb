@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :error, class: 'ExceptionHunter::Error' do
     class_name { 'ExceptionName' }
     message { 'Exception message' }
-    ocurred_at { '2020-03-25 10:27:33' }
+    occurred_at { '2020-03-25 10:27:33' }
     environment_data do
       {
         target: 'http://socialWebExample.com/users',

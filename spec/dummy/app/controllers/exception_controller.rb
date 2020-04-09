@@ -1,5 +1,5 @@
 class ExceptionController < ApplicationController
-  def operation_that_raises
-    raise HunterTestException
+  def raising_endpoint
+    raise ArgumentError, 'You should not have called me'
   end
 end

@@ -2,7 +2,7 @@ module ExceptionHunter
   class RequestHunter
     ENVIRONMENT_KEYS =
       %w[PATH_INFO QUERY_STRING REMOTE_HOST REQUEST_METHOD REQUEST_URI
-         SERVER_PROTOCOL HTTP_HOST HTTP_USER_AGENT HTTP_COOKIE].freeze
+         SERVER_PROTOCOL HTTP_HOST HTTP_USER_AGENT].freeze
 
     def initialize(app)
       @app = app
@@ -18,7 +18,7 @@ module ExceptionHunter
     private
 
     def catch_prey(env, exception)
-      ExceptionHunter::Error.create!(
+      Error.create(
         class_name: exception.class.to_s,
         message: exception.message,
         environment_data: environment_data(env),
