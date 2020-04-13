@@ -41,11 +41,11 @@ module ExceptionHunter
         it 'creates an error record to track the exception' do
           expect {
             begin
-                     subject
+              subject
             rescue StandardError
               nil
-                   end
-          } .to change(Error, :count).by(1)
+            end
+          }.to change(Error, :count).by(1)
         end
 
         it 'tracks the configured env data' do

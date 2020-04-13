@@ -24,5 +24,7 @@ FactoryBot.define do
        'actionpack (3.0.7) lib/action_view/template.rb:135:in `block in render',
        'activesupport (3.0.7) lib/active_support/notifications.rb:54:in `instrument']
     end
+
+    association(:error_group)
   end
 end

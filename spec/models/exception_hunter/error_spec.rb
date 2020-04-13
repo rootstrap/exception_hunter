@@ -7,7 +7,11 @@ module ExceptionHunter
       it { is_expected.to validate_presence_of(:class_name) }
     end
 
-    describe 'ocurred at' do
+    describe 'associations' do
+      it { is_expected.to belong_to(:error_group) }
+    end
+
+    describe 'occurred at' do
       let!(:error) { create(:error, occurred_at: nil) }
 
       context 'when creating' do
