@@ -29,7 +29,8 @@ detectors:
 
   FeatureEnvy:
     enabled: true
-    exclude: []
+    exclude:
+      - ExceptionHunter::RequestHunter#catch_prey
 
   InstanceVariableAssumption:
     enabled: false
@@ -111,7 +112,8 @@ detectors:
 
   UncommunicativeVariableName:
     enabled: true
-    exclude: []
+    exclude:
+    - ExceptionHunter::RequestHunter#call
     reject:
     - "/^.$/"
     - "/[0-9]$/"

@@ -1,13 +1,13 @@
 GIT
   remote: https://github.com/rspec/rspec-core
-  revision: dd3b2abe63b0dbd4c5c4131275a858d63cddab0e
+  revision: 464b8488e80a90c5c1a76b476c1b814f79fc8efb
   specs:
     rspec-core (3.10.0.pre)
       rspec-support (= 3.10.0.pre)
 
 GIT
   remote: https://github.com/rspec/rspec-expectations
-  revision: 9f224eaeb5c6d7eaaab0f7f6e355efd9329328f8
+  revision: 7b7fecf35e3a93d74893020f55faa62901fdf6d0
   specs:
     rspec-expectations (3.10.0.pre)
       diff-lcs (>= 1.2.0, < 2.0)
@@ -15,7 +15,7 @@ GIT
 
 GIT
   remote: https://github.com/rspec/rspec-mocks
-  revision: 81c17e89b2722cb225d602e08b600e4a4f6148a4
+  revision: a0005a15cc092c7cde75a8429f2da6704235488e
   specs:
     rspec-mocks (3.10.0.pre)
       diff-lcs (>= 1.2.0, < 2.0)
@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/rspec/rspec-support
-  revision: 63c03e5e6f0ac858398933f820d37087f57c315a
+  revision: 0e322b49c412947c306d394fdaa506d7d830f1cd
   specs:
     rspec-support (3.10.0.pre)
 
@@ -261,4 +261,4 @@ DEPENDENCIES
   simplecov (~> 0.18.5)
 
 BUNDLED WITH
-   1.17.3
+   2.1.4

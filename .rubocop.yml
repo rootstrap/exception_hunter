@@ -11,6 +11,10 @@ Lint/AmbiguousBlockAssociation:
   Exclude:
     - spec/**/*
 
+Lint/RescueException:
+  Exclude:
+    - lib/exception_hunter/request_hunter.rb
+
 Metrics/AbcSize:
   Enabled: false
   # The ABC size is a calculated magnitude, so this number can be an Integer or
@@ -67,6 +71,10 @@ Metrics/PerceivedComplexity:
 
 Naming/AccessorMethodName:
   Exclude: []
+
+Naming/RescuedExceptionsVariableName:
+  Exclude:
+    - lib/exception_hunter/request_hunter.rb
 
 Style/FrozenStringLiteralComment:
   Enabled: false
