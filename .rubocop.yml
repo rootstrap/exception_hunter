@@ -54,7 +54,7 @@ Metrics/ModuleLength:
   Enabled: false
 
 Metrics/LineLength:
-  Max: 100
+  Max: 120
   AllowURI: true
   URISchemes:
     - http

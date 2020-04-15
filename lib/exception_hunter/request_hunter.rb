@@ -18,7 +18,7 @@ module ExceptionHunter
     private
 
     def catch_prey(env, exception)
-      Error.create(
+      ErrorCreator.call(
         class_name: exception.class.to_s,
         message: exception.message,
         environment_data: environment_data(env),
