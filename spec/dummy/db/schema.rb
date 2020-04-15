@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(version: 2020_04_13_030831) do
   enable_extension "plpgsql"
 
   create_table "exception_hunter_error_groups", force: :cascade do |t|
+    t.string "error_class_name", null: false
     t.string "message"
-    t.string "error_class_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["message"], name: "index_exception_hunter_error_groups_on_message", opclass: :gin_trgm_ops, using: :gin
