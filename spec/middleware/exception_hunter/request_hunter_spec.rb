@@ -2,11 +2,12 @@ module ExceptionHunter
   describe RequestHunter do
     let(:request_hunter) { RequestHunter.new(app) }
     let(:app) { double('Rack app') }
+    let(:controller) { double('controller') }
 
     describe '#call' do
       subject { request_hunter.call(env) }
 
-      let(:env) { tracked_env.merge(not_tracked_env) }
+      let(:env) { tracked_env.merge(not_tracked_env).merge('action_controller.instance' => controller) }
       let(:tracked_env) do
         {
           'PATH_INFO' => '/path/to/endpoint',
@@ -68,6 +69,40 @@ module ExceptionHunter
 
           error = Error.last
           expect(error.environment_data).not_to include(not_tracked_env)
+        end
+
+        context 'when the exception was raised by a logged user' do
+          let!(:user) { User.create!(email: 'example@example.com', password: 'password') }
+          before do
+            allow(controller).to receive(:current_user).and_return(user)
+          end
+
+          it 'registers user data' do
+            begin
+              subject
+            rescue StandardError
+              nil
+            end
+            expect(Error.last.user_data).to eq(
+              { 'email' => user.email,
+                'id' => user.id }
+            )
+          end
+        end
+
+        context 'when the exception was raised by an unlogged user' do
+          before do
+            allow(controller).to receive(:current_user).and_return(nil)
+          end
+
+          it 'does not register user data' do
+            begin
+              subject
+            rescue StandardError
+              nil
+            end
+            expect(Error.last.user_data).to be_nil
+          end
         end
       end
     end

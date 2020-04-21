@@ -9,7 +9,7 @@ module ExceptionHunter
           error.error_group = error_group
 
           error.save!
-          true
+          error
         end
       rescue ActiveRecord::RecordInvalid
         false

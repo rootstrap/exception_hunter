@@ -7,6 +7,11 @@ module ExceptionHunter
 
     before_validation :set_occurred_at, on: :create
 
+    def add_user(user)
+      self.user_data = UserAttributesCollector.collect_attributes(user)
+      save!
+    end
+
     private
 
     def set_occurred_at

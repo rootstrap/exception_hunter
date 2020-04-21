@@ -22,6 +22,7 @@ gem 'rspec-support', git: 'https://github.com/rspec/rspec-support'
 
 group :development, :test do
   gem 'byebug', '~> 11.1'
+  gem 'devise', '~> 4.7'
 end
 
 group :test do

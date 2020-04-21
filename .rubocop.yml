@@ -3,6 +3,7 @@ AllCops:
   Exclude:
     - 'spec/dummy/config/**/*'
     - 'spec/dummy/db/**/*'
+    - 'config/initializers/**/*'
 
 Documentation:
   Enabled: false

@@ -15,12 +15,12 @@ module ExceptionHunter
                    message: 'Something went very wrong 567')
           end
 
-          it 'returns true' do
-            expect(subject).to be true
-          end
-
           it 'creates an error ' do
             expect { subject }.to change(Error, :count).by(1)
+          end
+
+          it 'returns the error' do
+            expect(subject).to eq(Error.first)
           end
 
           it 'binds the error to the error group ' do
@@ -34,12 +34,12 @@ module ExceptionHunter
         end
 
         context 'without a matching error group' do
-          it 'returns true' do
-            expect(subject).to be true
-          end
-
           it 'creates an error' do
             expect { subject }.to change(Error, :count).by(1)
+          end
+
+          it 'returns the error' do
+            expect(subject).to eq(Error.first)
           end
 
           it 'creates an error group and binds the error to it' do
