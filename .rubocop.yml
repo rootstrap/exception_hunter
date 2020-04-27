@@ -102,3 +102,7 @@ Style/HashTransformValues:
 Style/StringLiterals:
   Exclude:
     - spec/dummy/**/*
+
+Style/RescueModifier:
+  Exclude:
+    - spec/middleware/exception_hunter/request_hunter_spec.rb

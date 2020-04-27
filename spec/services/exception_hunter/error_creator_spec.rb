@@ -20,7 +20,7 @@ module ExceptionHunter
           end
 
           it 'returns the error' do
-            expect(subject).to eq(Error.first)
+            expect(subject).to be_an(Error)
           end
 
           it 'binds the error to the error group ' do

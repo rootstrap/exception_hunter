@@ -3,25 +3,13 @@ module ExceptionHunter
     extend self
 
     def collect_attributes(user)
-      user_data = {}
-      attributes.each do |attribute|
-        value = user.send(attribute)
-        user_data[attribute] = value
-
-      rescue NoMethodError => e
-        logger.error e.message
+      attributes.reduce({}) do |data, attribute|
+        data.merge(attribute => user.try(attribute))
       end
-
-      user_data
     end
 
     def attributes
-      attributes = Config.user_attributes
-
-      raise 'User attributes are required to be an array' unless
-        attributes.is_a?(Array)
-
-      attributes
+      Config.user_attributes
     end
   end
 end
