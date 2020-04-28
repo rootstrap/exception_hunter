@@ -114,6 +114,7 @@ detectors:
     enabled: true
     exclude:
     - ExceptionHunter::RequestHunter#call
+    - ExceptionHunter::UserAttributesCollector#collect_attributes
     reject:
     - "/^.$/"
     - "/[0-9]$/"

@@ -2,11 +2,13 @@ module ExceptionHunter
   describe RequestHunter do
     let(:request_hunter) { RequestHunter.new(app) }
     let(:app) { double('Rack app') }
+    let(:controller) { double('controller') }
+    let(:user) { double('User', id: 3, email: 'example@example.com') }
 
     describe '#call' do
       subject { request_hunter.call(env) }
 
-      let(:env) { tracked_env.merge(not_tracked_env) }
+      let(:env) { tracked_env.merge(not_tracked_env).merge('action_controller.instance' => controller) }
       let(:tracked_env) do
         {
           'PATH_INFO' => '/path/to/endpoint',
@@ -31,6 +33,7 @@ module ExceptionHunter
       context 'when the app has an exception' do
         before do
           allow(app).to receive(:call).and_raise(ArgumentError.new('Something happened on the app'))
+          allow(controller).to receive(:current_user).and_return(nil)
         end
 
         it 're-raises the exception' do
@@ -40,34 +43,49 @@ module ExceptionHunter
 
         it 'creates an error record to track the exception' do
           expect {
-            begin
-              subject
-            rescue StandardError
-              nil
-            end
+            subject rescue nil
           }.to change(Error, :count).by(1)
         end
 
         it 'tracks the configured env data' do
-          begin
-            subject
-          rescue StandardError
-            nil
-          end
+          subject rescue nil
 
           error = Error.last
           expect(error.environment_data).to include(tracked_env)
         end
 
         it 'does not track none-configured data' do
-          begin
-            subject
-          rescue StandardError
-            nil
-          end
+          subject rescue nil
 
           error = Error.last
           expect(error.environment_data).not_to include(not_tracked_env)
+        end
+
+        context 'when the exception was raised by a logged user' do
+          before do
+            allow(controller).to receive(:current_user).and_return(user)
+          end
+
+          it 'registers user data' do
+            subject rescue nil
+
+            expect(Error.last.user_data).to include(
+              { 'email' => user.email,
+                'id' => user.id }
+            )
+          end
+        end
+
+        context 'when the exception was raised by an unlogged user' do
+          before do
+            allow(controller).to receive(:current_user).and_return(nil)
+          end
+
+          it 'does not register user data' do
+            subject rescue nil
+
+            expect(Error.last.user_data).to eq({})
+          end
         end
       end
     end
