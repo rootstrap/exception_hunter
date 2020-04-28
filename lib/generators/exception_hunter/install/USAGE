@@ -1,0 +1,6 @@
+Description:
+    Generates an initializer and the needed setup to use the ExceptionHunter gem. It also
+    creates a user for developers to access the dashboard by invoking devise.
+
+Example:
+    rails generate exception_hunter:install SuperUser

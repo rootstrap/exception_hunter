@@ -3,7 +3,9 @@ ExceptionHunter.setup do |config|
   #
   # Exception Hunter will include the user as part of the environment
   # data, if it was to be available. The default configuration uses devise
-  # :current_user method. You can change it in case
+  # :current_user method. You can change it in case you named your user model
+  # in some other way (i.e. Member). You can also remove the configuration if
+  # you don't wish to track user data.
   #
   config.current_user_method = :current_user
 
