@@ -3,7 +3,7 @@ module ExceptionHunter
     class << self
       def call(**error_attrs)
         ActiveRecord::Base.transaction do
-          error_attrs = include_user(error_attrs)
+          error_attrs = extract_user_data(error_attrs)
           error = Error.new(error_attrs)
           error_group = ErrorGroup.find_matching_group(error) || ErrorGroup.new
           update_error_group(error_group, error)
@@ -24,12 +24,14 @@ module ExceptionHunter
         error_group.save!
       end
 
-      def include_user(**error_attrs)
+      def extract_user_data(**error_attrs)
         user = error_attrs[:user]
-        unless user.nil?
-          error_attrs[:user_data] =
+        error_attrs[:user_data] =
+          if user.nil?
+            {}
+          else
             UserAttributesCollector.collect_attributes(user)
-        end
+          end
 
         error_attrs.delete(:user)
         error_attrs

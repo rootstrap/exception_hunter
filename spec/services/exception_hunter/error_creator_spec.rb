@@ -39,7 +39,7 @@ module ExceptionHunter
           end
 
           it 'returns the error' do
-            expect(subject).to eq(Error.first)
+            expect(subject).to be_an(Error)
           end
 
           it 'creates an error group and binds the error to it' do

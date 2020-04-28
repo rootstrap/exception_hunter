@@ -84,7 +84,7 @@ module ExceptionHunter
           it 'does not register user data' do
             subject rescue nil
 
-            expect(Error.last.user_data).to be_nil
+            expect(Error.last.user_data).to eq({})
           end
         end
       end

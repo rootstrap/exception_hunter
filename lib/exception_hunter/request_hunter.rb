@@ -18,7 +18,7 @@ module ExceptionHunter
     private
 
     def catch_prey(env, exception)
-      user = user_data(env)
+      user = user_from_env(env)
       ErrorCreator.call(
         class_name: exception.class.to_s,
         message: exception.message,
@@ -32,7 +32,7 @@ module ExceptionHunter
       env.select { |key, _value| ENVIRONMENT_KEYS.include?(key) }
     end
 
-    def user_data(env)
+    def user_from_env(env)
       current_user_method = Config.current_user_method
       controller = env['action_controller.instance']
       controller.try(current_user_method)
