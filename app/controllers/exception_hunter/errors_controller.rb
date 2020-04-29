@@ -1,4 +1,4 @@
-require_dependency "exception_hunter/application_controller"
+require_dependency 'exception_hunter/application_controller'
 
 module ExceptionHunter
   class ErrorsController < ApplicationController
