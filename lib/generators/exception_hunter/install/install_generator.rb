@@ -15,14 +15,15 @@ module ExceptionHunter
 
     def setup_routes
       if options[:users]
-        inject_into_file "config/routes.rb", "\n  ExceptionHunter.routes(self)", after: /devise_for .*/
+        inject_into_file 'config/routes.rb', "\n  ExceptionHunter.routes(self)", after: /devise_for .*/
       else
         route 'ExceptionHunter.routes(self)'
       end
     end
 
     def create_migrations
-      migration_template 'create_exception_hunter_error_groups.rb.erb', 'db/migrate/create_exception_hunter_error_groups.rb'
+      migration_template 'create_exception_hunter_error_groups.rb.erb',
+                         'db/migrate/create_exception_hunter_error_groups.rb'
       migration_template 'create_exception_hunter_errors.rb.erb', 'db/migrate/create_exception_hunter_errors.rb'
     end
   end
