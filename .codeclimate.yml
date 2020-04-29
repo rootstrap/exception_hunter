@@ -71,9 +71,3 @@ plugins:
     channel: reek-5-3-1
     config:
       file: '.reek.yml'
-engines:
-  rubocop:
-    enabled: true
-    checks:
-      Rubocop/Performance/StringReplacement:
-        enabled: false
