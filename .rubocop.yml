@@ -108,4 +108,4 @@ Style/RescueModifier:
     - spec/middleware/exception_hunter/request_hunter_spec.rb
 
 Performance/StringReplacement:
-  enabled: false
+  Enabled: false
