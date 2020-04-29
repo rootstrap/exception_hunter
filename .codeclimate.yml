@@ -66,9 +66,6 @@ plugins:
     exclude_patterns:
       - db/**/*
       - bin/
-    checks:
-      Performance/StringReplacement:
-        Enabled: false
   reek:
     enabled: true
     channel: reek-5-3-1
