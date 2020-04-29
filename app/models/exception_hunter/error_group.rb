@@ -17,5 +17,13 @@ module ExceptionHunter
         .most_similar(error.message.to_s)
         .first
     end
+
+    def last_occurrence
+      grouped_errors.maximum(:occurred_at)
+    end
+
+    def total_occurrences
+      grouped_errors.count
+    end
   end
 end

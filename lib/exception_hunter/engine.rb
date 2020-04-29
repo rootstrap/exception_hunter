@@ -1,3 +1,5 @@
+require_dependency 'exception_hunter/railtie'
+
 module ExceptionHunter
   class Engine < ::Rails::Engine
     isolate_namespace ExceptionHunter
