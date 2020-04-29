@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_21_142700) do
+ActiveRecord::Schema.define(version: 2020_04_28_212929) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -30,11 +30,11 @@ ActiveRecord::Schema.define(version: 2020_04_21_142700) do
     t.datetime "occurred_at", null: false
     t.json "environment_data"
     t.json "custom_data"
+    t.json "user_data"
     t.string "backtrace", default: [], array: true
+    t.bigint "error_group_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "error_group_id"
-    t.json "user_data"
     t.index ["error_group_id"], name: "index_exception_hunter_errors_on_error_group_id"
   end
 
