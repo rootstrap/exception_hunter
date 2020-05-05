@@ -150,6 +150,7 @@ GEM
     nokogiri (1.10.9)
       mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
+    pagy (3.8.0)
     parallel (1.19.1)
     parser (2.7.0.5)
       ast (~> 2.4.0)
@@ -262,6 +263,7 @@ DEPENDENCIES
   devise (~> 4.7)
   exception_hunter!
   factory_bot_rails
+  pagy (~> 3.8)
   pg
   rails_best_practices (~> 1.20)
   reek (~> 5.6)

@@ -1,0 +1,17 @@
+<% link = pagy_link_proc(pagy) %>
+<nav aria-label="pager" class="pagy_nav pagination" role="navigation">
+  <% if pagy.prev %>
+  <span class="page prev"><%== link.call(pagy.prev, '◄', 'aria-label="previous"') %></span>
+  <% else %>
+    <span class="page prev disabled">
+      ◄
+    </span>
+  <% end %>
+  <% if pagy.next %>
+    <span class="page next"><%== link.call(pagy.next, '►', 'aria-label="next"') %></span>
+  <% else %>
+    <span class="page next disabled">
+      ►
+    </span>
+  <% end %>
+</nav>

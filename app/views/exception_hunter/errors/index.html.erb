@@ -25,7 +25,7 @@
 <% @errors.each do |error| %>
   <div class="row error-row">
     <div class="column column-75 error-cell">
-      <a href="#"><%= error.message %></a>
+      <a href="errors/<%= error.id %>"> <%= error.message %></a>
     </div>
     <div class="column column-15 error-cell error-cell--highlight">
       <%= time_ago_in_words(error.last_occurrence) %> ago
