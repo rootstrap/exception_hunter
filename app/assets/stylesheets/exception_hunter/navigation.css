@@ -1,0 +1,21 @@
+.nav {
+    background: var(--secondary-color);
+    border-bottom: .1rem solid var(--border-color);
+    display: block;
+    height: 5.2rem;
+    left: 0;
+    max-width: 100%;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+.container__nav {
+    display: flex;
+    height: 100%;
+}
+
+.nav__logo img {
+    height: 100%;
+}

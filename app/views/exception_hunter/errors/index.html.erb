@@ -1,0 +1,37 @@
+<div class="row statistics-row">
+  <div class="column column-25">
+    <div class="statistics__cell">
+      <%= number_with_delimiter(@errors.count + 5547567) %> Total errors
+    </div>
+  </div>
+  <div class="column column-25">
+    <div class="statistics__cell">
+      <%= number_with_delimiter(@errors.count + 4545) %> Errors this month
+    </div>
+  </div>
+  <div class="column column-25">
+    <div class="statistics__cell"></div>
+  </div>
+  <div class="column column-25">
+    <div class="statistics__cell"></div>
+  </div>
+</div>
+
+<div class="row error-row error-row--header">
+  <div class="column column-75">Message</div>
+  <div class="column column-15">Last Occurrence</div>
+  <div class="column column-10">Occurrences</div>
+</div>
+<% @errors.each do |error| %>
+  <div class="row error-row">
+    <div class="column column-75 error-cell">
+      <a href="#"><%= error.message %></a>
+    </div>
+    <div class="column column-15 error-cell error-cell--highlight">
+      <%= time_ago_in_words(error.last_occurrence) %> ago
+    </div>
+    <div class="column column-10 error-cell error-cell--highlight">
+      <%= error.total_occurrences %>
+    </div>
+  </div>
+<% end %>

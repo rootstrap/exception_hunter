@@ -1,0 +1,18 @@
+:root {
+    --main-color: #C8193C;
+    --secondary-color: #F4F5F6;
+    --link-color: #158FEF;
+    --border-color: #D1D1D1;
+}
+
+.wrapper {
+    margin: 5.5rem auto auto;
+}
+
+a {
+    color: var(--link-color);
+}
+
+a:hover, a:focus, a:active {
+    color: var(--main-color);
+}
