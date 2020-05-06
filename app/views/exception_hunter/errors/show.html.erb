@@ -1,86 +1,40 @@
-<div class="row statistics-row">
+<div class="row">
   <div class="column column-20"></div>
   <div class="column column-20"></div>
   <div class="column column-20"></div>
   <div class="column column-20"></div>
   <div class="column column-20">
-  <%= render partial: 'exception_hunter/errors/pagy/pagy_nav', locals: {pagy: @pagy} %>
+    <%= render partial: 'exception_hunter/errors/pagy/pagy_nav', locals: { pagy: @pagy } %>
   </div>
 </div>
 
-<div class="row error-row error-row--header">
-  <div class="column column-35">Name</div>
-  <div class="column column-25">Message</div>
-  <div class="column column-25"></div>
-  <div class="column column-15">Ocurred at</div>
+<div class="error-title">
+  <%= @error.class_name %>: <%= @error.message %>
+</div>
+<div class="error-occurred_at">
+  <%= @error.occurred_at %>
 </div>
 
+<ul data-tabs>
+  <li><a data-tabby-default href="#summary">Summary</a></li>
+  <li><a href="#backtrace">Backtrace</a></li>
+  <li><a href="#user-data">User Data</a></li>
+</ul>
 
-<div class="row error-row-no-border">
-  <div class="column column-35 error-cell">
-    <%= @error.first.error_group.error_class_name %>
+<div class="tab-content">
+  <div id="summary">
+    <%= render partial: 'exception_hunter/errors/error_summary', locals: { error: @error } %>
   </div>
-  <div class="column column-40 error-cell">
-    <%= @error.first.message %>
+
+  <div id="backtrace">
+    <%= render partial: 'exception_hunter/errors/error_backtrace', locals: { error: @error } %>
   </div>
-  <div class="column column-10 error-cell"></div>
-  <div class="column column-15 error-cell error-cell--highlight">
-    <%= time_ago_in_words(@error.first.occurred_at) %> ago
+
+  <div id="user-data">
+    <%= render partial: 'exception_hunter/errors/error_user_data', locals: { error: @error } %>
   </div>
 </div>
 
-  <input type="radio" name="tabs" id="summary" checked />
-  <label for="summary">Summary</label>
-  <input type="radio" name="tabs" id="backtrace" />
-  <label for="backtrace">Backtrace</label>
-  <input type="radio" name="tabs" id="user" />
-  <label for="user">User Data</label>
-
-  <div class="tab content1">
-      <% if @error.first.environment_data.empty? %>
-      <div class="row error-row-no-border data-title">
-        Unfortunately, no environment information has been registered for this error.
-      </div>
-      <% else %>
-        <div class="row error-row-no-border data-title">
-          Environment Data
-        </div>
-        <% @error.first.environment_data.each do |key, value| %>
-          <b><%= key %></b>: <%= value  %><br>
-        <% end %>
-      <% end %>
-    <% if @error.first.custom_data.nil? %>
-      <div class="row error-row-no-border data-title">
-        No custom data included.
-      </div>
-      <% else %>
-      <div class="row error-row-no-border data-title">
-        Custom Data
-      </div>
-        <% @error.first.custom_data.each do |key, value| %>
-          <b><%= key %></b>: <%= value || 'None' %> <br>
-        <% end %>
-      <% end %>
-  </div>
-  <div class="tab content2">
-    <% if @error.first.backtrace.empty? %>
-      Unfortunately, no backtrace has been registered for this error.
-    <% else %>
-      <% @error.first.backtrace.each do |line| %>
-        <%= line %>
-      <% end %>
-    <% end %>
-  </div>
-  <div class="tab content3">
-    <% if @error.first.user_data.empty? %>
-      Unfortunately, no user information has been registered for this error.
-    <% else %>
-      <% @error.first.user_data.transform_keys(&:to_sym).each_slice(5) do |attributes| %>
-        <% attributes.each do |key, value| %>
-            <div class="column column-15">
-              <b><%= key %></b>: <%= value %>
-            </div>
-        <% end %>
-      <% end %>
-    <% end %>
-  </div>
+<script type="text/javascript" charset="utf-8">
+  const tabs = new Tabby('[data-tabs]')
+</script>
