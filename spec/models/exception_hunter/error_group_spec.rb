@@ -31,7 +31,7 @@ module ExceptionHunter
       let(:older_error) { create(:error, occurred_at: 2.weeks.ago) }
 
       it 'returns the maximum occurrence from the grouped errors' do
-        expect(subject).to eq(last_error.occurred_at)
+        expect(subject).to be_within(1.second).of(last_error.occurred_at)
       end
     end
 
