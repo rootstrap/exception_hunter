@@ -10,7 +10,7 @@ module ExceptionHunter
 
     def show
       Pagy::VARS[:items] = 1
-      @pagy, @error = pagy(last_error)
+      @pagy, @error = pagy(most_recent_errors)
     end
 
     private
@@ -19,8 +19,8 @@ module ExceptionHunter
       ErrorGroup.all
     end
 
-    def last_error
-      ErrorGroup.find(params[:id]).grouped_errors.order('created_at DESC')
+    def most_recent_errors
+      Error.most_recent(params[:id])
     end
   end
 end

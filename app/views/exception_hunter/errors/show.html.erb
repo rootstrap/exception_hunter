@@ -4,7 +4,7 @@
   <div class="column column-20"></div>
   <div class="column column-20"></div>
   <div class="column column-20">
-  <%= render partial: 'exception_hunter/errors/pagy/pagy_nav', locals: {pagy: @pagy} %>
+  <%= render partial: 'exception_hunter/errors/pagy/pagy_nav', locals: { pagy: @pagy } %>
   </div>
 </div>
 
@@ -18,7 +18,7 @@
 
 <div class="row error-row-no-border">
   <div class="column column-35 error-cell">
-    <%= @error.first.error_group.error_class_name %>
+    <%= @error.first.class_name %>
   </div>
   <div class="column column-40 error-cell">
     <%= @error.first.message %>
@@ -75,12 +75,8 @@
     <% if @error.first.user_data.empty? %>
       Unfortunately, no user information has been registered for this error.
     <% else %>
-      <% @error.first.user_data.transform_keys(&:to_sym).each_slice(5) do |attributes| %>
-        <% attributes.each do |key, value| %>
-            <div class="column column-15">
-              <b><%= key %></b>: <%= value %>
-            </div>
-        <% end %>
+      <% @error.first.user_data.each do |key, value| %>
+          <b><%= key %></b>: <%= value %>
       <% end %>
     <% end %>
   </div>

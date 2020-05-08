@@ -7,6 +7,10 @@ module ExceptionHunter
 
     before_validation :set_occurred_at, on: :create
 
+    scope :most_recent, lambda { |error_group_id|
+      where(error_group_id: error_group_id).order(occurred_at: :desc)
+    }
+
     private
 
     def set_occurred_at
