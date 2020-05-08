@@ -15,10 +15,6 @@ module ExceptionHunter
 
     private
 
-    def error_groups
-      ErrorGroup.all
-    end
-
     def most_recent_errors
       Error.most_recent(params[:id])
     end
