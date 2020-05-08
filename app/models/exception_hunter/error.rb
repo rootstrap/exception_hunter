@@ -7,6 +7,12 @@ module ExceptionHunter
 
     before_validation :set_occurred_at, on: :create
 
+    def self.in_current_month
+      current_month = Date.today.beginning_of_month..Date.today.end_of_month
+
+      self.where(occurred_at: current_month)
+    end
+
     private
 
     def set_occurred_at

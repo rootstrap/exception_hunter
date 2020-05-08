@@ -173,6 +173,10 @@ GEM
       bundler (>= 1.3.0)
       railties (= 6.0.2.2)
       sprockets-rails (>= 2.0.0)
+    rails-controller-testing (1.0.4)
+      actionpack (>= 5.0.1.x)
+      actionview (>= 5.0.1.x)
+      activesupport (>= 5.0.1.x)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
@@ -263,6 +267,7 @@ DEPENDENCIES
   exception_hunter!
   factory_bot_rails
   pg
+  rails-controller-testing (~> 1.0.4)
   rails_best_practices (~> 1.20)
   reek (~> 5.6)
   rspec-core!
