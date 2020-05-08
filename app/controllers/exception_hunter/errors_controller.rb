@@ -5,12 +5,12 @@ module ExceptionHunter
     include Pagy::Backend
 
     def index
-      @errors = error_groups
+      @errors = ErrorGroup.all
     end
 
     def show
-      Pagy::VARS[:items] = 1
-      @pagy, @error = pagy(most_recent_errors)
+      @pagy, errors = pagy(most_recent_errors, items: 1)
+      @error = ErrorPresenter.new(errors.first)
     end
 
     private
