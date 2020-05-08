@@ -10,7 +10,7 @@ module ExceptionHunter
     def self.in_current_month
       current_month = Date.today.beginning_of_month..Date.today.end_of_month
 
-      self.where(occurred_at: current_month)
+      where(occurred_at: current_month)
     end
 
     private

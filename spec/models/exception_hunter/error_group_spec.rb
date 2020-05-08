@@ -26,7 +26,7 @@ module ExceptionHunter
     describe '#last_occurence' do
       subject { error_group.last_occurrence }
 
-      let(:error_group) { create(:error_group, grouped_errors: [last_error, older_error] )}
+      let(:error_group) { create(:error_group, grouped_errors: [last_error, older_error]) }
       let(:last_error) { create(:error, occurred_at: 1.week.ago) }
       let(:older_error) { create(:error, occurred_at: 2.weeks.ago) }
 
@@ -38,7 +38,7 @@ module ExceptionHunter
     describe '#total_occurrences' do
       subject { error_group.total_occurrences }
 
-      let(:error_group) { create(:error_group, grouped_errors: grouped_errors )}
+      let(:error_group) { create(:error_group, grouped_errors: grouped_errors) }
       let(:grouped_errors) { create_list(:error, 4) }
 
       it 'returns the total number of grouped errors' do
