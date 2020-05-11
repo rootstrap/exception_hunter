@@ -19,11 +19,11 @@ module ExceptionHunter
     end
 
     def last_occurrence
-      grouped_errors.maximum(:occurred_at)
+      @last_occurrence ||= grouped_errors.maximum(:occurred_at)
     end
 
     def total_occurrences
-      grouped_errors.count
+      @total_occurrences ||= grouped_errors.count
     end
   end
 end

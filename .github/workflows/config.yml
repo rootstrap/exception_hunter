@@ -23,7 +23,7 @@ jobs:
       - uses: actions/setup-ruby@v1
         with:
           ruby-version: 2.6
-      
+
       - name: Install PostgreSQL 11 client
         run: |
           sudo apt-get -yqq install libpq-dev
@@ -42,15 +42,16 @@ jobs:
         run: |
           bundle exec rails db:setup
 
-      - name: Run tests and code analysis
+      - name: Run tests
         env:
           PGHOST: localhost
           PGUSER: postgres
           PGPASSWORD: postgres
           RAILS_ENV: test
-        run: |
-          COVERAGE=true bundle exec rspec --require rails_helper
-          bundle exec rake code_analysis
+        run: COVERAGE=true bundle exec rspec --require rails_helper
+
+      - name: Run code analysis
+        run: bundle exec rake code_analysis
 
       - name: Upload coverage results
         uses: actions/upload-artifact@v1

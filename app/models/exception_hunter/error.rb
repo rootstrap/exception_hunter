@@ -11,6 +11,12 @@ module ExceptionHunter
       where(error_group_id: error_group_id).order(occurred_at: :desc)
     }
 
+    def self.in_current_month
+      current_month = Date.today.beginning_of_month..Date.today.end_of_month
+
+      where(occurred_at: current_month)
+    end
+
     private
 
     def set_occurred_at
