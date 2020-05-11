@@ -6,7 +6,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 # development dependencies will be added by default to the :development group.
 gemspec
 
-# gem 'pagy', '~> 3.8'
 # https://github.com/rspec/rspec-rails/issues/2177
 gem 'rspec-core', git: 'https://github.com/rspec/rspec-core'
 gem 'rspec-expectations', git: 'https://github.com/rspec/rspec-expectations'
