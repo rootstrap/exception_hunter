@@ -14,8 +14,13 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'simplecov'
-SimpleCov.start do
+
+SimpleCov.start('rails') do
   add_filter 'spec'
+  add_filter 'lib/generators'
+  add_filter 'lib/exception_hunter/version.rb'
+  add_filter 'app/mailers/exception_hunter/application_mailer.rb'
+  add_filter 'app/jobs/exception_hunter/application_job.rb'
 end
 
 RSpec.configure do |config|
