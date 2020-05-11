@@ -21,10 +21,14 @@ module ExceptionHunter
     def format_backtrace_line(line)
       matches = line.match(%r{(?<path>.*)/(?<file_name>[^:]*):(?<line_number>\d*).*`(?<method_call>.*)'})
 
-      BacktraceLine.new(matches[:path],
-                        matches[:file_name],
-                        matches[:line_number],
-                        matches[:method_call])
+      if matches.nil?
+        line
+      else
+        BacktraceLine.new(matches[:path],
+                          matches[:file_name],
+                          matches[:line_number],
+                          matches[:method_call])
+      end
     end
   end
 end

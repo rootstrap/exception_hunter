@@ -19,12 +19,10 @@ FactoryBot.define do
       }
     end
     backtrace do
-      ["/Users/user/RailsProjects/exception_hunter/spec/dummy/app/controllers/exception_controller.rb:3:in `raising_endpoint'",
-       "/Users/user/.rvm/rubies/ruby-2.6.5/lib/ruby/gems/2.6.0/gems/actionpack-6.0.2.2/lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'",
-       "/Users/user/.rvm/rubies/ruby-2.6.5/lib/ruby/gems/2.6.0/gems/actionpack-6.0.2.2/lib/abstract_controller/base.rb:196:in `process_action'",
-       "/Users/user/.rvm/rubies/ruby-2.6.5/lib/ruby/gems/2.6.0/gems/actionpack-6.0.2.2/lib/action_controller/metal/rendering.rb:30:in `process_action'",
-       "/Users/user/.rvm/rubies/ruby-2.6.5/lib/ruby/gems/2.6.0/gems/actionpack-6.0.2.2/lib/abstract_controller/callbacks.rb:42:in `block in process_action'",
-       "/Users/user/.rvm/rubies/ruby-2.6.5/lib/ruby/gems/2.6.0/gems/activesupport-6.0.2.2/lib/active_support/callbacks.rb:135:in `run_callbacks'"]
+      ['ActionView::Template::Error (ActionView::Template::Error):',
+       'activesupport (3.0.7) lib/active_support/whiny_nil.rb:48:in `method_missing',
+       'actionpack (3.0.7) lib/action_view/template.rb:135:in `block in render',
+       'activesupport (3.0.7) lib/active_support/notifications.rb:54:in `instrument']
     end
 
     association(:error_group)
