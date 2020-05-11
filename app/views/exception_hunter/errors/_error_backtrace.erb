@@ -3,20 +3,18 @@
 <% else %>
   <div class="backtrace">
     <% error.backtrace.each do |line| %>
-      <% if line.respond_to?(:path) %>
-        <div class="backtrace-line">
+      <div class="backtrace-line">
+        <% if line.is_a?(String) %>
+          <%= line %>
+        <% else %>
           <div class="backtrace-line__path"><%= line.path %></div>
           /
           <div class="backtrace-line__file-name"><%= line.file_name %></div>
           :
           <div class="backtrace-line__line-number"><%= line.line_number %></div>
           <div class="backtrace-line__method-call"><%= line.method_call %></div>
-        </div>
-      <% else %>
-        <div class="backtrace-line">
-          <div class="backtrace-line__path"><%= line %></div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     <% end %>
   </div>
 <% end %>
