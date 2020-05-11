@@ -16,6 +16,9 @@
 require 'simplecov'
 
 SimpleCov.start('rails') do
+  add_group 'Presenters', 'app/presenters'
+  add_group 'Services', 'app/services'
+
   add_filter 'spec'
   add_filter 'lib/generators'
   add_filter 'lib/exception_hunter/version.rb'
