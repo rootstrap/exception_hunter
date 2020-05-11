@@ -1,6 +1,3 @@
-require 'rubygems'
-require 'pagy'
-
 module ExceptionHunter
   class Engine < ::Rails::Engine
     isolate_namespace ExceptionHunter

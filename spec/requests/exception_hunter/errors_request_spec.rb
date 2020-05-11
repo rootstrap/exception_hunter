@@ -2,7 +2,9 @@ require 'rails_helper'
 
 describe 'Errors', type: :request do
   describe 'show' do
-    subject { get "/exception_hunter/errors/#{ExceptionHunter::Error.last.id}" }
+    let(:last_error) { ExceptionHunter::Error.last.id }
+
+    subject { get "/exception_hunter/errors/#{last_error}" }
 
     before do
       2.times do |i|

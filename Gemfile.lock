@@ -268,7 +268,6 @@ DEPENDENCIES
   devise (~> 4.7)
   exception_hunter!
   factory_bot_rails
-  pagy (~> 3.8)
   pg
   rails-controller-testing (~> 1.0.4)
   rails_best_practices (~> 1.20)

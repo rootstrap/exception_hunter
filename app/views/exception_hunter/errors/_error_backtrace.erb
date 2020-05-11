@@ -3,7 +3,7 @@
 <% else %>
   <div class="backtrace">
     <% error.backtrace.each do |line| %>
-      <% if line.method_defined?(:path) %>
+      <% if line.respond_to?(:path) %>
         <div class="backtrace-line">
           <div class="backtrace-line__path"><%= line.path %></div>
           /
