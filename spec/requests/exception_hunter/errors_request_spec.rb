@@ -2,16 +2,12 @@ require 'rails_helper'
 
 describe 'Errors', type: :request do
   describe 'show' do
-    let(:last_error) { ExceptionHunter::Error.last.id }
+    let(:error_group) { create(:error_group) }
 
-    subject { get "/exception_hunter/errors/#{last_error}" }
+    subject { get "/exception_hunter/errors/#{error_group.id}" }
 
     before do
-      2.times do |i|
-        create(:error_group).tap do |error_group|
-          create_list(:error, i + 1, error_group: error_group)
-        end
-      end
+      create_list(:error, 2, error_group: error_group)
     end
 
     it 'renders the show template' do
