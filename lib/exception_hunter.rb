@@ -2,6 +2,7 @@ require 'exception_hunter/engine'
 require 'exception_hunter/railtie'
 require 'exception_hunter/config'
 require 'exception_hunter/user_attributes_collector'
+require 'pagy'
 
 module ExceptionHunter
   def self.setup(&block)

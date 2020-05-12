@@ -60,6 +60,8 @@ Metrics/LineLength:
   URISchemes:
     - http
     - https
+  Exclude:
+    - spec/factories/exception_hunter/errors.rb
 
 Metrics/ParameterLists:
   Max: 5

@@ -1,0 +1,20 @@
+<% if error.backtrace.empty? %>
+  Unfortunately, no backtrace has been registered for this error.
+<% else %>
+  <div class="backtrace">
+    <% error.backtrace.each do |line| %>
+      <div class="backtrace-line">
+        <% if line.is_a?(String) %>
+          <%= line %>
+        <% else %>
+          <div class="backtrace-line__path"><%= line.path %></div>
+          /
+          <div class="backtrace-line__file-name"><%= line.file_name %></div>
+          :
+          <div class="backtrace-line__line-number"><%= line.line_number %></div>
+          <div class="backtrace-line__method-call"><%= line.method_call %></div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

@@ -29,6 +29,26 @@ module ExceptionHunter
       end
     end
 
+    describe 'most_recent' do
+      let(:error_group) { create(:error_group) }
+      let!(:errors) do
+        [Date.yesterday, Date.today, Date.today.last_month].map do |occurred_at|
+          create(:error, error_group: error_group, occurred_at: occurred_at)
+        end
+      end
+      let!(:extra_error) { create(:error) }
+
+      subject { Error.most_recent(error_group.id) }
+
+      it 'returns ordered errors' do
+        expect(subject.to_a.sort).to eq(errors.sort)
+      end
+
+      it 'returns only errors from error group' do
+        expect(subject.to_a).not_to include(extra_error)
+      end
+    end
+
     describe '.in_current_month' do
       subject { Error.in_current_month }
 

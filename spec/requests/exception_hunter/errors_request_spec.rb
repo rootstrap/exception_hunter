@@ -1,6 +1,22 @@
 require 'rails_helper'
 
 describe 'Errors', type: :request do
+  describe 'show' do
+    let(:error_group) { create(:error_group) }
+
+    subject { get "/exception_hunter/errors/#{error_group.id}" }
+
+    before do
+      create_list(:error, 2, error_group: error_group)
+    end
+
+    it 'renders the show template' do
+      subject
+
+      expect(response).to render_template(:show)
+    end
+  end
+
   describe 'index' do
     subject { get '/exception_hunter/errors' }
 
