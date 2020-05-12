@@ -19,10 +19,11 @@ FactoryBot.define do
       }
     end
     backtrace do
-      ['ActionView::Template::Error (ActionView::Template::Error):',
-       'activesupport (3.0.7) lib/active_support/whiny_nil.rb:48:in `method_missing',
-       'actionpack (3.0.7) lib/action_view/template.rb:135:in `block in render',
-       'activesupport (3.0.7) lib/active_support/notifications.rb:54:in `instrument']
+      [
+        "activesupport (3.0.7) lib/active_support/whiny_nil.rb:48:in `method_missing'",
+        "actionpack (3.0.7) lib/action_view/template.rb:135:in `block in render'",
+        "activesupport (3.0.7) lib/active_support/notifications.rb:54:in `instrument'"
+      ]
     end
 
     association(:error_group)
