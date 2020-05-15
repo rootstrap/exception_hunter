@@ -5,6 +5,8 @@ require 'exception_hunter/user_attributes_collector'
 require 'pagy'
 
 module ExceptionHunter
+  autoload :Devise, 'exception_hunter/devise'
+
   def self.setup(&block)
     block.call(Config)
   end

@@ -1,4 +1,12 @@
 ExceptionHunter.setup do |config|
+  # == Dashboard User
+  # Exception Hunter allows you to restrict users who can see the dashboard
+  # to the ones included in the database. You can change the table name in
+  # case you are not satisfied with the default one. You can also remove the
+  # configuration if you wish to have no access restrictions for the dashboard.
+  #
+  config.dashboard_user = 'admin_user'
+
   # == Current User
   #
   # Exception Hunter will include the user as part of the environment
