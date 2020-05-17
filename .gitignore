@@ -6,3 +6,7 @@ spec/dummy/storage/
 spec/dummy/tmp/
 
 .idea/
+coverage
+.byebug_history
+
+.DS_Store

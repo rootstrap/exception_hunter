@@ -1,0 +1,24 @@
+<% if error.environment_data.empty? %>
+  <div class="row error-row-no-border data-title">
+    Unfortunately, no environment information has been registered for this error.
+  </div>
+<% else %>
+  <div class="row error-row-no-border data-title">
+    Environment Data
+  </div>
+  <% error.environment_data.each do |key, value| %>
+    <b><%= key %></b>: <%= value %><br>
+  <% end %>
+<% end %>
+<% if error.custom_data.nil? %>
+  <div class="row error-row-no-border data-title">
+    No custom data included.
+  </div>
+<% else %>
+  <div class="row error-row-no-border data-title">
+    Custom Data
+  </div>
+  <% error.custom_data.each do |key, value| %>
+    <b><%= key %></b>: <%= value || 'None' %> <br>
+  <% end %>
+<% end %>

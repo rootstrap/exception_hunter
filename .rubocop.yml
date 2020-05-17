@@ -1,0 +1,110 @@
+AllCops:
+  TargetRubyVersion: 2.5.4
+  Exclude:
+    - 'spec/dummy/config/**/*'
+    - 'spec/dummy/db/**/*'
+    - 'config/initializers/**/*'
+
+Documentation:
+  Enabled: false
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - spec/**/*
+
+Lint/RescueException:
+  Exclude:
+    - lib/exception_hunter/request_hunter.rb
+
+Metrics/AbcSize:
+  Enabled: false
+  # The ABC size is a calculated magnitude, so this number can be an Integer or
+  # a Float.
+  Max: 18
+
+Metrics/BlockLength:
+  CountComments: false  # count full line comments?
+  Max: 25
+  Exclude:
+    - config/**/*
+    - spec/**/*
+  Severity: warning
+
+Metrics/BlockNesting:
+  Max: 4
+  Enabled: false
+
+Metrics/ClassLength:
+  CountComments: false  # count full line comments?
+  Max: 200
+  Enabled: false
+
+# Avoid complex methods.
+Metrics/CyclomaticComplexity:
+  Max: 6
+  Enabled: false
+
+Metrics/MethodLength:
+  CountComments: false  # count full line comments?
+  Max: 24
+  Severity: warning
+
+Metrics/ModuleLength:
+  CountComments: false  # count full line comments?
+  Max: 200
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 120
+  AllowURI: true
+  URISchemes:
+    - http
+    - https
+  Exclude:
+    - spec/factories/exception_hunter/errors.rb
+
+Metrics/ParameterLists:
+  Max: 5
+  CountKeywordArgs: true
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Max: 12
+  Enabled: false
+
+Naming/AccessorMethodName:
+  Exclude: []
+
+Naming/RescuedExceptionsVariableName:
+  Exclude:
+    - lib/exception_hunter/request_hunter.rb
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/ModuleFunction:
+  Enabled: false
+
+Style/BlockDelimiters:
+  EnforcedStyle: braces_for_chaining
+
+Style/BlockComments:
+  Exclude:
+    - spec/spec_helper.rb
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
+
+Style/StringLiterals:
+  Exclude:
+    - spec/dummy/**/*
+
+Style/RescueModifier:
+  Exclude:
+    - spec/middleware/exception_hunter/request_hunter_spec.rb

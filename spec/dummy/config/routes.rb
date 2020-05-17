@@ -1,3 +1,6 @@
 Rails.application.routes.draw do
-  mount ExceptionHunter::Engine, at: 'exception_hunter'
+  devise_for :users
+  ExceptionHunter.routes(self)
+
+  get :raising_endpoint, to: 'exception#raising_endpoint'
 end

@@ -1,0 +1,11 @@
+<% if error.user_data.empty? %>
+  <div class="data-title">
+    Unfortunately, no user information has been registered for this error.
+  </div>
+<% else %>
+  <% error.user_data.transform_keys(&:to_sym).each do |key, value| %>
+    <div class="column column-15">
+      <b><%= key %></b>: <%= value %>
+    </div>
+  <% end %>
+<% end %>
