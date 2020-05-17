@@ -14,6 +14,14 @@ module ExceptionHunter
       end
     end
 
+    def environment_data
+      error.environment_data.except('params')
+    end
+
+    def tracked_params
+      error.environment_data&.fetch('params')
+    end
+
     private
 
     attr_reader :error
