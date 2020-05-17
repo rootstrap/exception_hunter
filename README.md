@@ -8,7 +8,7 @@ How to use my plugin.
 Add Exception Hunter to your application's Gemfile:
 
 ```ruby
-gem 'exception_hunter', '0.1.0'
+gem 'exception_hunter', '~> 0.1.1'
 ```
 
 You may also need to add [Devise](https://github.com/heartcombo/devise) to your Gemfile
