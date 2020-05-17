@@ -7,24 +7,17 @@ require 'exception_hunter/version'
 Gem::Specification.new do |spec|
   spec.name        = 'exception_hunter'
   spec.version     = ExceptionHunter::VERSION
-  spec.authors     = ['Rootstrap']
+  spec.authors     = ['Bruno Vezoli', 'Tiziana Romani']
   spec.email       = ['bruno.vezoli@rootstrap.com']
   spec.summary     = 'Exception tracking engine'
   spec.license     = 'MIT'
+  spec.homepage    = 'https://github.com/rootstrap/exception_hunter'
 
-  # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
-  # to allow pushing to a single host or delete this section to allow pushing to any host.
-  if spec.respond_to?(:metadata)
-    spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com'"
-  else
-    raise 'RubyGems 2.0 or newer is required to protect against ' \
-      'public gem pushes.'
-  end
+  spec.required_ruby_version = '>= 2.5.5'
 
   spec.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
 
   spec.add_dependency 'pagy', '~> 3.8'
-  spec.add_dependency 'rails', '~> 6.0.2', '>= 6.0.2.1'
 
   spec.add_development_dependency 'brakeman', '~> 4.8'
   spec.add_development_dependency 'factory_bot_rails'

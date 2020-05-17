@@ -32,7 +32,6 @@ PATH
   specs:
     exception_hunter (0.1.0)
       pagy (~> 3.8)
-      rails (~> 6.0.2, >= 6.0.2.1)
 
 GEM
   remote: https://rubygems.org/
@@ -269,6 +268,7 @@ DEPENDENCIES
   exception_hunter!
   factory_bot_rails
   pg
+  rails (~> 6.0.2)
   rails-controller-testing (~> 1.0.4)
   rails_best_practices (~> 1.20)
   reek (~> 5.6)
