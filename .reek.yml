@@ -30,7 +30,8 @@ detectors:
   FeatureEnvy:
     enabled: true
     exclude:
-      - ExceptionHunter::RequestHunter#catch_prey
+      - ExceptionHunter::Middleware::RequestHunter#catch_prey
+      - ExceptionHunter::Middleware::SidekiqHunter#track_exception
 
   InstanceVariableAssumption:
     enabled: false

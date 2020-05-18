@@ -10,6 +10,7 @@ group :development, :test do
   gem 'byebug', '~> 11.1'
   gem 'devise', '~> 4.7'
   gem 'rails', '~> 6.0.2'
+  gem 'sidekiq', '~> 6.0.4'
 end
 
 group :test do

@@ -76,8 +76,7 @@ Naming/AccessorMethodName:
   Exclude: []
 
 Naming/RescuedExceptionsVariableName:
-  Exclude:
-    - lib/exception_hunter/request_hunter.rb
+  Enabled: false
 
 Style/FrozenStringLiteralComment:
   Enabled: false
@@ -108,3 +107,4 @@ Style/StringLiterals:
 Style/RescueModifier:
   Exclude:
     - spec/middleware/exception_hunter/request_hunter_spec.rb
+    - spec/middleware/exception_hunter/sidekiq_hunter_spec.rb
