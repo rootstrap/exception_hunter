@@ -8,7 +8,7 @@ module ExceptionHunter
     describe '#call' do
       subject { request_hunter.call(env) }
 
-      let(:env) { tracked_env.merge(not_tracked_env).merge('action_controller.instance' => controller) }
+      let(:env) { tracked_env.merge(not_tracked_env).merge(required_env) }
       let(:tracked_env) do
         {
           'PATH_INFO' => '/path/to/endpoint',
@@ -27,6 +27,25 @@ module ExceptionHunter
         {
           'HTTP_ACCEPT_LANGUAGE' => 'fr-FR,fr;q=0.8,en-US;q=0.6,en;q=0.4',
           'HTTP_CONNECTION' => 'keep-alive'
+        }
+      end
+      let(:required_env) do
+        {
+          'action_controller.instance' => controller,
+          'action_dispatch.request.parameters' => params
+        }
+      end
+      let(:params) do
+        {
+          'password' => '1234',
+          'password_confirmation' => '1234',
+          'really_anything_with_password_in_it' => 'abcd',
+          'some_param' => 1,
+          'some_array_param' => [1, 'hi there', {}],
+          'nested_param' => {
+            'name' => 'John',
+            'password' => 'Doe'
+          }
         }
       end
 
@@ -61,30 +80,51 @@ module ExceptionHunter
           expect(error.environment_data).not_to include(not_tracked_env)
         end
 
-        context 'when the exception was raised by a logged user' do
-          before do
-            allow(controller).to receive(:current_user).and_return(user)
+        describe 'user data' do
+          context 'when the exception was raised by a logged user' do
+            before do
+              allow(controller).to receive(:current_user).and_return(user)
+            end
+
+            it 'registers user data' do
+              subject rescue nil
+
+              expect(Error.last.user_data).to include(
+                { 'email' => user.email,
+                  'id' => user.id }
+              )
+            end
           end
 
-          it 'registers user data' do
-            subject rescue nil
+          context 'when the exception was raised by an unlogged user' do
+            before do
+              allow(controller).to receive(:current_user).and_return(nil)
+            end
 
-            expect(Error.last.user_data).to include(
-              { 'email' => user.email,
-                'id' => user.id }
-            )
+            it 'does not register user data' do
+              subject rescue nil
+
+              expect(Error.last.user_data).to eq({})
+            end
           end
         end
 
-        context 'when the exception was raised by an unlogged user' do
-          before do
-            allow(controller).to receive(:current_user).and_return(nil)
-          end
-
-          it 'does not register user data' do
+        describe 'tracked params' do
+          it 'tracks the data in the action_dispatch.request.parameters env' do
             subject rescue nil
 
-            expect(Error.last.user_data).to eq({})
+            error = Error.last
+            expect(error.environment_data['params'].keys).to eq(params.keys)
+          end
+
+          it 'filters values with sensitive information' do
+            subject rescue nil
+
+            error = Error.last
+            expect(error.environment_data['params']['password']).to eq('[FILTERED]')
+            expect(error.environment_data['params']['password_confirmation']).to eq('[FILTERED]')
+            expect(error.environment_data['params']['really_anything_with_password_in_it']).to eq('[FILTERED]')
+            expect(error.environment_data['params']['nested_param']['password']).to eq('[FILTERED]')
           end
         end
       end
