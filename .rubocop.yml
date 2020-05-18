@@ -106,4 +106,4 @@ Style/StringLiterals:
 
 Style/RescueModifier:
   Exclude:
-    - spec/**
+    - spec/middleware/exception_hunter/request_hunter_spec.rb
