@@ -6,5 +6,6 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
 
   get :raising_endpoint, to: 'exception#raising_endpoint'
+  post :broken_post, to: 'exception#broken_post'
   post :failing_job, to: 'exception#failing_job'
 end

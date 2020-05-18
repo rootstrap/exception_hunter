@@ -3,9 +3,8 @@
     Unfortunately, no user information has been registered for this error.
   </div>
 <% else %>
-  <% error.user_data.transform_keys(&:to_sym).each do |key, value| %>
-    <div class="column column-15">
-      <b><%= key %></b>: <%= value %>
-    </div>
-  <% end %>
+  <pre class="tracked-data">
+
+<%= format_tracked_data(error.user_data) %>
+  </pre>
 <% end %>

@@ -6,10 +6,26 @@
   <div class="row error-row-no-border data-title">
     Environment Data
   </div>
-  <% error.environment_data.each do |key, value| %>
-    <b><%= key %></b>: <%= value %><br>
-  <% end %>
+  <pre class="tracked-data">
+
+<%= format_tracked_data(error.environment_data) %>
+  </pre>
 <% end %>
+
+<% if error.tracked_params.nil? %>
+  <div class="row error-row-no-border data-title">
+    There are not tracked params.
+  </div>
+<% else %>
+  <div class="row error-row-no-border data-title">
+    Tracked Params
+  </div>
+  <pre class="tracked-data">
+
+<%= format_tracked_data(error.tracked_params) %>
+  </pre>
+<% end %>
+
 <% if error.custom_data.nil? %>
   <div class="row error-row-no-border data-title">
     No custom data included.
@@ -18,7 +34,8 @@
   <div class="row error-row-no-border data-title">
     Custom Data
   </div>
-  <% error.custom_data.each do |key, value| %>
-    <b><%= key %></b>: <%= value || 'None' %> <br>
-  <% end %>
+  <pre class="tracked-data">
+
+<%= format_tracked_data(error.custom_data) %>
+  </pre>
 <% end %>
