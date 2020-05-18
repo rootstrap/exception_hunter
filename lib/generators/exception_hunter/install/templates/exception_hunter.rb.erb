@@ -5,7 +5,11 @@ ExceptionHunter.setup do |config|
   # case you are not satisfied with the default one. You can also remove the
   # configuration if you wish to have no access restrictions for the dashboard.
   #
-  <% unless @use_authentication_method %># <% end %>config.dashboard_user = '<%= @underscored_user_name %>'
+  <% if @use_authentication_method %>
+    config.admin_user_class = '<%= @underscored_user_name %>'
+  <% else %>
+    # config.admin_user_class = '<%= @underscored_user_name %>'
+  <% end %>
 
   # == Current User
   #
