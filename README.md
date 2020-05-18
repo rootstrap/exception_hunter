@@ -8,7 +8,7 @@ How to use my plugin.
 Add Exception Hunter to your application's Gemfile:
 
 ```ruby
-gem 'exception_hunter', '~> 0.1.1'
+gem 'exception_hunter', '~> 0.2.0'
 ```
 
 You may also need to add [Devise](https://github.com/heartcombo/devise) to your Gemfile
@@ -26,7 +26,8 @@ $ rails generate exception_hunter:install
 
 This will create an initializer and invoke Devise to
 create an `AdminUser` which will be used for authentication to access the dashboard. If you already
-have this user created (Devise uses the same model) you can run the command with the `--skip-users` flag.
+have this user created ([ActiveAdmin](https://github.com/activeadmin/activeadmin) uses the same model)
+you can run the command with the `--skip-users` flag.
 
 Additionally it should add the 'ExceptionHunter.routes(self)' line to your routes, which means you can go to
 `/exception_hunter/errors` in your browser and start enjoying some good old fashioned exception tracking!
