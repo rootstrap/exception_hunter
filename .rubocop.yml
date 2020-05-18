@@ -107,3 +107,4 @@ Style/StringLiterals:
 Style/RescueModifier:
   Exclude:
     - spec/middleware/exception_hunter/request_hunter_spec.rb
+    - spec/middleware/exception_hunter/sidekiq_hunter_spec.rb

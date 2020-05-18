@@ -33,21 +33,11 @@ module ExceptionHunter
           end
 
           it 'tracks the error' do
-            expect {
-              begin
-                       subject
-              rescue StandardError
-                nil
-                     end
-            } .to change(Error, :count).by(1)
+            expect { subject rescue nil } .to change(Error, :count).by(1)
           end
 
           it 'tracks data from the context' do
-            begin
-              subject
-            rescue StandardError
-              nil
-            end
+            subject rescue nil
 
             error = Error.last
             expect(error.environment_data).to eq({
@@ -70,13 +60,7 @@ module ExceptionHunter
             end
 
             it 'tracks the error' do
-              expect {
-                begin
-                         subject
-                rescue StandardError
-                  nil
-                       end
-              } .to change(Error, :count).by(1)
+              expect { subject rescue nil } .to change(Error, :count).by(1)
             end
           end
 
@@ -89,13 +73,7 @@ module ExceptionHunter
             end
 
             it 'does not create an error' do
-              expect {
-                begin
-                         subject
-                rescue StandardError
-                  nil
-                       end
-              } .not_to change(Error, :count)
+              expect { subject rescue nil } .not_to change(Error, :count)
             end
           end
         end
@@ -104,13 +82,7 @@ module ExceptionHunter
           let(:worker) { -> {} }
 
           it 'does not create an error' do
-            expect {
-              begin
-                       subject
-              rescue StandardError
-                nil
-                     end
-            } .not_to change(Error, :count)
+            expect { subject rescue nil } .not_to change(Error, :count)
           end
         end
       end
