@@ -4,6 +4,51 @@ module ExceptionHunter
   describe ErrorPresenter do
     let(:error_presenter) { ErrorPresenter.new(error) }
 
+    describe '#environment_data' do
+      subject { error_presenter.environment_data }
+      let(:error) do
+        create(:error,
+               environment_data: {
+                 'something' => 123,
+                 'something_else' => 'abcd',
+                 'params' => {
+                   'name' => 'John'
+                 }
+               })
+      end
+
+      it 'returns the error environment data without the params' do
+        expect(subject).to eq({ 'something' => 123, 'something_else' => 'abcd' })
+      end
+    end
+
+    describe '#tracked_params' do
+      subject { error_presenter.tracked_params }
+
+      context 'when the environment data has tracked params' do
+        let(:error) do
+          create(:error,
+                 environment_data: {
+                   'something' => 123,
+                   'something_else' => 'abcd',
+                   'params' => {
+                     'name' => 'John'
+                   }
+                 })
+        end
+
+        it 'returns those tracked params' do
+          expect(subject).to eq({ 'name' => 'John' })
+        end
+      end
+
+      context 'when the environment data does not have tracked params' do
+        let(:error) { create(:error, environment_data: { 'something' => 123 }) }
+
+        it { is_expected.to be_nil }
+      end
+    end
+
     describe '#backtrace' do
       subject { error_presenter.backtrace }
 

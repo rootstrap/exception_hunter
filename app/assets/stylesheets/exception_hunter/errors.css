@@ -59,6 +59,10 @@
     color: var(--main-color);
 }
 
+.tracked-data {
+    border-left-color: var(--main-color);
+}
+
 .backtrace {
     padding-top: 1em;
     padding-bottom: 1em;
