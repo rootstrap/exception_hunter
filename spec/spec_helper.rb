@@ -14,6 +14,7 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'simplecov'
+require 'devise'
 
 SimpleCov.start('rails') do
   add_group 'Presenters', 'app/presenters'

@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 describe 'Errors', type: :request do
+  let(:controller) { ExceptionHunter::ErrorsController }
+  before { controller.skip_before_action :authenticate_admin_user_class, raise: false }
+
   describe 'show' do
     let(:error_group) { create(:error_group) }
 
