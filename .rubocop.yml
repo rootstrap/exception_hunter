@@ -76,7 +76,7 @@ Naming/AccessorMethodName:
   Exclude: []
 
 Naming/RescuedExceptionsVariableName:
-  Enabled: true
+  Enabled: false
 
 Style/FrozenStringLiteralComment:
   Enabled: false

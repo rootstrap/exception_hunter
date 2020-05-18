@@ -18,9 +18,9 @@ module ExceptionHunter
 
       def call(_worker, context, _queue)
         yield
-      rescue Exception => e # rubocop:disable Lint/RescueException
-        track_exception(e, context)
-        raise e
+      rescue Exception => exception # rubocop:disable Lint/RescueException
+        track_exception(exception, context)
+        raise exception
       end
 
       private

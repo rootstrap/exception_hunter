@@ -20,9 +20,9 @@ module ExceptionHunter
 
       def call(env)
         @app.call(env)
-      rescue Exception => e # rubocop:disable Lint/RescueException
-        catch_prey(env, e)
-        raise e
+      rescue Exception => exception # rubocop:disable Lint/RescueException
+        catch_prey(env, exception)
+        raise exception
       end
 
       private
