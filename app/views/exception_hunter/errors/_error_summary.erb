@@ -12,11 +12,7 @@
   </pre>
 <% end %>
 
-<% if error.tracked_params.nil? %>
-  <div class="row error-row-no-border data-title">
-    There are not tracked params.
-  </div>
-<% else %>
+<% unless error.tracked_params.nil? %>
   <div class="row error-row-no-border data-title">
     Tracked Params
   </div>

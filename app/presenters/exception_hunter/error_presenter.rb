@@ -19,7 +19,7 @@ module ExceptionHunter
     end
 
     def tracked_params
-      error.environment_data&.fetch('params')
+      error.environment_data&.fetch('params', nil)
     end
 
     private

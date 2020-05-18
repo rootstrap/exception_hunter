@@ -4,23 +4,23 @@ module ExceptionHunter
     # when a Sidekiq worker fails
     #
     class SidekiqHunter
-      TRACK_AT_RETRY = [0, 3, 6, 10]
+      TRACK_AT_RETRY = [0, 3, 6, 10].freeze
       JOB_TRACKED_DATA = %w[
         queue
         retry_count
-      ]
+      ].freeze
       ARGS_TRACKED_DATA = %w[
         job_class
         job_id
         arguments
         enqueued_at
-      ]
+      ].freeze
 
       def call(_worker, context, _queue)
         yield
-      rescue Exception => exception
-        track_exception(exception, context)
-        raise exception
+      rescue Exception => e # rubocop:disable Lint/RescueException
+        track_exception(e, context)
+        raise e
       end
 
       private
@@ -32,7 +32,7 @@ module ExceptionHunter
           class_name: exception.class.to_s,
           message: exception.message,
           environment_data: environment_data(context),
-          backtrace: exception.backtrace,
+          backtrace: exception.backtrace
         )
       end
 
