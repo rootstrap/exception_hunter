@@ -1,5 +1,3 @@
-require 'devise' if defined?(Devise)
-
 module ExceptionHunter
   module Devise
     def self.config

@@ -20,6 +20,14 @@ describe 'Errors', type: :request do
 
       expect(response).to render_template(:index)
     end
+
+    context 'when logged out' do
+      before { controller.before_action :authenticate_admin_user_class }
+
+      it 'redirects to login' do
+        expect(subject).to redirect_to(new_admin_user_session_path)
+      end
+    end
   end
 
   describe 'show' do
@@ -35,6 +43,14 @@ describe 'Errors', type: :request do
       subject
 
       expect(response).to render_template(:show)
+    end
+
+    context 'when logged out' do
+      before { controller.before_action :authenticate_admin_user_class }
+
+      it 'redirects to login' do
+        expect(subject).to redirect_to(new_admin_user_session_path)
+      end
     end
   end
 end
