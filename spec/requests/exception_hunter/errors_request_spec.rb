@@ -5,7 +5,7 @@ describe 'Errors', type: :request do
   before { controller.skip_before_action :authenticate_admin_user_class, raise: false }
 
   describe 'index' do
-    subject { get '/exception_hunter/errors' }
+    subject { get '/exception_hunter/' }
 
     before do
       3.times do |i|

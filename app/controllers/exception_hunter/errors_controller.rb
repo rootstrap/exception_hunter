@@ -2,7 +2,6 @@ require_dependency 'exception_hunter/application_controller'
 
 module ExceptionHunter
   class ErrorsController < ApplicationController
-    include ExceptionHunter::Authorization
     include Pagy::Backend
 
     def index
@@ -13,7 +12,7 @@ module ExceptionHunter
 
     def show
       @pagy, errors = pagy(most_recent_errors, items: 1)
-      @error = ErrorPresenter.new(errors.first)
+      @error = ErrorPresenter.new(errors.first!)
     end
 
     private
