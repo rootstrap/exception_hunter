@@ -49,6 +49,30 @@ module ExceptionHunter
       end
     end
 
+    describe 'with_occurrences_before' do
+      subject { Error.with_occurrences_before(deadline) }
+      let(:deadline) { 1.month.ago }
+
+      let!(:old_errors) do
+        (1..3).map do |i|
+          create(:error, occurred_at: deadline - i.days)
+        end
+      end
+      let!(:new_errors) do
+        (1..3).map do |i|
+          create(:error, occurred_at: deadline + i.days)
+        end
+      end
+
+      it 'returns errors with occurrences before the given date' do
+        expect(subject.to_a).to match_array(old_errors)
+      end
+
+      it 'does not return errors with occurrences after the given date' do
+        expect(subject.to_a).not_to include(*new_errors)
+      end
+    end
+
     describe '.in_current_month' do
       subject { Error.in_current_month }
 

@@ -11,6 +11,10 @@ module ExceptionHunter
       where(error_group_id: error_group_id).order(occurred_at: :desc)
     }
 
+    scope :with_occurrences_before, lambda { |max_occurrence_date|
+      where(Error[:occurred_at].lteq(max_occurrence_date))
+    }
+
     def self.in_current_month
       current_month = Date.today.beginning_of_month..Date.today.end_of_month
 
