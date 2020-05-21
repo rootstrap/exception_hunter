@@ -1,11 +1,9 @@
 module ExceptionHunter
   class ErrorReaper
-    DELETE_UNTIL = 1.month.ago
-
     class << self
-      def purge(delete_until: DELETE_UNTIL)
+      def purge(stale_time: Config.errors_stale_time)
         ActiveRecord::Base.transaction do
-          Error.with_occurrences_before(delete_until).destroy_all
+          Error.with_occurrences_before(Date.today - stale_time).destroy_all
           ErrorGroup.without_errors.destroy_all
         end
       end

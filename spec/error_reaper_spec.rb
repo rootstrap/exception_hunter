@@ -1,15 +1,15 @@
 module ExceptionHunter
   describe ErrorReaper do
     describe '.purge' do
-      subject { described_class.purge(delete_until: deadline) }
-      let(:deadline) { 1.month.ago }
+      subject { described_class.purge(stale_time: stale_time) }
+      let(:stale_time) { 1.month }
 
       let(:error_group) { create(:error_group) }
       let!(:old_errors) do
-        3.times.map { |i| create(:error, occurred_at: (1 + i).months.ago - 1.week, error_group: error_group) }
+        (1..3).map { |i| create(:error, occurred_at: i.months.ago - 1.week, error_group: error_group) }
       end
       let!(:new_errors) do
-        2.times.map { |i| create(:error, occurred_at: (1 + i).weeks.ago, error_group: error_group) }
+        (1..2).map { |i| create(:error, occurred_at: i.weeks.ago, error_group: error_group) }
       end
 
       let!(:empty_error_group) { create(:error_group) }

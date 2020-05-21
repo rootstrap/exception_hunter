@@ -12,7 +12,7 @@ module ExceptionHunter
         .order(Arel.sql("similarity(exception_hunter_error_groups.message, '#{quoted_message}') DESC"))
     }
 
-    scope :without_errors, -> {
+    scope :without_errors, lambda {
       is_associated_error = Error[:error_group_id].eq(ErrorGroup[:id])
       where.not(Error.where(is_associated_error).arel.exists)
     }

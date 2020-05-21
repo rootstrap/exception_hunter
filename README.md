@@ -32,6 +32,19 @@ you can run the command with the `--skip-users` flag.
 Additionally it should add the 'ExceptionHunter.routes(self)' line to your routes, which means you can go to
 `/exception_hunter/errors` in your browser and start enjoying some good old fashioned exception tracking!
 
+## Stale data
+
+You can get rid of stale errors by running the rake task to purge them:
+
+```bash
+$ rake exception_hunter:purge_errors
+```
+
+We recommend you run this task once in a while to de-clutter your DB, using a recurring tasks once
+a week would be ideal. You can also purge errors by running `ExceptionHunter::ErrorReaper.purge`.
+
+The time it takes for an error to go stale defaults to 45 days but it's configurable via the initializer.
+
 ## Contributing
 Contribution directions go here.
 
