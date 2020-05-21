@@ -66,6 +66,24 @@ module ExceptionHunter
           expect { subject }.not_to change(ErrorGroup, :count)
         end
       end
+
+      context 'when error tracking is disabled' do
+        let(:error_attributes) do
+          { class_name: 'SomeError', message: 'Something went very wrong 123' }
+        end
+
+        before do
+          Config.enabled = false
+        end
+
+        after do
+          Config.enabled = true
+        end
+
+        it 'does not track errors' do
+          expect { subject }.not_to change(Error, :count)
+        end
+      end
     end
   end
 end

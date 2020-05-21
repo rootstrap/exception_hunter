@@ -1,4 +1,10 @@
 ExceptionHunter.setup do |config|
+  # == Enabling
+  #
+  # This flag allows disabling error tracking, it's set to track in
+  # any environment but development or test by default
+  config.enabled = !(Rails.env.development? || Rails.env.test?)
+
   # == Current User
   #
   # Exception Hunter will include the user as part of the environment
