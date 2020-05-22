@@ -7,9 +7,9 @@ module ExceptionHunter
     has_many :grouped_errors, class_name: 'ExceptionHunter::Error', dependent: :destroy
 
     scope :most_similar, lambda { |message|
-      quoted_message = ActiveRecord::Base.connection.quote_string(message)
-      where("similarity(exception_hunter_error_groups.message, :message) >= #{SIMILARITY_THRESHOLD}", message: message)
-        .order(Arel.sql("similarity(exception_hunter_error_groups.message, '#{quoted_message}') DESC"))
+      message_similarity = sql_similarity(ErrorGroup[:message], message)
+      where(message_similarity.gteq(SIMILARITY_THRESHOLD))
+        .order(message_similarity.desc)
     }
 
     scope :without_errors, lambda {
