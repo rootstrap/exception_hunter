@@ -3,10 +3,9 @@ module ExceptionHunter
     validates :class_name, presence: true
     validates :occurred_at, presence: true
 
-    belongs_to :error_group
+    belongs_to :error_group, touch: true
 
     before_validation :set_occurred_at, on: :create
-    after_create :update_error_group
 
     scope :most_recent, lambda { |error_group_id|
       where(error_group_id: error_group_id).order(occurred_at: :desc)
@@ -22,10 +21,6 @@ module ExceptionHunter
 
     def set_occurred_at
       self.occurred_at ||= Time.now
-    end
-
-    def update_error_group
-      error_group.touch
     end
   end
 end
