@@ -5,7 +5,7 @@ module ExceptionHunter
     include Pagy::Backend
 
     def index
-      @errors = ErrorGroup.all.order(created_at: :desc)
+      @errors = ErrorGroup.all.order(updated_at: :desc)
       @errors_count = Error.count
       @month_errors = Error.in_current_month.count
     end

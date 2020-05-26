@@ -12,6 +12,15 @@ module ExceptionHunter
       it { is_expected.to belong_to(:error_group) }
     end
 
+    describe 'on creation' do
+      let(:error_group) { create(:error_group) }
+      let(:error) { build(:error, error_group: error_group) }
+
+      it 'touches error group' do
+        expect { error.save }.to change { error_group.reload.updated_at }
+      end
+    end
+
     describe 'occurred at' do
       let!(:error) { create(:error, occurred_at: nil) }
 
