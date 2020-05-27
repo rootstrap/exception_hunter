@@ -19,3 +19,7 @@
 .nav__logo img {
     height: 100%;
 }
+
+.logout {
+  text-align: left;
+}
