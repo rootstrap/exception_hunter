@@ -6,9 +6,12 @@ require 'exception_hunter/middleware/sidekiq_hunter' if defined?(Sidekiq)
 require 'exception_hunter/config'
 require 'exception_hunter/error_creator'
 require 'exception_hunter/error_reaper'
+require 'exception_hunter/tracking'
 require 'exception_hunter/user_attributes_collector'
 
 module ExceptionHunter
+  extend ::ExceptionHunter::Tracking
+
   def self.setup(&block)
     block.call(Config)
   end
