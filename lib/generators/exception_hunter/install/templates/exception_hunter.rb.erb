@@ -21,4 +21,12 @@ ExceptionHunter.setup do |config|
   # as part of the user information that is kept from the request.
   #
   config.user_attributes = [:id, :email]
+
+  # == Stale errors
+  #
+  # You can configure how long it takes for errors to go stale. This is
+  # taken into account when purging old error messages but nothing will
+  # happen automatically.
+  #
+  # config.errors_stale_time = 45.days
 end

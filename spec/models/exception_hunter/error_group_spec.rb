@@ -23,6 +23,27 @@ module ExceptionHunter
       end
     end
 
+    describe 'without_errors' do
+      subject { ErrorGroup.without_errors }
+
+      let!(:groups_without_errors) { create_list(:error_group, 3) }
+      let!(:groups_with_errors) { create_list(:error_group, 3) }
+
+      before do
+        groups_with_errors.each_with_index do |group, index|
+          create_list(:error, index + 1, error_group: group)
+        end
+      end
+
+      it 'returns error groups without associated errors' do
+        expect(subject.to_a).to match_array(groups_without_errors)
+      end
+
+      it 'does not return error groups with associated errors' do
+        expect(subject.to_a).not_to include(*groups_with_errors)
+      end
+    end
+
     describe '#last_occurence' do
       subject { error_group.last_occurrence }
 
