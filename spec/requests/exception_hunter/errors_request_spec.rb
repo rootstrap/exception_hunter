@@ -7,9 +7,9 @@ describe 'Errors', type: :request do
     subject { get '/exception_hunter' }
 
     before do
-      3.times do |i|
+      (1..3).each do |i|
         create(:error_group).tap do |error_group|
-          create_list(:error, i + 1, error_group: error_group)
+          create_list(:error, i, error_group: error_group)
         end
       end
     end

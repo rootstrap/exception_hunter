@@ -2,6 +2,8 @@ module ExceptionHunter
   class ErrorCreator
     class << self
       def call(**error_attrs)
+        return unless should_create?
+
         ActiveRecord::Base.transaction do
           error_attrs = extract_user_data(error_attrs)
           error = Error.new(error_attrs)
@@ -16,6 +18,10 @@ module ExceptionHunter
       end
 
       private
+
+      def should_create?
+        Config.enabled
+      end
 
       def update_error_group(error_group, error)
         error_group.error_class_name = error.class_name
