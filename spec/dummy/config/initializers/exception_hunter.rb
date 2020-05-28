@@ -1,11 +1,18 @@
 ExceptionHunter.setup do |config|
-  # == Admin User Class
+  # == Dashboard User
   # Exception Hunter allows you to restrict users who can see the dashboard
   # to the ones included in the database. You can change the table name in
   # case you are not satisfied with the default one. You can also remove the
   # configuration if you wish to have no access restrictions for the dashboard.
   #
   config.admin_user_class = 'AdminUser'
+
+  # == Dashboard User Authentication method
+  # Exception Hunter will try to authenticate the dashboard user with the
+  # provided method. You can change it here in case you have your own way
+  # of authenticating admins.
+  #
+  config.admin_authentication_method = :authenticate_admin_user!
 
   # == Current User
   #

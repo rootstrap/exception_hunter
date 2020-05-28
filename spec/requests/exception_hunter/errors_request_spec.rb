@@ -2,10 +2,9 @@ require 'rails_helper'
 
 describe 'Errors', type: :request do
   let(:controller) { ExceptionHunter::ErrorsController }
-  before { controller.skip_before_action :authenticate_admin_user_class, raise: false }
 
   describe 'index' do
-    subject { get '/exception_hunter/' }
+    subject { get '/exception_hunter' }
 
     before do
       3.times do |i|
@@ -14,16 +13,18 @@ describe 'Errors', type: :request do
         end
       end
     end
+    context 'when logged in' do
+      let(:admin) { create(:admin_user) }
+      before { sign_in(admin) }
 
-    it 'renders the index template' do
-      subject
+      it 'renders the index template' do
+        subject
 
-      expect(response).to render_template(:index)
+        expect(response).to render_template(:index)
+      end
     end
 
     context 'when logged out' do
-      before { controller.before_action :authenticate_admin_user_class }
-
       it 'redirects to login' do
         expect(subject).to redirect_to(new_admin_user_session_path)
       end
@@ -39,15 +40,18 @@ describe 'Errors', type: :request do
       create_list(:error, 2, error_group: error_group)
     end
 
-    it 'renders the show template' do
-      subject
+    context 'when logged in' do
+      let(:admin) { create(:admin_user) }
+      before { sign_in(admin) }
 
-      expect(response).to render_template(:show)
+      it 'renders the show template' do
+        subject
+
+        expect(response).to render_template(:show)
+      end
     end
 
     context 'when logged out' do
-      before { controller.before_action :authenticate_admin_user_class }
-
       it 'redirects to login' do
         expect(subject).to redirect_to(new_admin_user_session_path)
       end
