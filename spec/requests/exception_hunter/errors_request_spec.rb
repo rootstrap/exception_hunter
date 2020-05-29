@@ -26,7 +26,7 @@ describe 'Errors', type: :request do
 
     context 'when logged out' do
       it 'redirects to login' do
-        expect(subject).to redirect_to(new_admin_user_session_path)
+        expect(subject).to redirect_to(exception_hunter_login_path)
       end
     end
   end
@@ -53,7 +53,7 @@ describe 'Errors', type: :request do
 
     context 'when logged out' do
       it 'redirects to login' do
-        expect(subject).to redirect_to(new_admin_user_session_path)
+        expect(subject).to redirect_to(exception_hunter_login_path)
       end
     end
   end

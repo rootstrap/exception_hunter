@@ -23,14 +23,14 @@
   <nav class="nav">
     <div class="container container__nav">
       <div class="nav__logo">
-        <%= link_to dashboard_path do %>
+        <%= link_to exception_hunter_dashboard_path do %>
           <%= image_tag 'exception_hunter/logo.png', alt: 'Logo' %>
         <% end %>
       </div>
       <div class="logout">
         <% if current_admin_user? %>
           <div class="sign_out">
-            <%= link_to destroy_session_path(current_admin_user), method: 'delete' do %>
+            <%= link_to exception_hunter_logout_path do %>
               Sign out
             <% end %>
           </div>

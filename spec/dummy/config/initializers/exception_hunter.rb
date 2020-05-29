@@ -7,13 +7,6 @@ ExceptionHunter.setup do |config|
   #
   config.admin_user_class = 'AdminUser'
 
-  # == Dashboard User Authentication method
-  # Exception Hunter will try to authenticate the dashboard user with the
-  # provided method. You can change it here in case you have your own way
-  # of authenticating admins.
-  #
-  config.admin_authentication_method = :authenticate_admin_user!
-
   # == Current User
   #
   # Exception Hunter will include the user as part of the environment
