@@ -23,6 +23,10 @@ module ExceptionHunter
         .first
     end
 
+    def first_occurrence
+      @first_occurrence ||= grouped_errors.minimum(:occurred_at)
+    end
+
     def last_occurrence
       @last_occurrence ||= grouped_errors.maximum(:occurred_at)
     end

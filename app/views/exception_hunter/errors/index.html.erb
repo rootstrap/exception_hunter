@@ -1,36 +1,105 @@
-<div class="row statistics-row">
-  <div class="column column-offset-50 column-25">
-    <div class="statistics__cell">
-      <%= number_with_delimiter(@errors_count) %> Total errors
+<div class="row">
+  <div class="column column-80">
+    <div class="errors-tabs">
+      <div class="errors-tab">
+        <%= link_to errors_path(tab: :last_7_days) do %>
+          <div class="errors-tab__content">
+            <div class="errors-tab__badge">
+              <%= 7 %>
+            </div>
+            <div class="errors-tab__description">
+              Errors in the last 7 days
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="errors-tab">
+        <%= link_to errors_path(tab: :current_month) do %>
+          <div class="errors-tab__content">
+            <div class="errors-tab__badge">
+              <%= 45 %>
+            </div>
+            <div class="errors-tab__description">
+              Errors this month
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="errors-tab errors-tab--active">
+        <%= link_to errors_path(tab: :total_errors) do %>
+          <div class="errors-tab__content">
+            <div class="errors-tab__badge">
+              <%= @errors_count %>
+            </div>
+            <div class="errors-tab__description">
+              Total errors
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="errors-tab errors-tab__resolved">
+        <%= link_to errors_path(tab: :resolved) do %>
+          <div class="errors-tab__content">
+            <div class="errors-tab__badge">
+              <%= 245 %>
+            </div>
+            <div class="errors-tab__description">
+              Resolved
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
-  <div class="column column-25">
-    <div class="statistics__cell">
-      <%= number_with_delimiter(@month_errors) %> Errors this month
+
+  <div class="column column-10 column-offset-10">
+    <div class="button purge-button">
+      Purge
     </div>
   </div>
 </div>
 
-<div class="row error-row error-row--header">
-  <div class="column column-75">Message</div>
-  <div class="column column-15">Last Occurrence</div>
-  <div class="column column-10">Occurrences</div>
-</div>
-
-<% @errors.each do |error| %>
-  <div class="row error-row">
-    <div class="column column-75 error-cell">
-      <%= link_to error.message, error_path(error.id) %>
-    </div>
-    <div class="column column-15 error-cell error-cell--highlight">
-      <% if error.last_occurrence.present? %>
-        <%= time_ago_in_words(error.last_occurrence) %> ago
-      <% else %>
-        Never
-      <% end %>
-    </div>
-    <div class="column column-10 error-cell error-cell--highlight">
-      <%= error.total_occurrences %>
-    </div>
+<div class="errors__container">
+  <div class="row error-row error-row--header">
+    <div class="column column-50">Message</div>
+    <div class="column column-15">First Occurrence</div>
+    <div class="column column-15">Last Occurrence</div>
+    <div class="column column-10">Total</div>
+    <div class="column column-10"></div>
   </div>
-<% end %>
+
+  <% @errors.each do |error| %>
+    <div class="row error-row">
+      <div class="column column-50 error-cell error-cell__message">
+        <%= link_to error.message, error_path(error.id), class: %w[error-message] %>
+      </div>
+
+      <div class="column column-15 error-cell">
+        <% if error.first_occurrence.present? %>
+          <%= time_ago_in_words(error.first_occurrence) %> ago
+        <% else %>
+          Never
+        <% end %>
+      </div>
+
+      <div class="column column-15 error-cell">
+        <% if error.last_occurrence.present? %>
+          <%= time_ago_in_words(error.last_occurrence) %> ago
+        <% else %>
+          Never
+        <% end %>
+      </div>
+
+      <div class="column column-10 error-cell">
+        <%= error.total_occurrences %>
+      </div>
+
+      <div class="column column-10 error-cell">
+        <div class="button button-outline resolve-button">Resolve</div>
+      </div>
+    </div>
+  <% end %>
+</div>
