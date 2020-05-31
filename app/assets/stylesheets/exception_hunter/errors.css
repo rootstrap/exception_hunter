@@ -54,12 +54,12 @@
     align-items: center;
 }
 
-.purge-button {
+.button.purge-button {
     background-color: var(--highlight-color);
     border: none;
 }
 
-.purge-button:hover, .purge-button:focus {
+.button.purge-button:hover, .button.purge-button:focus {
     background: var(--focused-grey);
 }
 

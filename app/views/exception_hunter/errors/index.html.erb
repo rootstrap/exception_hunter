@@ -56,9 +56,10 @@
   </div>
 
   <div class="column column-10 column-offset-10">
-    <div class="button purge-button">
-      Purge
-    </div>
+    <%= button_to 'Purge', purge_errors_path,
+                  class: %w[button purge-button],
+                  method: :delete,
+                  data: { confirm: 'This will delete all stale errors, do you want to continue?' } %>
   </div>
 </div>
 
