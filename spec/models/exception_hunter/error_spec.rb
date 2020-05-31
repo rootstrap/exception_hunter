@@ -82,7 +82,32 @@ module ExceptionHunter
       end
     end
 
-    describe '.in_current_month' do
+    describe 'in_last_7_days' do
+      subject { Error.in_last_7_days }
+      let!(:valid_errors) do
+        [
+          create(:error, occurred_at: Date.current),
+          create(:error, occurred_at: 3.days.ago),
+          create(:error, occurred_at: 6.days.ago)
+        ]
+      end
+      let!(:invalid_errors) do
+        [
+          create(:error, occurred_at: 8.days.ago),
+          create(:error, occurred_at: 1.month.ago)
+        ]
+      end
+
+      it 'returns error groups with errors in the last 7 days' do
+        expect(subject).to include(*valid_errors)
+      end
+
+      it 'does not return error groups without errors in the last 7 days' do
+        expect(subject).not_to include(*invalid_errors)
+      end
+    end
+
+    describe 'in_current_month' do
       subject { Error.in_current_month }
 
       context 'when there are errors in the current month' do

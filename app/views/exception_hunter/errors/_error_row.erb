@@ -1,0 +1,29 @@
+<div class="row error-row">
+  <div class="column column-50 error-cell error-cell__message">
+    <%= link_to error.message, error_path(error.id), class: %w[error-message] %>
+  </div>
+
+  <div class="column column-15 error-cell">
+    <% if error.first_occurrence.present? %>
+      <%= time_ago_in_words(error.first_occurrence) %> ago
+    <% else %>
+      Never
+    <% end %>
+  </div>
+
+  <div class="column column-15 error-cell">
+    <% if error.last_occurrence.present? %>
+      <%= time_ago_in_words(error.last_occurrence) %> ago
+    <% else %>
+      Never
+    <% end %>
+  </div>
+
+  <div class="column column-10 error-cell">
+    <%= error.total_occurrences %>
+  </div>
+
+  <div class="column column-10 error-cell">
+    <div class="button button-outline resolve-button">Resolve</div>
+  </div>
+</div>

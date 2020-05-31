@@ -10,16 +10,14 @@ module ExceptionHunter
     scope :most_recent, lambda { |error_group_id|
       where(error_group_id: error_group_id).order(occurred_at: :desc)
     }
-
     scope :with_occurrences_before, lambda { |max_occurrence_date|
       where(Error[:occurred_at].lteq(max_occurrence_date))
     }
-
-    def self.in_current_month
-      current_month = Date.today.beginning_of_month..Date.today.end_of_month
-
-      where(occurred_at: current_month)
-    end
+    scope :in_period, ->(period) { where(occurred_at: period) }
+    scope :in_last_7_days, -> { in_period(7.days.ago.beginning_of_day..Time.now) }
+    scope :in_current_month, lambda {
+      in_period(Date.current.beginning_of_month.beginning_of_day..Date.current.end_of_month.end_of_day)
+    }
 
     private
 
