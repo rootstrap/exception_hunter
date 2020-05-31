@@ -5,7 +5,7 @@ module ExceptionHunter
     TOTAL_ERRORS_TAB = 'total_errors'.freeze
     RESOLVED_ERRORS_TAB = 'resolved'.freeze
     TABS = [LAST_7_DAYS_TAB, CURRENT_MONTH_TAB, TOTAL_ERRORS_TAB, RESOLVED_ERRORS_TAB].freeze
-    DEFAULT_TAB = TOTAL_ERRORS_TAB
+    DEFAULT_TAB = LAST_7_DAYS_TAB
 
     attr_reader :current_tab
 
