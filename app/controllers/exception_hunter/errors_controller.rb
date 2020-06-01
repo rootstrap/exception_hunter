@@ -6,7 +6,8 @@ module ExceptionHunter
 
     def index
       @dashboard = DashboardPresenter.new(current_tab)
-      @errors = ErrorGroupPresenter.wrap_collection(errors_for_tab(@dashboard).order(updated_at: :desc))
+      shown_errors = errors_for_tab(@dashboard).order(updated_at: :desc).distinct
+      @errors = ErrorGroupPresenter.wrap_collection(shown_errors)
     end
 
     def show
