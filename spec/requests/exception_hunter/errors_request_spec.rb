@@ -41,7 +41,7 @@ describe 'Errors', type: :request do
     subject { get "/exception_hunter/errors/#{error_group.id}/resolve" }
 
     it 'resolves the error group' do
-      expect { subject }.to change { error_group.reload.resolved }.from(false).to(true)
+      expect { subject }.to change { error_group.reload.status }.from('active').to('resolved')
     end
 
     it 'redirects back' do
@@ -56,7 +56,7 @@ describe 'Errors', type: :request do
       subject { create(:error, error_group: error_group) }
 
       it 'unresolves error' do
-        expect { subject }.to change { error_group.reload.resolved }.from(true).to(false)
+        expect { subject }.to change { error_group.reload.status }.from('resolved').to('active')
       end
     end
   end

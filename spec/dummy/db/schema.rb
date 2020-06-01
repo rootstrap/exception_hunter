@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_01_122247) do
+ActiveRecord::Schema.define(version: 2020_06_01_134030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2020_06_01_122247) do
   create_table "exception_hunter_error_groups", force: :cascade do |t|
     t.string "error_class_name", null: false
     t.string "message"
-    t.boolean "resolved", default: false
+    t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["message"], name: "index_exception_hunter_error_groups_on_message", opclass: :gin_trgm_ops, using: :gin

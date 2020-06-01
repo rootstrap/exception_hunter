@@ -16,7 +16,7 @@ module ExceptionHunter
     end
 
     def resolve
-      ErrorGroup.find(params[:id]).update!(resolved: true)
+      ErrorGroup.find(params[:id]).resolved!
 
       redirect_back fallback_location: errors_path, notice: 'Error resolved successfully'
     end

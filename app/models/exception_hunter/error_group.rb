@@ -6,6 +6,8 @@ module ExceptionHunter
 
     has_many :grouped_errors, class_name: 'ExceptionHunter::Error', dependent: :destroy
 
+    enum status: { active: 0, resolved: 1 }
+
     scope :most_similar, lambda { |message|
       message_similarity = sql_similarity(ErrorGroup[:message], message)
       where(message_similarity.gteq(SIMILARITY_THRESHOLD))

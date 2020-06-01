@@ -5,7 +5,7 @@ class CreateExceptionHunterErrorGroups < ActiveRecord::Migration[6.0]
     create_table :exception_hunter_error_groups do |t|
       t.string :error_class_name, null: false
       t.string :message
-      t.boolean :resolved, default: false
+      t.integer :status, default: 0
 
       t.timestamps
 

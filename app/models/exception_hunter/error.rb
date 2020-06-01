@@ -29,9 +29,9 @@ module ExceptionHunter
     end
 
     def unresolve_error_group
-      return unless error_group.resolved?
+      return if error_group.active?
 
-      error_group.update!(resolved: false)
+      error_group.active!
     end
   end
 end
