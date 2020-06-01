@@ -24,6 +24,12 @@
   </div>
 
   <div class="column column-10 error-cell">
-    <div class="button button-outline resolve-button">Resolve</div>
+    <% if error.active? %>
+    <div class="button button-outline resolve-button">
+      <%= link_to 'Resolve', resolve_error_path(error.id),
+                   method: :get,
+                   data: { confirm: 'Are you sure you want to resolve this error?' } %></div>
+    </div>
+    <% end %>
   </div>
 </div>

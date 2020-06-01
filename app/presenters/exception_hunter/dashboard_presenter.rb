@@ -43,10 +43,10 @@ module ExceptionHunter
 
     def calculate_tabs_counts
       @tabs_counts = {
-        LAST_7_DAYS_TAB => Error.in_last_7_days.count,
-        CURRENT_MONTH_TAB => Error.in_current_month.count,
-        TOTAL_ERRORS_TAB => Error.count,
-        RESOLVED_ERRORS_TAB => 0
+        LAST_7_DAYS_TAB => Error.in_last_7_days.from_active_error_groups.count,
+        CURRENT_MONTH_TAB => Error.in_current_month.from_active_error_groups.count,
+        TOTAL_ERRORS_TAB => Error.from_active_error_groups.count,
+        RESOLVED_ERRORS_TAB => Error.from_resolved_error_groups.count
       }
     end
   end
