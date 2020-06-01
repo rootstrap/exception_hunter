@@ -1,19 +1,72 @@
 :root {
-    --main-color: #C8193C;
-    --secondary-color: #F4F5F6;
-    --link-color: #158FEF;
-    --border-color: #D1D1D1;
-    --file-name-color: #16AF90
+    --background-grey: #E5E5E5;
+    --highlight-color: #CF4031;
+    --highlight-good-color: #2CBB85;
+    --highlight-inactive-color: #808183;
+    --inactive-grey: #D1D1D3;
+    --focused-grey: #808183;
+    --highlighted-link-blue: #0036F7;
+    --header-grey: #F8F8F8;
+    --border-grey: #F1F2F5;
+    --file-name-color: #2CBB85;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background-grey);
+}
+
+.container {
+    padding: 0;
+}
+
+.row {
+    margin: 0;
+    width: 100%;
+}
+
+.row .column {
+    padding: 0;
+    margin-bottom: 0;
 }
 
 .wrapper {
-    margin: 5.5rem auto auto;
+    margin: 6.5rem auto auto;
+}
+
+.text--underline {
+    text-decoration: underline;
 }
 
 a {
-    color: var(--link-color);
+    color: inherit;
 }
 
 a:hover, a:focus, a:active {
-    color: var(--main-color);
+    color: inherit;
+}
+
+form {
+    margin-bottom: 0;
+}
+
+.flash.flash--notice {
+    background-color: #FFF;
+    margin-bottom: 2rem;
+    padding: 0.7rem 2rem;
+    border-radius: 5px;
+    line-height: 3.8rem;
+    font-weight: 400;
+}
+
+.button.button-dismiss {
+    margin-bottom: 0;
+    padding: 0;
+    color: var(--focused-grey);
+    width: 100%;
+    text-align: right;
+}
+
+.button.button-dismiss:hover, .button.button-dismiss:focus, .button.button-dismiss:active {
+    color: var(--inactive-grey);
 }

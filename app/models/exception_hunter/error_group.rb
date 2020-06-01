@@ -18,11 +18,22 @@ module ExceptionHunter
       is_associated_error = Error[:error_group_id].eq(ErrorGroup[:id])
       where.not(Error.where(is_associated_error).arel.exists)
     }
+    scope :with_errors_in_last_7_days, lambda {
+      joins(:grouped_errors)
+        .where(Error.in_last_7_days.where(Error[:error_group_id].eq(ErrorGroup[:id])).arel.exists)
+    }
+    scope :with_errors_in_current_month, lambda {
+      joins(:grouped_errors).where(Error.in_current_month.where(Error[:error_group_id].eq(ErrorGroup[:id])).arel.exists)
+    }
 
     def self.find_matching_group(error)
       where(error_class_name: error.class_name)
         .most_similar(error.message.to_s)
         .first
+    end
+
+    def first_occurrence
+      @first_occurrence ||= grouped_errors.minimum(:occurred_at)
     end
 
     def last_occurrence

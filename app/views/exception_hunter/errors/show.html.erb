@@ -1,33 +1,35 @@
-<div class="row">
-  <div class="column column-offset-80 column-20">
-    <%= render partial: 'exception_hunter/errors/pagy/pagy_nav', locals: { pagy: @pagy } %>
-  </div>
-</div>
-
-<div class="error-title">
-  <%= @error.class_name %>: <%= @error.message %>
-</div>
-<div class="error-occurred_at">
-  <%= @error.occurred_at %>
-</div>
-
-<ul data-tabs>
-  <li><a data-tabby-default href="#summary">Summary</a></li>
-  <li><a href="#backtrace">Backtrace</a></li>
-  <li><a href="#user-data">User Data</a></li>
-</ul>
-
-<div class="tab-content">
-  <div id="summary">
-    <%= render partial: 'exception_hunter/errors/error_summary', locals: { error: @error } %>
+<div class="errors__container">
+  <div class="row">
+    <div class="column column-offset-80 column-20">
+      <%= render partial: 'exception_hunter/errors/pagy/pagy_nav', locals: { pagy: @pagy } %>
+    </div>
   </div>
 
-  <div id="backtrace">
-    <%= render partial: 'exception_hunter/errors/error_backtrace', locals: { error: @error } %>
+  <div class="error-title">
+    <%= @error.class_name %>: <%= @error.message %>
+  </div>
+  <div class="error-occurred_at">
+    <%= @error.occurred_at %>
   </div>
 
-  <div id="user-data">
-    <%= render partial: 'exception_hunter/errors/error_user_data', locals: { error: @error } %>
+  <ul data-tabs>
+    <li><a data-tabby-default href="#summary">Summary</a></li>
+    <li><a href="#backtrace">Backtrace</a></li>
+    <li><a href="#user-data">User Data</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="summary">
+      <%= render partial: 'exception_hunter/errors/error_summary', locals: { error: @error } %>
+    </div>
+
+    <div id="backtrace">
+      <%= render partial: 'exception_hunter/errors/error_backtrace', locals: { error: @error } %>
+    </div>
+
+    <div id="user-data">
+      <%= render partial: 'exception_hunter/errors/error_user_data', locals: { error: @error } %>
+    </div>
   </div>
 </div>
 

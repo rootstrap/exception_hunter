@@ -2,49 +2,119 @@
   Place all the styles related to the matching controller here.
   They will automatically be included in application.css.
 */
-
-.row.statistics-row {
-    padding-top: 1rem;
+.errors__container {
+    background-color: #FFF;
+    padding: 32px;
+    border-radius: 0 5px 5px 5px;
 }
 
-.statistics__cell {
-    color: var(--main-color);
-    background-color: var(--secondary-color);
-    border: 1px solid var(--border-color);
-    height: 5rem;
-    border-radius: 10px;
+.errors-tabs {
     display: flex;
-    align-items: center;
+}
+
+.errors-tab {
+    border-radius: 5px 5px 0 0;
+    margin-right: 1rem;
+    background-color: var(--inactive-grey);
+}
+
+.errors-tab--active {
+    background-color: #FFF;
+    color: var(--highlight-color);
+}
+
+.errors-tab__resolved.errors-tab--active {
+    color: var(--highlight-good-color);
+}
+
+.errors-tab__content {
+    padding: 1rem;
+    display: flex;
+}
+
+.errors-tab__badge {
+    background: var(--highlight-inactive-color);
+    border-radius: 5px;
+    color: #FFF;
+    padding: 4px 8px;
+}
+
+.errors-tab--active .errors-tab__badge {
+    background-color: var(--highlight-color);
+}
+
+.errors-tab__resolved.errors-tab--active .errors-tab__badge {
+    background-color: var(--highlight-good-color);
+}
+
+.errors-tab__description {
+    margin-left: 1.3rem;
+    display: flex;
     justify-content: center;
-    font-size: 2.2rem;
+    align-items: center;
+}
+
+.button.purge-button {
+    background-color: var(--highlight-color);
+    border: none;
+}
+
+.button.purge-button:hover, .button.purge-button:focus {
+    background: var(--focused-grey);
+}
+
+.errors-date-group {
+    background-color: var(--header-grey);
+    padding: 0.5rem 1rem;
+}
+
+.errors-date-group ~ .errors-date-group {
+    border-bottom: 1px solid var(--border-grey);
 }
 
 .row.error-row {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid;
+    padding: 1rem;
 }
 
-.row.error-row-no-border {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+.error-row:not(.error-row--header) {
+    border: 1px solid var(--border-grey);
+}
+
+.error-message, .error-message:hover, .error-message:focus, .error-message:active {
+    color: var(--highlighted-link-blue);
 }
 
 .error-row.error-row--header {
-    font-weight: bold;
+    background-color: var(--header-grey);
+    font-weight: 500;
+    color: #000;
 }
 
-.error-cell.error-cell--highlight {
-    color: var(--main-color);
+.error-cell__message {
+    overflow-x: hidden;
 }
 
 .error-title {
     font-size: 20px;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-grey);
+}
+
+.button.resolve-button {
+    color: var(--highlight-good-color);
+    border-color: var(--highlight-good-color);
+    font-size: 10px;
+    padding: 0 1rem;
+    height: 3rem;
+    line-height: 3rem;
+}
+
+.button.resolve-button:hover, .button.resolve-button:focus {
+    color: var(--focused-grey);
+    border-color: var(--focused-grey);
 }
 
 .error-occurred_at {
-    color: var(--main-color);
+    color: var(--highlight-color);
     font-size: 14px;
     margin-top: 0.5em;
     margin-bottom: 2em;
@@ -56,11 +126,11 @@
 
 .data-title {
     font-weight: bold;
-    color: var(--main-color);
+    color: var(--highlight-color);
 }
 
 .tracked-data {
-    border-left-color: var(--main-color);
+    border-left-color: var(--highlight-color);
 }
 
 .backtrace {
@@ -80,7 +150,7 @@
 
 .backtrace-line__line-number {
     margin-right: 5px;
-    color: var(--main-color);
+    color: var(--highlight-color);
 }
 
 .backtrace-line__file-name {

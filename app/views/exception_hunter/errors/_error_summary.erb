@@ -1,9 +1,9 @@
 <% if error.environment_data.empty? %>
-  <div class="row error-row-no-border data-title">
+  <div class="row error-row data-title">
     Unfortunately, no environment information has been registered for this error.
   </div>
 <% else %>
-  <div class="row error-row-no-border data-title">
+  <div class="row error-row data-title">
     Environment Data
   </div>
   <pre class="tracked-data">
@@ -13,7 +13,7 @@
 <% end %>
 
 <% unless error.tracked_params.nil? %>
-  <div class="row error-row-no-border data-title">
+  <div class="row error-row data-title">
     Tracked Params
   </div>
   <pre class="tracked-data">
@@ -23,11 +23,11 @@
 <% end %>
 
 <% if error.custom_data.nil? %>
-  <div class="row error-row-no-border data-title">
+  <div class="row error-row data-title">
     No custom data included.
   </div>
 <% else %>
-  <div class="row error-row-no-border data-title">
+  <div class="row error-row data-title">
     Custom Data
   </div>
   <pre class="tracked-data">
