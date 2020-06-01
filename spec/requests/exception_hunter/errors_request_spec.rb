@@ -34,4 +34,20 @@ describe 'Errors', type: :request do
       expect(response).to render_template(:show)
     end
   end
+
+  describe 'resolve' do
+    let(:error_group) { create(:error_group) }
+
+    subject { get "/exception_hunter/errors/#{error_group.id}/resolve" }
+
+    it 'resolves the error group' do
+      expect { subject }.to change { error_group.reload.resolved }.from(false).to(true)
+    end
+
+    it 'redirects back' do
+      subject
+
+      expect(response).to have_http_status(302)
+    end
+  end
 end

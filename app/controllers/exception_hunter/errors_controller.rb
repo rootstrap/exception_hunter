@@ -15,6 +15,12 @@ module ExceptionHunter
       @error = ErrorPresenter.new(errors.first)
     end
 
+    def resolve
+      ErrorGroup.find(params[:id]).update!(resolved: true)
+
+      redirect_back fallback_location: errors_path, notice: 'Error resolved successfully'
+    end
+
     private
 
     def most_recent_errors

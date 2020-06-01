@@ -1,6 +1,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  devise_for :admin_users
   devise_for :users
   ExceptionHunter.routes(self)
   mount Sidekiq::Web => '/sidekiq'

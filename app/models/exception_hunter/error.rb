@@ -6,6 +6,7 @@ module ExceptionHunter
     belongs_to :error_group, touch: true
 
     before_validation :set_occurred_at, on: :create
+    after_create :unresolve_error_group
 
     scope :most_recent, lambda { |error_group_id|
       where(error_group_id: error_group_id).order(occurred_at: :desc)
@@ -25,6 +26,12 @@ module ExceptionHunter
 
     def set_occurred_at
       self.occurred_at ||= Time.now
+    end
+
+    def unresolve_error_group
+      return if error_group.resolved?
+
+      error_group.update!(resolved: false)
     end
   end
 end
