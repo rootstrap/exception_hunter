@@ -29,6 +29,19 @@
   </nav>
 
   <div class="container">
+    <% if flash[:notice] %>
+      <div id="flash-notice" class="flash flash--notice row">
+        <div class="column column-80">
+          <%= flash[:notice] %>
+        </div>
+        <div class="column column-20">
+          <div class="button button-clear button-dismiss" data-dismiss="#flash-notice">
+            <%= ['Cool!', 'Nice!', 'Ok', 'Dismiss', 'Fine. Whatever.', 'I know that'].sample %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
     <%= yield %>
   </div>
 
@@ -36,6 +49,36 @@
     Made with ♥ at <a href="https://www.rootstrap.com/" class="text--underline">Rootstrap</a>
   </div>
 </div>
+
+<script type="text/javascript" charset="utf-8">
+  function confirmable(element) {
+    const message = element.getAttribute('data-confirm')
+    element.form.addEventListener('submit', confirm(message))
+
+    function confirm(message) {
+      return function (event) {
+        if (!window.confirm(message)) {
+          event.preventDefault()
+        }
+      }
+    }
+  }
+
+  function dismissible(element) {
+    element.addEventListener('click', dismiss(element))
+
+    function dismiss(element) {
+      return function () {
+        const selector = element.getAttribute('data-dismiss')
+        const elementToDismiss = document.querySelector(selector)
+        elementToDismiss.remove()
+      }
+    }
+  }
+
+  Array.from(document.querySelectorAll('[data-confirm]')).forEach(confirmable)
+  Array.from(document.querySelectorAll('[data-dismiss]')).forEach(dismissible)
+</script>
 
 </body>
 </html>

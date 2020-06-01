@@ -74,7 +74,7 @@ module ExceptionHunter
 
       before do
         create(:error, error_group: groups_with_valid_errors.first, occurred_at: Date.current)
-        create(:error, error_group: groups_with_valid_errors.second, occurred_at: 15.days.ago)
+        create(:error, error_group: groups_with_valid_errors.second, occurred_at: Date.current.beginning_of_month + 15.days)
         create(:error, error_group: groups_with_valid_errors.third, occurred_at: Date.current.beginning_of_month)
 
         create(:error, error_group: groups_without_valid_errors.first, occurred_at: 32.days.ago)

@@ -27,10 +27,11 @@ body {
 
 .row .column {
     padding: 0;
+    margin-bottom: 0;
 }
 
 .wrapper {
-    margin: 8.5rem auto auto;
+    margin: 6.5rem auto auto;
 }
 
 .text--underline {
@@ -43,4 +44,29 @@ a {
 
 a:hover, a:focus, a:active {
     color: inherit;
+}
+
+form {
+    margin-bottom: 0;
+}
+
+.flash.flash--notice {
+    background-color: #FFF;
+    margin-bottom: 2rem;
+    padding: 0.7rem 2rem;
+    border-radius: 5px;
+    line-height: 3.8rem;
+    font-weight: 400;
+}
+
+.button.button-dismiss {
+    margin-bottom: 0;
+    padding: 0;
+    color: var(--focused-grey);
+    width: 100%;
+    text-align: right;
+}
+
+.button.button-dismiss:hover, .button.button-dismiss:focus, .button.button-dismiss:active {
+    color: var(--inactive-grey);
 }

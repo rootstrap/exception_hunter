@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module ExceptionHunter
   describe 'Errors', type: :request do
-    describe 'index' do
+    describe 'GET /exception_hunter/errors' do
       subject { get "/exception_hunter/errors?tab=#{tab}" }
 
       context 'in the last 7 days tab' do
@@ -78,7 +78,7 @@ module ExceptionHunter
 
         before do
           create(:error, error_group: shown_errors.first, occurred_at: Date.current)
-          create(:error, error_group: shown_errors.second, occurred_at: 15.days.ago)
+          create(:error, error_group: shown_errors.second, occurred_at: Date.current.beginning_of_month + 15.days)
           create(:error, error_group: shown_errors.third, occurred_at: Date.current.beginning_of_month)
 
           create(:error, error_group: hidden_errors.first, occurred_at: 32.days.ago)
@@ -151,7 +151,7 @@ module ExceptionHunter
       end
     end
 
-    describe 'show' do
+    describe 'GET /exception_hunter/errors/:id' do
       let(:error_group) { create(:error_group) }
 
       subject { get "/exception_hunter/errors/#{error_group.id}" }
@@ -164,6 +164,22 @@ module ExceptionHunter
         subject
 
         expect(response).to render_template(:show)
+      end
+    end
+
+    describe 'DELETE /exception_hunter/errors/purge' do
+      subject { delete '/exception_hunter/errors/purge' }
+
+      it 'calls the ErrorReaper' do
+        expect(ErrorReaper).to receive(:purge)
+
+        subject
+      end
+
+      it 'redirects back' do
+        subject
+
+        expect(response).to have_http_status(302)
       end
     end
   end
