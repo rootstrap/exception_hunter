@@ -1,11 +1,11 @@
 <div class="row">
   <div class="column column-80">
     <div class="errors-tabs">
-      <div class="errors-tab">
-        <%= link_to errors_path(tab: :last_7_days) do %>
+      <div class="errors-tab <%= 'errors-tab--active' if @dashboard.tab_active?(@dashboard.class::LAST_7_DAYS_TAB) %>">
+        <%= link_to errors_path(tab: @dashboard.class::LAST_7_DAYS_TAB) do %>
           <div class="errors-tab__content">
             <div class="errors-tab__badge">
-              <%= 7 %>
+              <%= @dashboard.errors_count(@dashboard.class::LAST_7_DAYS_TAB) %>
             </div>
             <div class="errors-tab__description">
               Errors in the last 7 days
@@ -14,11 +14,11 @@
         <% end %>
       </div>
 
-      <div class="errors-tab">
-        <%= link_to errors_path(tab: :current_month) do %>
+      <div class="errors-tab <%= 'errors-tab--active' if @dashboard.tab_active?(@dashboard.class::CURRENT_MONTH_TAB) %>">
+        <%= link_to errors_path(tab: @dashboard.class::CURRENT_MONTH_TAB) do %>
           <div class="errors-tab__content">
             <div class="errors-tab__badge">
-              <%= 45 %>
+              <%= @dashboard.errors_count(@dashboard.class::CURRENT_MONTH_TAB) %>
             </div>
             <div class="errors-tab__description">
               Errors this month
@@ -27,11 +27,11 @@
         <% end %>
       </div>
 
-      <div class="errors-tab errors-tab--active">
-        <%= link_to errors_path(tab: :total_errors) do %>
+      <div class="errors-tab <%= 'errors-tab--active' if @dashboard.tab_active?(@dashboard.class::TOTAL_ERRORS_TAB) %>">
+        <%= link_to errors_path(tab: @dashboard.class::TOTAL_ERRORS_TAB) do %>
           <div class="errors-tab__content">
             <div class="errors-tab__badge">
-              <%= @errors_count %>
+              <%= @dashboard.errors_count(@dashboard.class::TOTAL_ERRORS_TAB) %>
             </div>
             <div class="errors-tab__description">
               Total errors
@@ -40,11 +40,11 @@
         <% end %>
       </div>
 
-      <div class="errors-tab errors-tab__resolved">
-        <%= link_to errors_path(tab: :resolved) do %>
+      <div class="errors-tab errors-tab__resolved <%= 'errors-tab--active' if @dashboard.tab_active?(@dashboard.class::RESOLVED_ERRORS_TAB) %>">
+        <%= link_to errors_path(tab: @dashboard.class::RESOLVED_ERRORS_TAB) do %>
           <div class="errors-tab__content">
             <div class="errors-tab__badge">
-              <%= 245 %>
+              <%= @dashboard.errors_count(@dashboard.class::RESOLVED_ERRORS_TAB) || '-' %>
             </div>
             <div class="errors-tab__description">
               Resolved
@@ -72,35 +72,5 @@
     <div class="column column-10"></div>
   </div>
 
-  <% @errors.each do |error| %>
-    <div class="row error-row">
-      <div class="column column-50 error-cell error-cell__message">
-        <%= link_to error.message, error_path(error.id), class: %w[error-message] %>
-      </div>
-
-      <div class="column column-15 error-cell">
-        <% if error.first_occurrence.present? %>
-          <%= time_ago_in_words(error.first_occurrence) %> ago
-        <% else %>
-          Never
-        <% end %>
-      </div>
-
-      <div class="column column-15 error-cell">
-        <% if error.last_occurrence.present? %>
-          <%= time_ago_in_words(error.last_occurrence) %> ago
-        <% else %>
-          Never
-        <% end %>
-      </div>
-
-      <div class="column column-10 error-cell">
-        <%= error.total_occurrences %>
-      </div>
-
-      <div class="column column-10 error-cell">
-        <div class="button button-outline resolve-button">Resolve</div>
-      </div>
-    </div>
-  <% end %>
+  <%= render partial: @dashboard.partial_for_tab, locals: { errors: @errors } %>
 </div>

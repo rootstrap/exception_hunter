@@ -84,6 +84,9 @@ detectors:
     - initialize
     max_statements: 12
 
+  TooManyConstants:
+    enabled: false
+
   UncommunicativeMethodName:
     enabled: true
     exclude: []

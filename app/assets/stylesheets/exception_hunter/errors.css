@@ -63,6 +63,15 @@
     background: var(--focused-grey);
 }
 
+.errors-date-group {
+    background-color: var(--header-grey);
+    padding: 0.5rem 1rem;
+}
+
+.errors-date-group ~ .errors-date-group {
+    border-bottom: 1px solid var(--border-grey);
+}
+
 .row.error-row {
     padding: 1rem;
 }
