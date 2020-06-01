@@ -29,7 +29,7 @@ module ExceptionHunter
     end
 
     def unresolve_error_group
-      return if error_group.resolved?
+      return unless error_group.resolved?
 
       error_group.update!(resolved: false)
     end

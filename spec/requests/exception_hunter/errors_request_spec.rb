@@ -49,5 +49,15 @@ describe 'Errors', type: :request do
 
       expect(response).to have_http_status(302)
     end
+
+    context 'on new error creation' do
+      before { get "/exception_hunter/errors/#{error_group.id}/resolve" }
+
+      subject { create(:error, error_group: error_group) }
+
+      it 'unresolves error' do
+        expect { subject }.to change { error_group.reload.resolved }.from(true).to(false)
+      end
+    end
   end
 end
