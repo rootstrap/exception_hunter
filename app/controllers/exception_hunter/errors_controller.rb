@@ -15,6 +15,12 @@ module ExceptionHunter
       @error = ErrorPresenter.new(errors.first)
     end
 
+    def destroy
+      ErrorReaper.purge
+
+      redirect_back fallback_location: errors_path, notice: 'Errors purged successfully'
+    end
+
     private
 
     def most_recent_errors

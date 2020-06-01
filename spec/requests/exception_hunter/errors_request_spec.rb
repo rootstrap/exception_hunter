@@ -1,37 +1,55 @@
 require 'rails_helper'
 
-describe 'Errors', type: :request do
-  describe 'index' do
-    subject { get '/exception_hunter/errors' }
+module ExceptionHunter
+  describe 'Errors', type: :request do
+    describe 'GET /exception_hunter/errors' do
+      subject { get '/exception_hunter/errors' }
 
-    before do
-      (1..3).each do |i|
-        create(:error_group).tap do |error_group|
-          create_list(:error, i, error_group: error_group)
+      before do
+        (1..3).each do |i|
+          create(:error_group).tap do |error_group|
+            create_list(:error, i, error_group: error_group)
+          end
         end
+      end
+
+      it 'renders the index template' do
+        subject
+
+        expect(response).to render_template(:index)
       end
     end
 
-    it 'renders the index template' do
-      subject
+    describe 'GET /exception_hunter/errors/:id' do
+      let(:error_group) { create(:error_group) }
 
-      expect(response).to render_template(:index)
+      subject { get "/exception_hunter/errors/#{error_group.id}" }
+
+      before do
+        create_list(:error, 2, error_group: error_group)
+      end
+
+      it 'renders the show template' do
+        subject
+
+        expect(response).to render_template(:show)
+      end
     end
-  end
 
-  describe 'show' do
-    let(:error_group) { create(:error_group) }
+    describe 'DELETE /exception_hunter/errors/purge' do
+      subject { delete '/exception_hunter/errors/purge' }
 
-    subject { get "/exception_hunter/errors/#{error_group.id}" }
+      it 'calls the ErrorReaper' do
+        expect(ErrorReaper).to receive(:purge)
 
-    before do
-      create_list(:error, 2, error_group: error_group)
-    end
+        subject
+      end
 
-    it 'renders the show template' do
-      subject
+      it 'redirects back' do
+        subject
 
-      expect(response).to render_template(:show)
+        expect(response).to have_http_status(302)
+      end
     end
   end
 end
