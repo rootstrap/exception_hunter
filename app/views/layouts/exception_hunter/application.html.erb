@@ -7,7 +7,7 @@
 
   <%= favicon_link_tag 'exception_hunter/logo.png' %>
 
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css">
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.css">
 
@@ -22,16 +22,18 @@
 <div class="wrapper">
   <nav class="nav">
     <div class="container container__nav">
-      <div class="nav__logo">
-        <%= link_to errors_path do %>
-          <%= image_tag 'exception_hunter/logo.png', alt: 'Logo' %>
-        <% end %>
-      </div>
+      <%= link_to errors_path do %>
+        <div class="nav__title">Exception Hunter</div>
+      <% end %>
     </div>
   </nav>
 
   <div class="container">
     <%= yield %>
+  </div>
+
+  <div class="footer">
+    Made with ♥ at <a href="https://www.rootstrap.com/" class="text--underline">Rootstrap</a>
   </div>
 </div>
 
