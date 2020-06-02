@@ -25,10 +25,9 @@
 
   <div class="column column-10 error-cell">
     <% if error.active? %>
-      <div class="button button-outline resolve-button">
-        <%= link_to 'Resolve', resolve_error_path(error.id),
-                    method: :get,
-                    data: { confirm: 'Are you sure you want to resolve this error?' } %>
+      <div class="resolve-button button-outline button  ">
+        <%= button_to('Resolve', resolved_errors_path(error_group: { id: error.id }), method: :post,
+                    data: { confirm: 'Are you sure you want to resolve this error?' }) %>
       </div>
     <% end %>
   </div>

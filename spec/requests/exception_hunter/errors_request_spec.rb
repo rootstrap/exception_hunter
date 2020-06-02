@@ -186,8 +186,9 @@ module ExceptionHunter
 
   describe 'resolve' do
     let(:error_group) { create(:error_group) }
+    let(:params) { { error_group: { id: error_group.id } } }
 
-    subject { get "/exception_hunter/errors/#{error_group.id}/resolve" }
+    subject { post '/exception_hunter/resolved_errors', params: params }
 
     it 'resolves the error group' do
       expect { subject }.to change { error_group.reload.status }.from('active').to('resolved')
@@ -197,16 +198,6 @@ module ExceptionHunter
       subject
 
       expect(response).to have_http_status(302)
-    end
-
-    context 'on new error creation' do
-      before { get "/exception_hunter/errors/#{error_group.id}/resolve" }
-
-      subject { create(:error, error_group: error_group) }
-
-      it 'unresolves error' do
-        expect { subject }.to change { error_group.reload.status }.from('resolved').to('active')
-      end
     end
   end
 end

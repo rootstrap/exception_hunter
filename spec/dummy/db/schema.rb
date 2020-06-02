@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2020_06_01_134030) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["message"], name: "index_exception_hunter_error_groups_on_message", opclass: :gin_trgm_ops, using: :gin
+    t.index ["status"], name: "index_exception_hunter_error_groups_on_status"
   end
 
   create_table "exception_hunter_errors", force: :cascade do |t|

@@ -6,7 +6,7 @@ module ExceptionHunter
     belongs_to :error_group, touch: true
 
     before_validation :set_occurred_at, on: :create
-    after_create :unresolve_error_group
+    after_create :unresolve_error_group, unless: -> { error_group.active? }
 
     scope :most_recent, lambda { |error_group_id|
       where(error_group_id: error_group_id).order(occurred_at: :desc)
@@ -20,10 +20,10 @@ module ExceptionHunter
       in_period(Date.current.beginning_of_month.beginning_of_day..Date.current.end_of_month.end_of_day)
     }
     scope :from_active_error_groups, lambda {
-      joins(:error_group).where(error_group_id: ErrorGroup.active)
+      joins(:error_group).where(error_group: ErrorGroup.active)
     }
     scope :from_resolved_error_groups, lambda {
-      joins(:error_group).where(error_group_id: ErrorGroup.resolved)
+      joins(:error_group).where(error_group: ErrorGroup.resolved)
     }
 
     private
@@ -33,8 +33,6 @@ module ExceptionHunter
     end
 
     def unresolve_error_group
-      return if error_group.active?
-
       error_group.active!
     end
   end

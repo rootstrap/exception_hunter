@@ -14,12 +14,6 @@ module ExceptionHunter
       @error = ErrorPresenter.new(errors.first)
     end
 
-    def resolve
-      ErrorGroup.find(params[:id]).resolved!
-
-      redirect_back fallback_location: errors_path, notice: 'Error resolved successfully'
-    end
-
     def destroy
       ErrorReaper.purge
 
