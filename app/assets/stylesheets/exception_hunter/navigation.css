@@ -28,3 +28,9 @@
     padding-top: 4rem;
     padding-bottom: 1rem;
 }
+
+.logout {
+  line-height: 4.2rem;
+  color: #FFF;
+  text-align: right;
+}

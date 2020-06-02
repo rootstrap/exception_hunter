@@ -1,0 +1,71 @@
+.login_form_container {
+  margin: 0rem auto auto;
+  display: flex;
+  max-width: 75%;
+  margin-top: 20rem;
+  width: 910px;
+  height: 356px;
+  font-family: 'Inter', sans-serif;
+  background-color: white;
+}
+
+.login_left_container {
+  width: 455px;
+  text-align: center;
+  width: 38rem;
+  background-color: black;
+
+}
+
+.left_column {
+  max-width: 50%;
+  padding-top: 15%;
+  padding-left: 10%;
+  line-height: 130%;
+  color: white;
+  text-align: left;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.login_right_container {
+  width: 350px;
+  margin: 3rem 3.5rem 1rem;
+  font-size: 24px;
+  font-weight: 400;
+  text-align: left;
+  line-height: 29px;
+  line-height: 100%;
+  color: black;
+}
+
+.login_row {
+  margin: 2rem 0rem 0rem;
+  width: 100%;
+  align-items: center;
+}
+
+.login_button{
+  margin: 3rem 3rem 0rem;
+  align-items: right;
+}
+
+.button-log-in {
+  background-color: #2CBB85!important;
+  border-color: #2CBB85!important;
+}
+
+.field{
+  border: 0.1rem solid black;
+  border-radius: .4rem;
+}
+
+input[type='password'],
+input[type='email'],
+textarea:focus,
+select:focus {
+  border-color: black!important;
+  outline: 0;
+  font-size: 1.2rem!important;
+  color: black!important;
+}

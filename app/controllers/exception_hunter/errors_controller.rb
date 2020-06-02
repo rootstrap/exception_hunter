@@ -12,7 +12,7 @@ module ExceptionHunter
 
     def show
       @pagy, errors = pagy(most_recent_errors, items: 1)
-      @error = ErrorPresenter.new(errors.first)
+      @error = ErrorPresenter.new(errors.first!)
     end
 
     def destroy

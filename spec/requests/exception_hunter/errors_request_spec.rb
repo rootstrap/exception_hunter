@@ -2,6 +2,9 @@ require 'rails_helper'
 
 module ExceptionHunter
   describe 'Errors', type: :request do
+    let(:admin) { create(:admin_user) }
+    before { sign_in(admin) }
+
     describe 'GET /exception_hunter/errors' do
       subject { get "/exception_hunter/errors?tab=#{tab}" }
 
@@ -182,22 +185,22 @@ module ExceptionHunter
         expect(response).to have_http_status(302)
       end
     end
-  end
 
-  describe 'POST /exception_hunter/resolved_errors' do
-    let(:error_group) { create(:error_group) }
-    let(:params) { { error_group: { id: error_group.id } } }
+    describe 'POST /exception_hunter/resolved_errors' do
+      let(:error_group) { create(:error_group) }
+      let(:params) { { error_group: { id: error_group.id } } }
 
-    subject { post '/exception_hunter/resolved_errors', params: params }
+      subject { post '/exception_hunter/resolved_errors', params: params }
 
-    it 'resolves the error group' do
-      expect { subject }.to change { error_group.reload.status }.from('active').to('resolved')
-    end
+      it 'resolves the error group' do
+        expect { subject }.to change { error_group.reload.status }.from('active').to('resolved')
+      end
 
-    it 'redirects back' do
-      subject
+      it 'redirects back' do
+        subject
 
-      expect(response).to have_http_status(302)
+        expect(response).to have_http_status(302)
+      end
     end
   end
 end

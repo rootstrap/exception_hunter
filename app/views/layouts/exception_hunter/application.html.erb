@@ -22,9 +22,24 @@
 <div class="wrapper">
   <nav class="nav">
     <div class="container container__nav">
-      <%= link_to errors_path do %>
-        <div class="nav__title">Exception Hunter</div>
-      <% end %>
+      <div class="row">
+        <div class="column column-40">
+          <%= link_to errors_path do %>
+            <div class="nav__title">Exception Hunter</div>
+          <% end %>
+        </div>
+        <div class="column column-10 column-offset-50">
+          <div class="logout">
+            <% if current_admin_user? %>
+              <div class="sign_out">
+                <%= link_to exception_hunter_logout_path do %>
+                  Sign out
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
   </nav>
 

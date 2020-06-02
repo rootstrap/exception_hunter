@@ -1,9 +1,8 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  devise_for :admin_users
-  devise_for :users
   ExceptionHunter.routes(self)
+  devise_for :users
   mount Sidekiq::Web => '/sidekiq'
 
   get :raising_endpoint, to: 'exception#raising_endpoint'
