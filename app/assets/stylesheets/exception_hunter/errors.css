@@ -99,7 +99,7 @@
     border-bottom: 1px solid var(--border-grey);
 }
 
-.button.resolve-button {
+.button_to .button.resolve-button {
     color: var(--highlight-good-color);
     border-color: var(--highlight-good-color);
     font-size: 10px;
