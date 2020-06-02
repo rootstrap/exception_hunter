@@ -7,7 +7,7 @@ module ExceptionHunter
     end
 
     def authenticate_admin_user_class
-      return unless underscored_admin_user_class && !send("current_#{underscored_admin_user_class}")
+      return unless ExceptionHunter::Config.auth_enabled? && !send("current_#{underscored_admin_user_class}")
 
       redirect_to '/exception_hunter/login'
     end
@@ -17,7 +17,7 @@ module ExceptionHunter
     end
 
     def underscored_admin_user_class
-      ExceptionHunter::Config.admin_user_class.try(:underscore)
+      ExceptionHunter::Config.admin_user_class.underscore
     end
   end
 end

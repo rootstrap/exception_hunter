@@ -31,12 +31,5 @@ module ExceptionHunter
       model_file = File.join(destination_root, 'app', 'models', "#{file_path}.rb")
       gsub_file model_file, /\:registerable([.]*,)?/, ''
     end
-
-    def set_namespace_for_path
-      routes_file = File.join(destination_root, 'config', 'routes.rb')
-      gsub_file routes_file,
-                /devise_for :#{plural_table_name}$/,
-                "devise_for :#{plural_table_name}, ExceptionHunter::Devise.config"
-    end
   end
 end
