@@ -184,7 +184,7 @@ module ExceptionHunter
     end
   end
 
-  describe 'resolve' do
+  describe 'POST /exception_hunter/resolved_errors' do
     let(:error_group) { create(:error_group) }
     let(:params) { { error_group: { id: error_group.id } } }
 
