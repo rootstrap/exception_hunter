@@ -183,4 +183,21 @@ module ExceptionHunter
       end
     end
   end
+
+  describe 'POST /exception_hunter/resolved_errors' do
+    let(:error_group) { create(:error_group) }
+    let(:params) { { error_group: { id: error_group.id } } }
+
+    subject { post '/exception_hunter/resolved_errors', params: params }
+
+    it 'resolves the error group' do
+      expect { subject }.to change { error_group.reload.status }.from('active').to('resolved')
+    end
+
+    it 'redirects back' do
+      subject
+
+      expect(response).to have_http_status(302)
+    end
+  end
 end

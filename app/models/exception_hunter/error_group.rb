@@ -6,6 +6,8 @@ module ExceptionHunter
 
     has_many :grouped_errors, class_name: 'ExceptionHunter::Error', dependent: :destroy
 
+    enum status: { active: 0, resolved: 1 }
+
     scope :most_similar, lambda { |message|
       message_similarity = sql_similarity(ErrorGroup[:message], message)
       where(message_similarity.gteq(SIMILARITY_THRESHOLD))
@@ -21,7 +23,8 @@ module ExceptionHunter
         .where(Error.in_last_7_days.where(Error[:error_group_id].eq(ErrorGroup[:id])).arel.exists)
     }
     scope :with_errors_in_current_month, lambda {
-      joins(:grouped_errors).where(Error.in_current_month.where(Error[:error_group_id].eq(ErrorGroup[:id])).arel.exists)
+      joins(:grouped_errors)
+        .where(Error.in_current_month.where(Error[:error_group_id].eq(ErrorGroup[:id])).arel.exists)
     }
 
     def self.find_matching_group(error)

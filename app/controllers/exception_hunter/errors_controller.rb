@@ -34,13 +34,13 @@ module ExceptionHunter
     def errors_for_tab(dashboard)
       case dashboard.current_tab
       when DashboardPresenter::LAST_7_DAYS_TAB
-        ErrorGroup.with_errors_in_last_7_days
+        ErrorGroup.with_errors_in_last_7_days.active
       when DashboardPresenter::CURRENT_MONTH_TAB
-        ErrorGroup.with_errors_in_current_month
+        ErrorGroup.with_errors_in_current_month.active
       when DashboardPresenter::TOTAL_ERRORS_TAB
-        ErrorGroup.all
+        ErrorGroup.active
       when DashboardPresenter::RESOLVED_ERRORS_TAB
-        ErrorGroup.none
+        ErrorGroup.resolved
       end
     end
   end
