@@ -1,4 +1,11 @@
 ExceptionHunter.setup do |config|
+  # == Enabling
+  #
+  # This flag allows disabling error tracking, it's set to track in
+  # any environment but development or test by default
+  #
+  config.enabled = !(Rails.env.development? || Rails.env.test?)
+
   # == Dashboard User
   # Exception Hunter allows you to restrict users who can see the dashboard
   # to the ones included in the database. You can change the table name in
@@ -10,13 +17,6 @@ ExceptionHunter.setup do |config|
   <% else %>
   # config.admin_user_class = '<%= name %>'
   <% end %>
-
-  # == Enabling
-  #
-  # This flag allows disabling error tracking, it's set to track in
-  # any environment but development or test by default
-  #
-  config.enabled = !(Rails.env.development? || Rails.env.test?)
 
   # == Current User
   #

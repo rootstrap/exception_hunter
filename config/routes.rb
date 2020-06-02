@@ -1,6 +1,11 @@
 ExceptionHunter::Engine.routes.draw do
-  resources :errors, only: %i[show]
-  get '/', to: 'errors#index', as: :exception_hunter_dashboard
+  resources :errors, only: %i[index show] do
+    delete 'purge', on: :collection, to: 'errors#destroy', as: :purge
+  end
+
+  resources :resolved_errors, only: %i[create]
+
+  get '/', to: redirect('/exception_hunter/errors')
 
   admin_user_class = ExceptionHunter::Config.admin_user_class
   if admin_user_class.try(:underscore)

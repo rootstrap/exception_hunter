@@ -5,9 +5,9 @@ module ExceptionHunter
     include Pagy::Backend
 
     def index
-      @errors = ErrorGroup.all.order(updated_at: :desc)
-      @errors_count = Error.count
-      @month_errors = Error.in_current_month.count
+      @dashboard = DashboardPresenter.new(current_tab)
+      shown_errors = errors_for_tab(@dashboard).order(updated_at: :desc).distinct
+      @errors = ErrorGroupPresenter.wrap_collection(shown_errors)
     end
 
     def show
@@ -15,10 +15,33 @@ module ExceptionHunter
       @error = ErrorPresenter.new(errors.first!)
     end
 
+    def destroy
+      ErrorReaper.purge
+
+      redirect_back fallback_location: errors_path, notice: 'Errors purged successfully'
+    end
+
     private
 
     def most_recent_errors
       Error.most_recent(params[:id])
+    end
+
+    def current_tab
+      params[:tab]
+    end
+
+    def errors_for_tab(dashboard)
+      case dashboard.current_tab
+      when DashboardPresenter::LAST_7_DAYS_TAB
+        ErrorGroup.with_errors_in_last_7_days.active
+      when DashboardPresenter::CURRENT_MONTH_TAB
+        ErrorGroup.with_errors_in_current_month.active
+      when DashboardPresenter::TOTAL_ERRORS_TAB
+        ErrorGroup.active
+      when DashboardPresenter::RESOLVED_ERRORS_TAB
+        ErrorGroup.resolved
+      end
     end
   end
 end

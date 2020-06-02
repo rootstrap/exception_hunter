@@ -32,6 +32,7 @@ detectors:
     exclude:
       - ExceptionHunter::Middleware::RequestHunter#catch_prey
       - ExceptionHunter::Middleware::SidekiqHunter#track_exception
+      - ExceptionHunter::DashboardPresenter#calculate_tabs_counts
 
   InstanceVariableAssumption:
     enabled: false
@@ -83,6 +84,9 @@ detectors:
     exclude:
     - initialize
     max_statements: 12
+
+  TooManyConstants:
+    enabled: false
 
   UncommunicativeMethodName:
     enabled: true
