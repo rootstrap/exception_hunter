@@ -22,7 +22,7 @@ module ExceptionHunter
     end
 
     def create_admin_user
-      invoke 'devise', [name]
+      invoke 'devise', [name], routes: false
     end
 
     def remove_registerable_from_model

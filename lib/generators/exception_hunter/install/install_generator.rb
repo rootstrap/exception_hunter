@@ -14,7 +14,13 @@ module ExceptionHunter
     end
 
     def setup_routes
-      route 'ExceptionHunter.routes(self)'
+      if options[:users]
+        gsub_file 'config/routes.rb',
+                  "\n  devise_for :#{plural_table_name}, skip: :all",
+                  "\n  ExceptionHunter.routes(self)"
+      else
+        route 'ExceptionHunter.routes(self)'
+      end
     end
 
     def create_migrations
