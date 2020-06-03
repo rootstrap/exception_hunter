@@ -19,6 +19,8 @@ module ExceptionHunter
   end
 
   def self.routes(router)
+    return unless Config.enabled
+
     router.mount(ExceptionHunter::Engine, at: 'exception_hunter')
   end
 end
