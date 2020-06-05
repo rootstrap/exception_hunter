@@ -1,23 +1,50 @@
-<div class="errors__container">
-  <div class="row">
-    <div class="column column-offset-80 column-20">
-      <%= render partial: 'exception_hunter/errors/pagy/pagy_nav', locals: { pagy: @pagy } %>
+<div class="row error-occurrence__header">
+  <div class="column column-90">
+    <div class="error-title">
+      <%= @error.class_name %>: <%= @error.message %>
     </div>
   </div>
-
-  <div class="error-title">
-    <%= @error.class_name %>: <%= @error.message %>
+  <div class="column column-10">
+    <%= button_to('Resolve', resolved_errors_path(error_group: { id: @error.error_group_id }),
+                  method: :post,
+                  class: %w[button resolve-button],
+                  data: { confirm: 'Are you sure you want to resolve this error?' }) %>
   </div>
-  <div class="error-occurred_at">
-    <%= @error.occurred_at %>
+</div>
+
+<div class="row">
+  <div class="column column-50">
+    <ul data-tabs class="errors-tabs">
+      <li class="errors-tab">
+        <a data-tabby-default href="#summary">
+          <div class="errors-tab__content">
+            Summary
+          </div>
+        </a>
+      </li>
+      <li class="errors-tab">
+        <a href="#backtrace">
+          <div class="errors-tab__content">
+            Backtrace
+          </div>
+        </a>
+      </li>
+      <li class="errors-tab">
+        <a href="#user-data">
+          <div class="errors-tab__content">
+            User Data
+          </div>
+        </a>
+      </li>
+    </ul>
   </div>
+  <div class="column column-50">
+    <%= render partial: 'exception_hunter/errors/pagy/pagy_nav', locals: { pagy: @pagy, occurred_at: @error.occurred_at } %>
+  </div>
+</div>
 
-  <ul data-tabs>
-    <li><a data-tabby-default href="#summary">Summary</a></li>
-    <li><a href="#backtrace">Backtrace</a></li>
-    <li><a href="#user-data">User Data</a></li>
-  </ul>
 
+<div class="errors__container">
   <div class="tab-content">
     <div id="summary">
       <%= render partial: 'exception_hunter/errors/error_summary', locals: { error: @error } %>

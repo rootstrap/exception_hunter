@@ -12,13 +12,22 @@
     display: flex;
 }
 
+ul.errors-tabs {
+    list-style-type: none;
+    margin-bottom: 0;
+}
+
 .errors-tab {
     border-radius: 5px 5px 0 0;
     margin-right: 1rem;
     background-color: var(--inactive-grey);
 }
 
-.errors-tab--active {
+li.errors-tab {
+    margin-bottom: 0;
+}
+
+.errors-tab--active, li.errors-tab a[aria-selected="true"] .errors-tab__content {
     background-color: #FFF;
     color: var(--highlight-color);
 }
@@ -95,17 +104,35 @@
 }
 
 .error-title {
-    font-size: 20px;
-    border-bottom: 1px solid var(--border-grey);
+    color: var(--highlighted-link-blue);
+    padding-left: 2rem;
 }
 
-.button_to .button.resolve-button {
+.error-occurrence__header {
+    background: #FFF;
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+    border-radius: 5px;
+}
+
+.button_to .button.button-outlined.resolve-button {
     color: var(--highlight-good-color);
     border-color: var(--highlight-good-color);
     font-size: 10px;
     padding: 0 1rem;
     height: 3rem;
     line-height: 3rem;
+}
+
+.button_to .button.resolve-button {
+    color: #FFF;
+    background-color: var(--highlight-good-color);
+    border-color: var(--highlight-good-color);
+    font-size: 10px;
+    padding: 0 1rem;
+    height: 3rem;
+    line-height: 3rem;
+    margin-bottom: 0;
 }
 
 .button.resolve-button:hover, .button.resolve-button:focus {
@@ -118,6 +145,34 @@
     font-size: 14px;
     margin-top: 0.5em;
     margin-bottom: 2em;
+}
+
+.error-occurrences__nav {
+    display: flex;
+    justify-content: flex-end;
+    height: 100%;
+    align-items: center;
+}
+
+.button.button-outline.error-occurrences__nav-link {
+    margin-bottom: 0;
+    padding: 0 1rem;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    margin-right: 0.5rem;
+    border-color: #000;
+    color: #000;
+}
+
+.button.button-outline.error-occurrences__nav-link[disabled="disabled"],
+.button.button-outline.error-occurrences__nav-link[disabled="disabled"]:focus,
+.button.button-outline.error-occurrences__nav-link[disabled="disabled"]:hover {
+    border-color: var(--highlight-inactive-color);
+    color: var(--highlight-inactive-color);
+}
+
+.error-occurrences__nav-current {
+    margin: 0 2rem;
 }
 
 .tab-content {
