@@ -3,6 +3,7 @@ ExceptionHunter.setup do |config|
   #
   # This flag allows disabling error tracking, it's set to track in
   # any environment but development or test by default
+  #
   # config.enabled = !(Rails.env.development? || Rails.env.test?)
 
   # == Dashboard User

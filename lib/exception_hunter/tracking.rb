@@ -6,7 +6,8 @@ module ExceptionHunter
         message: exception.message,
         backtrace: exception.backtrace,
         custom_data: custom_data,
-        user: user
+        user: user,
+        tags: ['Manual']
       )
 
       nil

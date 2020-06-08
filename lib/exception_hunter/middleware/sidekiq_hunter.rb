@@ -32,7 +32,8 @@ module ExceptionHunter
           class_name: exception.class.to_s,
           message: exception.message,
           environment_data: environment_data(context),
-          backtrace: exception.backtrace
+          backtrace: exception.backtrace,
+          tags: ['Worker']
         )
       end
 

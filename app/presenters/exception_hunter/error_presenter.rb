@@ -22,6 +22,10 @@ module ExceptionHunter
       (error.environment_data || {})['params']
     end
 
+    def tags
+      error.error_group.tags
+    end
+
     private
 
     attr_reader :error

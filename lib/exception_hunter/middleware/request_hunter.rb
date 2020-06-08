@@ -34,7 +34,8 @@ module ExceptionHunter
           message: exception.message,
           environment_data: environment_data(env),
           backtrace: exception.backtrace,
-          user: user
+          user: user,
+          tags: ['HTTP']
         )
       end
 

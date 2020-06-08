@@ -94,6 +94,18 @@
     overflow-x: hidden;
 }
 
+.error-cell__tags {
+  font-weight: 500;
+  font-size: 12px;
+  color: #000;
+  padding-bottom: 3px;
+}
+.error-cell__tags span {
+  background-color: #EAE639; /* Changing background color */
+  border-radius: 20px; /* Making border radius */
+  padding: 1px 5px 1px 5px; /* Making space around letters */
+}
+
 .error-title {
     font-size: 20px;
     border-bottom: 1px solid var(--border-grey);

@@ -6,6 +6,7 @@ class CreateExceptionHunterErrorGroups < ActiveRecord::Migration[<%= ActiveRecor
       t.string :error_class_name, null: false
       t.string :message
       t.integer :status, default: 0
+      t.text :tags, array: true, default: []
 
       t.timestamps
 
