@@ -1,17 +1,17 @@
-<% link = pagy_link_proc(pagy) %>
-<nav aria-label="pager" class="pagy_nav pagination" role="navigation">
-  <% if pagy.prev %>
-  <span class="page prev"><%== link.call(pagy.prev, '◄', 'aria-label="previous"') %></span>
-  <% else %>
-    <span class="page prev disabled">
-      ◄
-    </span>
+<div class="error-occurrences__nav">
+  <%= link_to pagy_url_for(1, pagy) do %>
+    <%= button_tag 'First', class: %w[button button-outline error-occurrences__nav-link], disabled: pagy.prev.nil? %>
   <% end %>
-  <% if pagy.next %>
-    <span class="page next"><%== link.call(pagy.next, '►', 'aria-label="next"') %></span>
-  <% else %>
-    <span class="page next disabled">
-      ►
-    </span>
+  <%= link_to pagy_url_for(pagy.prev, pagy) do %>
+    <%= button_tag '<', class: %w[button button-outline error-occurrences__nav-link], disabled: pagy.prev.nil? %>
   <% end %>
-</nav>
+  <div class="error-occurrences__nav-current">
+    <%= occurred_at %> (<%= pagy.page %>/<%= pagy.last %>)
+  </div>
+  <%= link_to pagy_url_for(pagy.next, pagy) do %>
+    <%= button_tag '>', class: %w[button button-outline error-occurrences__nav-link], disabled: pagy.next.nil? %>
+  <% end %>
+  <%= link_to pagy_url_for(pagy.last, pagy) do %>
+    <%= button_tag 'Last', class: %w[button button-outline error-occurrences__nav-link], disabled: pagy.next.nil? %>
+  <% end %>
+</div>
