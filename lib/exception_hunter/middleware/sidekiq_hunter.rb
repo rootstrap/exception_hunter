@@ -29,7 +29,7 @@ module ExceptionHunter
         return unless should_track?(context)
 
         ErrorCreator.call(
-          'Worker',
+          tag: ErrorCreator::WORKER_TAG,
           class_name: exception.class.to_s,
           message: exception.message,
           environment_data: environment_data(context),

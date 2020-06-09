@@ -30,7 +30,7 @@ module ExceptionHunter
       def catch_prey(env, exception)
         user = user_from_env(env)
         ErrorCreator.call(
-          'HTTP',
+          tag: ErrorCreator::HTTP_TAG,
           class_name: exception.class.to_s,
           message: exception.message,
           environment_data: environment_data(env),

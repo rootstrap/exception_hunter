@@ -1,9 +1,11 @@
 module ExceptionHunter
   class ErrorCreator
-    TAGS = %w[HTTP Worker Manual].freeze
+    HTTP_TAG = 'HTTP'.freeze
+    WORKER_TAG = 'Worker'.freeze
+    MANUAL_TAG = 'Manual'.freeze
 
     class << self
-      def call(tag = 'HTTP', **error_attrs)
+      def call(tag: HTTP_TAG, **error_attrs)
         return unless should_create?
 
         ActiveRecord::Base.transaction do

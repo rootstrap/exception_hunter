@@ -31,6 +31,21 @@ module ExceptionHunter
           it 'updates the error message' do
             expect { subject }.to change { error_group.reload.message }.to('Something went very wrong 123')
           end
+
+          context 'with repeating tag' do
+            before do
+              error_attributes[:tag] = ErrorCreator::HTTP_TAG  
+              described_class.call(error_attributes) 
+            end
+
+            it 'does not repeat tags' do
+              expect(error_group.reload.tags).to eq(['HTTP'])
+
+              subject
+
+              expect(error_group.reload.tags).to eq(['HTTP'])
+            end
+          end
         end
 
         context 'without a matching error group' do
