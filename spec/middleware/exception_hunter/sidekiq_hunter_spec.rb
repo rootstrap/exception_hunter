@@ -49,7 +49,7 @@ module ExceptionHunter
                                                  })
           end
 
-          it 's error group has Worker tag' do
+          it 'adds the tag Worker to the error group' do
             subject rescue nil
 
             error = Error.last

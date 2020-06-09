@@ -1,10 +1,10 @@
 <div class="row error-row">
   <div class="column column-10 error-cell">
-    <% error.tags.each{ |tag| %>
+    <% error.tags.each do|tag| %>
     <div class="error-cell__tags">
-      <span><%= tag %></span>
+      <span class="error-tag"><%= tag %></span>
     </div>
-    <% } %>
+    <% end %>
   </div>
   <div class="column column-40 error-cell error-cell__message">
     <%= link_to error.message, error_path(error.id), class: %w[error-message] %>

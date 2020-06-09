@@ -109,10 +109,11 @@ li.errors-tab {
   color: #000;
   padding-bottom: 3px;
 }
-.error-cell__tags span {
-  background-color: #EAE639; /* Changing background color */
-  border-radius: 20px; /* Making border radius */
-  padding: 1px 5px 1px 5px; /* Making space around letters */
+
+.error-cell__tags .error-tag {
+  background-color: var(--tag-color);
+  border-radius: 5px;
+  padding: 1px 5px 1px 5px;
 }
 
 .error-title {

@@ -29,11 +29,11 @@ module ExceptionHunter
         return unless should_track?(context)
 
         ErrorCreator.call(
+          'Worker',
           class_name: exception.class.to_s,
           message: exception.message,
           environment_data: environment_data(context),
-          backtrace: exception.backtrace,
-          tags: ['Worker']
+          backtrace: exception.backtrace
         )
       end
 

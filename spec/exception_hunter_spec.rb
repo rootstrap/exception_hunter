@@ -50,7 +50,7 @@ module ExceptionHunter
                                         })
         end
 
-        it 's error group has Manual tag' do
+        it 'adds the tag Manual to the error group' do
           subject
 
           expect(error.error_group.tags).to eq(['Manual'])

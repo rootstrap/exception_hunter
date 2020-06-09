@@ -1,6 +1,7 @@
 module ExceptionHunter
   class ErrorPresenter
     delegate_missing_to :error
+    delegate :tags, to: :error_group
 
     BacktraceLine = Struct.new(:path, :file_name, :line_number, :method_call)
 
@@ -20,10 +21,6 @@ module ExceptionHunter
 
     def tracked_params
       (error.environment_data || {})['params']
-    end
-
-    def tags
-      error.error_group.tags
     end
 
     private

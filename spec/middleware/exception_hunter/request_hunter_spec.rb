@@ -79,7 +79,7 @@ module ExceptionHunter
             expect(error.environment_data).not_to include(not_tracked_env)
           end
 
-          it 's error group has HTTP tag' do
+          it 'adds the tag HTTP to the error groups' do
             subject rescue nil
 
             error = Error.last
