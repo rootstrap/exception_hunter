@@ -34,8 +34,8 @@ module ExceptionHunter
 
           context 'with repeating tag' do
             before do
-              error_attributes[:tag] = ErrorCreator::HTTP_TAG  
-              described_class.call(error_attributes) 
+              error_attributes[:tag] = ErrorCreator::HTTP_TAG
+              described_class.call(error_attributes)
             end
 
             it 'does not repeat tags' do

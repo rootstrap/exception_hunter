@@ -5,7 +5,7 @@ module ExceptionHunter
     MANUAL_TAG = 'Manual'.freeze
 
     class << self
-      def call(tag: HTTP_TAG, **error_attrs)
+      def call(tag: nil, **error_attrs)
         return unless should_create?
 
         ActiveRecord::Base.transaction do
@@ -30,7 +30,7 @@ module ExceptionHunter
       def update_error_group(error_group, error, tag)
         error_group.error_class_name = error.class_name
         error_group.message = error.message
-        error_group.tags << tag
+        error_group.tags << tag unless tag.nil?
         error_group.tags.uniq!
 
         error_group.save!
