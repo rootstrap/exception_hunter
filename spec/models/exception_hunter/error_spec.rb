@@ -12,6 +12,21 @@ module ExceptionHunter
       it { is_expected.to belong_to(:error_group) }
     end
 
+    describe 'on creation' do
+      let(:error_group) { create(:error_group) }
+      let(:error) { build(:error, error_group: error_group) }
+
+      before { error_group.resolved! }
+
+      it 'touches error group' do
+        expect { error.save }.to change { error_group.reload.updated_at }
+      end
+
+      it 'unresolves error group' do
+        expect { error.save }.to change { error_group.reload.status }
+      end
+    end
+
     describe 'occurred at' do
       let!(:error) { create(:error, occurred_at: nil) }
 
@@ -49,7 +64,56 @@ module ExceptionHunter
       end
     end
 
-    describe '.in_current_month' do
+    describe 'with_occurrences_before' do
+      subject { Error.with_occurrences_before(deadline) }
+      let(:deadline) { 1.month.ago }
+
+      let!(:old_errors) do
+        (1..3).map do |i|
+          create(:error, occurred_at: deadline - i.days)
+        end
+      end
+      let!(:new_errors) do
+        (1..3).map do |i|
+          create(:error, occurred_at: deadline + i.days)
+        end
+      end
+
+      it 'returns errors with occurrences before the given date' do
+        expect(subject.to_a).to match_array(old_errors)
+      end
+
+      it 'does not return errors with occurrences after the given date' do
+        expect(subject.to_a).not_to include(*new_errors)
+      end
+    end
+
+    describe 'in_last_7_days' do
+      subject { Error.in_last_7_days }
+      let!(:valid_errors) do
+        [
+          create(:error, occurred_at: Date.current),
+          create(:error, occurred_at: 3.days.ago),
+          create(:error, occurred_at: 6.days.ago)
+        ]
+      end
+      let!(:invalid_errors) do
+        [
+          create(:error, occurred_at: 8.days.ago),
+          create(:error, occurred_at: 1.month.ago)
+        ]
+      end
+
+      it 'returns error groups with errors in the last 7 days' do
+        expect(subject).to include(*valid_errors)
+      end
+
+      it 'does not return error groups without errors in the last 7 days' do
+        expect(subject).not_to include(*invalid_errors)
+      end
+    end
+
+    describe 'in_current_month' do
       subject { Error.in_current_month }
 
       context 'when there are errors in the current month' do
@@ -73,6 +137,66 @@ module ExceptionHunter
 
       context 'when there are no errors in the current month' do
         it { is_expected.to be_empty }
+      end
+    end
+
+    describe 'from_active_error_groups' do
+      subject { Error.from_active_error_groups }
+
+      let(:resolved_error_group) { create(:error_group, status: :resolved) }
+      let(:active_error_group) { create(:error_group, status: :active) }
+
+      let(:resolved_errors) do
+        [
+          create(:error, error_group: resolved_error_group),
+          create(:error, error_group: resolved_error_group),
+          create(:error, error_group: resolved_error_group)
+        ]
+      end
+
+      let(:active_errors) do
+        [
+          create(:error, error_group: active_error_group),
+          create(:error, error_group: active_error_group)
+        ]
+      end
+
+      it 'returns active errors' do
+        expect(subject).to match_array(active_errors)
+      end
+
+      it 'does not return resolved errors' do
+        expect(subject).not_to include(resolved_errors)
+      end
+    end
+
+    describe 'from_resolved_error_groups' do
+      subject { Error.from_active_error_groups }
+
+      let(:resolved_error_group) { create(:error_group, status: :resolved) }
+      let(:active_error_group) { create(:error_group, status: :active) }
+
+      let(:resolved_errors) do
+        [
+          create(:error, error_group: resolved_error_group),
+          create(:error, error_group: resolved_error_group),
+          create(:error, error_group: resolved_error_group)
+        ]
+      end
+
+      let(:active_errors) do
+        [
+          create(:error, error_group: active_error_group),
+          create(:error, error_group: active_error_group)
+        ]
+      end
+
+      it 'returns resolved errors' do
+        expect(subject).to match_array(resolved_errors)
+      end
+
+      it 'does not return active errors' do
+        expect(subject).not_to include(active_errors)
       end
     end
   end

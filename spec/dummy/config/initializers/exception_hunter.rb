@@ -1,4 +1,19 @@
 ExceptionHunter.setup do |config|
+  # == Enabling
+  #
+  # This flag allows disabling error tracking, it's set to track in
+  # any environment but development or test by default
+  #
+  # config.enabled = !(Rails.env.development? || Rails.env.test?)
+
+  # == Dashboard User
+  # Exception Hunter allows you to restrict users who can see the dashboard
+  # to the ones included in the database. You can change the table name in
+  # case you are not satisfied with the default one. You can also remove the
+  # configuration if you wish to have no access restrictions for the dashboard.
+  #
+  config.admin_user_class = 'AdminUser'
+
   # == Current User
   #
   # Exception Hunter will include the user as part of the environment
@@ -15,4 +30,12 @@ ExceptionHunter.setup do |config|
   # as part of the user information that is kept from the request.
   #
   config.user_attributes = [:id, :email]
+
+  # == Stale errors
+  #
+  # You can configure how long it takes for errors to go stale. This is
+  # taken into account when purging old error messages but nothing will
+  # happen automatically.
+  #
+  # config.errors_stale_time = 45.days
 end

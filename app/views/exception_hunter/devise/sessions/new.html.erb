@@ -1,0 +1,24 @@
+<div class="login_form_container">
+  <div class="login_left_container">
+    <div class="left_column">Exception Hunter</div>
+  </div>
+  <div class="login_right_container">
+    <%= form_for(resource, as: resource_name, url: exception_hunter_create_session_path) do |f| %>
+    <div class="row">
+      Sign into your account
+    </div>
+    <div class="login_row row"></div>
+    <div class="login_row row">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'Email' %>
+    </div>
+    <div class="login_row row">
+      <%= f.password_field :password, autocomplete: "current-password", placeholder: 'Password'%>
+    </div>
+    <div class="login_button row">
+      <div class="column column-50 column-offset-50">
+          <input class="button-log-in" type="submit" value="Log in">
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

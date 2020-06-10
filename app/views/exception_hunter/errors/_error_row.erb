@@ -1,0 +1,44 @@
+<div class="row error-row">
+  <div class="column column-10 error-cell">
+    <% error.tags.each do |tag| %>
+      <div class="error-cell__tags">
+        <span class="error-tag"><%= tag %></span>
+      </div>
+    <% end %>
+  </div>
+  <div class="column column-40 error-cell error-cell__message">
+    <%= link_to error.message, error_path(error.id), class: %w[error-message] %>
+  </div>
+
+  <div class="column column-15 error-cell">
+    <% if error.first_occurrence.present? %>
+      <%= time_ago_in_words(error.first_occurrence) %> ago
+    <% else %>
+      Never
+    <% end %>
+  </div>
+
+  <div class="column column-15 error-cell">
+    <% if error.last_occurrence.present? %>
+      <%= time_ago_in_words(error.last_occurrence) %> ago
+    <% else %>
+      Never
+    <% end %>
+  </div>
+
+  <div class="column column-10 error-cell">
+    <%= error.total_occurrences %>
+  </div>
+
+  <div class="column column-10 error-cell">
+    <% if error.active? %>
+      <div class="color-green">
+        <%= button_to('Resolve', resolved_errors_path(error_group: { id: error.id }),
+                      method: :post,
+                      class: %w[button button-outline resolve-button],
+                      data: { confirm: 'Are you sure you want to resolve this error?' }) %>
+      </div>
+    <% end %>
+  </div>
+</div>
+

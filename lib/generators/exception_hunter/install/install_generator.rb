@@ -15,7 +15,9 @@ module ExceptionHunter
 
     def setup_routes
       if options[:users]
-        inject_into_file 'config/routes.rb', "\n  ExceptionHunter.routes(self)", after: /devise_for .*/
+        gsub_file 'config/routes.rb',
+                  "\n  devise_for :#{plural_table_name}, skip: :all",
+                  "\n  ExceptionHunter.routes(self)"
       else
         route 'ExceptionHunter.routes(self)'
       end

@@ -1,8 +1,7 @@
 .nav {
-    background: var(--secondary-color);
-    border-bottom: .1rem solid var(--border-color);
+    background: #000;
     display: block;
-    height: 5.2rem;
+    height: 4.2rem;
     left: 0;
     max-width: 100%;
     position: fixed;
@@ -16,6 +15,22 @@
     height: 100%;
 }
 
-.nav__logo img {
-    height: 100%;
+.nav__title {
+    line-height: 4.2rem;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    color: #FFF;
+}
+
+.footer {
+    text-align: center;
+    padding-top: 4rem;
+    padding-bottom: 1rem;
+}
+
+.logout {
+  line-height: 4.2rem;
+  color: #FFF;
+  text-align: right;
 }

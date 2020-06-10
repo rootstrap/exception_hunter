@@ -1,14 +1,27 @@
 # ExceptionHunter
-Short description and motivation.
 
-## Usage
-How to use my plugin.
+![Index screenshot](doc/screenshot.png)
+
+Exception Hunter is a Rails engine meant to track errors in your Rails project. It works
+by using your Postgres database to save errors with their corresponding metadata (like backtrace
+or environment data at the time of failure).
+
+To do so we hook to various points of your application where we can rescue from errors, track and
+then re-raise those errors so they are handled normally. As such, the gem does not conflict with any
+other service so you can have your favorite error tracking service running in parallel with Exception Hunter
+while you decide which you like best.
+
+## Motivation
+
+Error tracking is one of the most important tools a developer can have in their toolset. As such
+we think it'd be nice to provide a way for everyone to have it in their project, be it a personal
+project, and MVP or something else.
 
 ## Installation
 Add Exception Hunter to your application's Gemfile:
 
 ```ruby
-gem 'exception_hunter', '~> 0.2.0'
+gem 'exception_hunter', '~> 0.3.0'
 ```
 
 You may also need to add [Devise](https://github.com/heartcombo/devise) to your Gemfile
@@ -32,8 +45,18 @@ you can run the command with the `--skip-users` flag.
 Additionally it should add the 'ExceptionHunter.routes(self)' line to your routes, which means you can go to
 `/exception_hunter/errors` in your browser and start enjoying some good old fashioned exception tracking!
 
-## Contributing
-Contribution directions go here.
+## Stale data
+
+You can get rid of stale errors by running the rake task to purge them:
+
+```bash
+$ rake exception_hunter:purge_errors
+```
+
+We recommend you run this task once in a while to de-clutter your DB, using a recurring tasks once
+a week would be ideal. You can also purge errors by running `ExceptionHunter::ErrorReaper.purge`.
+
+The time it takes for an error to go stale defaults to 45 days but it's configurable via the initializer.
 
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

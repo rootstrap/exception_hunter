@@ -22,7 +22,14 @@ module ExceptionHunter
     end
 
     def create_admin_user
-      invoke 'devise', [name]
+      invoke 'devise', [name], routes: false
+    end
+
+    def remove_registerable_from_model
+      return if options[:registerable]
+
+      model_file = File.join(destination_root, 'app', 'models', "#{file_path}.rb")
+      gsub_file model_file, /\:registerable([.]*,)?/, ''
     end
   end
 end

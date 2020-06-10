@@ -23,6 +23,74 @@ module ExceptionHunter
       end
     end
 
+    describe 'without_errors' do
+      subject { ErrorGroup.without_errors }
+
+      let!(:groups_without_errors) { create_list(:error_group, 3) }
+      let!(:groups_with_errors) { create_list(:error_group, 3) }
+
+      before do
+        groups_with_errors.each_with_index do |group, index|
+          create_list(:error, index + 1, error_group: group)
+        end
+      end
+
+      it 'returns error groups without associated errors' do
+        expect(subject.to_a).to match_array(groups_without_errors)
+      end
+
+      it 'does not return error groups with associated errors' do
+        expect(subject.to_a).not_to include(*groups_with_errors)
+      end
+    end
+
+    describe 'with_errors_in_last_7_days' do
+      subject { ErrorGroup.with_errors_in_last_7_days }
+      let(:groups_with_valid_errors) { create_list(:error_group, 3) }
+      let(:groups_without_valid_errors) { create_list(:error_group, 2) }
+
+      before do
+        create(:error, error_group: groups_with_valid_errors.first, occurred_at: Date.current)
+        create(:error, error_group: groups_with_valid_errors.second, occurred_at: 3.days.ago)
+        create(:error, error_group: groups_with_valid_errors.third, occurred_at: 6.days.ago)
+
+        create(:error, error_group: groups_without_valid_errors.first, occurred_at: 8.days.ago)
+        create(:error, error_group: groups_without_valid_errors.second, occurred_at: 1.month.ago)
+      end
+
+      it 'returns error groups with errors in the last 7 days' do
+        expect(subject).to include(*groups_with_valid_errors)
+      end
+
+      it 'does not return error groups without errors in the last 7 days' do
+        expect(subject).not_to include(*groups_without_valid_errors)
+      end
+    end
+
+    describe 'with_errors_in_current_month' do
+      subject { ErrorGroup.with_errors_in_current_month }
+      let(:groups_with_valid_errors) { create_list(:error_group, 3) }
+      let(:groups_without_valid_errors) { create_list(:error_group, 2) }
+
+      before do
+        create(:error, error_group: groups_with_valid_errors.first, occurred_at: Date.current)
+        create(:error, error_group: groups_with_valid_errors.second,
+                       occurred_at: Date.current.beginning_of_month + 15.days)
+        create(:error, error_group: groups_with_valid_errors.third, occurred_at: Date.current.beginning_of_month)
+
+        create(:error, error_group: groups_without_valid_errors.first, occurred_at: 32.days.ago)
+        create(:error, error_group: groups_without_valid_errors.second, occurred_at: 2.months.ago)
+      end
+
+      it 'returns error groups with errors in the last 7 days' do
+        expect(subject).to include(*groups_with_valid_errors)
+      end
+
+      it 'does not return error groups without errors in the last 7 days' do
+        expect(subject).not_to include(*groups_without_valid_errors)
+      end
+    end
+
     describe '#last_occurence' do
       subject { error_group.last_occurrence }
 
