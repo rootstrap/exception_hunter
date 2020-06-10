@@ -1,14 +1,18 @@
 module ExceptionHunter
   class ErrorCreator
+    HTTP_TAG = 'HTTP'.freeze
+    WORKER_TAG = 'Worker'.freeze
+    MANUAL_TAG = 'Manual'.freeze
+
     class << self
-      def call(**error_attrs)
+      def call(tag: nil, **error_attrs)
         return unless should_create?
 
         ActiveRecord::Base.transaction do
           error_attrs = extract_user_data(error_attrs)
           error = Error.new(error_attrs)
           error_group = ErrorGroup.find_matching_group(error) || ErrorGroup.new
-          update_error_group(error_group, error)
+          update_error_group(error_group, error, tag)
           error.error_group = error_group
           error.save!
           error
@@ -23,9 +27,11 @@ module ExceptionHunter
         Config.enabled
       end
 
-      def update_error_group(error_group, error)
+      def update_error_group(error_group, error, tag)
         error_group.error_class_name = error.class_name
         error_group.message = error.message
+        error_group.tags << tag unless tag.nil?
+        error_group.tags.uniq!
 
         error_group.save!
       end

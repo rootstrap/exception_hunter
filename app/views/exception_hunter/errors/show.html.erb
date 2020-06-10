@@ -1,5 +1,12 @@
 <div class="row error-occurrence__header">
-  <div class="column column-90">
+  <div class="column column-10">
+    <% @error.tags.each do|tag| %>
+    <div class="error-cell__tags">
+      <span class="error-tag"><%= tag %></span>
+    </div>
+    <% end %>
+  </div>
+  <div class="column column-80">
     <div class="error-title">
       <%= @error.class_name %>: <%= @error.message %>
     </div>

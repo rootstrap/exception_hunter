@@ -103,6 +103,19 @@ li.errors-tab {
     overflow-x: hidden;
 }
 
+.error-cell__tags {
+  font-weight: 500;
+  font-size: 12px;
+  color: #000;
+  padding-bottom: 3px;
+}
+
+.error-cell__tags .error-tag {
+  background-color: var(--tag-color);
+  border-radius: 5px;
+  padding: 1px 5px 1px 5px;
+}
+
 .error-title {
     color: var(--highlighted-link-blue);
     padding-left: 2rem;

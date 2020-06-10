@@ -79,6 +79,13 @@ module ExceptionHunter
             expect(error.environment_data).not_to include(not_tracked_env)
           end
 
+          it 'adds the tag HTTP to the error groups' do
+            subject rescue nil
+
+            error = Error.last
+            expect(error.error_group.tags).to eq(['HTTP'])
+          end
+
           describe 'user data' do
             context 'when the exception was raised by a logged user' do
               before do

@@ -49,6 +49,12 @@ module ExceptionHunter
                                           'email' => 'example@example.com'
                                         })
         end
+
+        it 'adds the tag Manual to the error group' do
+          subject
+
+          expect(error.error_group.tags).to eq(['Manual'])
+        end
       end
 
       context 'when tracking is disabled' do

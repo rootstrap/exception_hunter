@@ -48,6 +48,13 @@ module ExceptionHunter
                                                    'enqueued_at' => '2020-05-18T02:23:30Z'
                                                  })
           end
+
+          it 'adds the tag Worker to the error group' do
+            subject rescue nil
+
+            error = Error.last
+            expect(error.error_group.tags).to eq(['Worker'])
+          end
         end
 
         context 'when the worker is retrying' do
