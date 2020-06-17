@@ -11,6 +11,7 @@ group :development, :test do
   gem 'devise', '~> 4.7'
   gem 'rails', '~> 6.0.2'
   gem 'sidekiq', '~> 6.0.4'
+  gem 'delayed_job_active_record', '~> 4.1', '>= 4.1.4'
 end
 
 group :test do
