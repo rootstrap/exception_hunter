@@ -41,9 +41,20 @@ module ExceptionHunter
       def self.environment_data(job)
         job_data =
           JOB_TRACKED_DATA.each_with_object({}) do |data_param, dict|
-            dict[o] = job.send(data_param)
+            dict.merge(data_param => job.try(data_param))
           end
-        args_data = (job.payload_object.job_data || {}).select { |key, _value| ARGS_TRACKED_DATA.include?(key) }
+
+        job_class = if job.payload_object.class.name == 'ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper'
+                      #buildin support for Rails 4.2 ActiveJob
+                      job.payload_object.job_data['job_class']
+                    elsif job.payload_object.object.is_a?(Class)
+                      job.payload_object.object.name
+                    else
+                      job.payload_object.object.class.name
+                    end
+        args_data = (job.payload_object.try(:job_data) || {}).select { |key, _value| ARGS_TRACKED_DATA.include?(key) }
+
+        args_data['job_class'] = job_class || job.payload_object.class.name if args_data['job_class'].nil?
 
         job_data.merge(args_data)
       end
