@@ -1,10 +1,8 @@
-
 require 'delayed_job'
 require 'exception_hunter/middleware/delayed_job_hunter'
 
 module ExceptionHunter
   describe Middleware::DelayedJobHunter do
-
     before do
       Delayed::Worker.delay_jobs = false
     end
@@ -30,9 +28,9 @@ module ExceptionHunter
         error = Error.last
 
         expect(error.environment_data).to include({
-                                                    "arguments" => [1, "a"],
-                                                    "job_class" => "ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper",
-                                                    "queue_name" => "default"
+                                                    'arguments' => [1, 'a'],
+                                                    'job_class' => 'ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper',
+                                                    'queue_name' => 'default'
                                                   })
         expect(error.environment_data['enqueued_at']).not_to be_nil
         expect(error.environment_data['job_id']).not_to be_nil
@@ -60,7 +58,7 @@ module ExceptionHunter
 
         error = Error.last
 
-        expect(error.environment_data).to eq({ "job_class" => "Delayed::PerformableMethod" })
+        expect(error.environment_data).to eq({ 'job_class' => 'Delayed::PerformableMethod' })
       end
     end
   end
