@@ -1,10 +1,9 @@
 name: Rails tests
 
-on: push
+on: [push, pull_request]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     # Service containers to run with `runner-job`
     services:
@@ -42,6 +41,14 @@ jobs:
         run: |
           bundle exec rails db:setup
 
+      - name: CodeClimate
+        run: |
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter
+          ./cc-test-reporter before-build
+        env:
+          CC_TEST_REPORTER_ID: 6cbfbd07cb24649965a02f72f52ade4f63042525e86075ef38f04817d4fe8a67
+
       - name: Run tests
         env:
           PGHOST: localhost
@@ -53,9 +60,8 @@ jobs:
       - name: Run code analysis
         run: bundle exec rake code_analysis
 
-      - name: Upload coverage results
-        uses: actions/upload-artifact@v1
-        if: always()
-        with:
-          name: coverage-report
-          path: coverage
+      - name: Report to CodeClimate
+        run: |
+          ./cc-test-reporter after-build --exit-code 0
+        env:
+          CC_TEST_REPORTER_ID: 6cbfbd07cb24649965a02f72f52ade4f63042525e86075ef38f04817d4fe8a67
