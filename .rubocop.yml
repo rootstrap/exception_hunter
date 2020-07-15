@@ -61,7 +61,7 @@ Layout/LineLength:
     - http
     - https
   Exclude:
-    - spec/factories/exception_hunter/errors.rb
+    - spec/**/*
 
 Metrics/ParameterLists:
   Max: 5
@@ -106,5 +106,4 @@ Style/StringLiterals:
 
 Style/RescueModifier:
   Exclude:
-    - spec/middleware/exception_hunter/request_hunter_spec.rb
-    - spec/middleware/exception_hunter/sidekiq_hunter_spec.rb
+    - spec/**/*
