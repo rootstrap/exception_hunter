@@ -22,7 +22,7 @@ detectors:
     min_clump_size: 2
 
   DuplicateMethodCall:
-    enabled: true
+    enabled: false
     exclude: []
     max_calls: 2
     allow_calls: []

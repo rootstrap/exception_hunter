@@ -44,20 +44,17 @@ module ExceptionHunter
             dict.merge(data_param => job.try(data_param))
           end
 
-        payload_object = job.payload_object
-        called_object = payload_object&.object
-
-        job_class = if payload_object.class.name == 'ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper'
+        job_class = if job.payload_object.class.name == 'ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper'
                       # support for Rails 4.2 ActiveJob
-                      payload_object.job_data['job_class']
-                    elsif called_object.is_a?(Class)
-                      called_object.name
+                      job.payload_object.job_data['job_class']
+                    elsif job.payload_object.object.is_a?(Class)
+                      job.payload_object.object.name
                     else
-                      called_object.class.name
+                      job.payload_object.object.class.name
                     end
-        args_data = (payload_object.try(:job_data) || {}).select { |key, _value| ARGS_TRACKED_DATA.include?(key) }
+        args_data = (job.payload_object.try(:job_data) || {}).select { |key, _value| ARGS_TRACKED_DATA.include?(key) }
 
-        args_data['job_class'] = job_class || payload_object.class.name if args_data['job_class'].nil?
+        args_data['job_class'] = job_class || job.payload_object.class.name if args_data['job_class'].nil?
 
         job_data.merge(args_data)
       end
