@@ -29,7 +29,13 @@ module ExceptionHunter
 
         error = Error.last
 
-        expect(error.environment_data).to eq({})
+        expect(error.environment_data).to include({
+                                                    "arguments" => [1, "a"],
+                                                    "job_class" => "ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper",
+                                                    "queue_name" => "default"
+                                                  })
+        expect(error.environment_data['enqueued_at']).not_to be_nil
+        expect(error.environment_data['job_id']).not_to be_nil
       end
     end
 
@@ -54,7 +60,7 @@ module ExceptionHunter
 
         error = Error.last
 
-        expect(error.environment_data).to eq({})
+        expect(error.environment_data).to eq({ "job_class" => "Delayed::PerformableMethod" })
       end
     end
   end

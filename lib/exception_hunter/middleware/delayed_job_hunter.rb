@@ -45,7 +45,7 @@ module ExceptionHunter
           end
 
         job_class = if job.payload_object.class.name == 'ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper'
-                      #buildin support for Rails 4.2 ActiveJob
+                      # support for Rails 4.2 ActiveJob
                       job.payload_object.job_data['job_class']
                     elsif job.payload_object.object.is_a?(Class)
                       job.payload_object.object.name
