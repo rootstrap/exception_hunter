@@ -30,8 +30,8 @@ GIT
 PATH
   remote: .
   specs:
-    exception_hunter (0.2.0)
-      pagy (~> 3.8)
+    exception_hunter (0.4.0)
+      pagy (~> 3)
 
 GEM
   remote: https://rubygems.org/
@@ -107,8 +107,13 @@ GEM
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     concurrent-ruby (1.1.6)
-    connection_pool (2.2.2)
+    connection_pool (2.2.3)
     crass (1.0.6)
+    delayed_job (4.1.8)
+      activesupport (>= 3.0, < 6.1)
+    delayed_job_active_record (4.1.4)
+      activerecord (>= 3.0, < 6.1)
+      delayed_job (>= 3.0, < 5)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     devise (4.7.1)
@@ -151,13 +156,13 @@ GEM
     nokogiri (1.10.9)
       mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
-    pagy (3.8.1)
+    pagy (3.8.2)
     parallel (1.19.1)
     parser (2.7.1.3)
       ast (~> 2.4.0)
     pg (1.2.3)
     psych (3.1.0)
-    rack (2.2.2)
+    rack (2.2.3)
     rack-protection (2.0.8.1)
       rack
     rack-test (1.1.0)
@@ -202,7 +207,7 @@ GEM
       thor (>= 0.20.3, < 2.0)
     rainbow (3.0.0)
     rake (13.0.1)
-    redis (4.1.4)
+    redis (4.2.1)
     reek (5.6.0)
       codeclimate-engine-rb (~> 0.4.0)
       kwalify (~> 0.7.0)
@@ -239,10 +244,11 @@ GEM
       rack (~> 2.0)
       rack-protection (>= 2.0.0)
       redis (>= 4.1.0)
-    simplecov (0.18.5)
+    simplecov (0.17.1)
       docile (~> 1.1)
-      simplecov-html (~> 0.11)
-    simplecov-html (0.12.2)
+      json (>= 1.8, < 3)
+      simplecov-html (~> 0.10.0)
+    simplecov-html (0.10.2)
     sprockets (4.0.0)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -273,6 +279,7 @@ PLATFORMS
 DEPENDENCIES
   brakeman (~> 4.8)
   byebug (~> 11.1)
+  delayed_job_active_record (~> 4.1, >= 4.1.4)
   devise (~> 4.7)
   exception_hunter!
   factory_bot_rails
@@ -289,7 +296,7 @@ DEPENDENCIES
   rubocop (~> 0.80.1)
   shoulda-matchers (~> 4.3)
   sidekiq (~> 6.0.4)
-  simplecov (~> 0.18.5)
+  simplecov (~> 0.17.1)
 
 BUNDLED WITH
    2.1.4

@@ -1,5 +1,9 @@
 # ExceptionHunter
 
+![CI](https://github.com/rootstrap/exception_hunter/workflows/Rails%20tests/badge.svg)
+[![Maintainability](https://api.codeclimate.com/v1/badges/86f6aaa2377c894f8ee4/maintainability)](https://codeclimate.com/github/rootstrap/exception_hunter/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/86f6aaa2377c894f8ee4/test_coverage)](https://codeclimate.com/github/rootstrap/exception_hunter/test_coverage)
+
 ![Index screenshot](doc/screenshot.png)
 
 Exception Hunter is a Rails engine meant to track errors in your Rails project. It works
@@ -21,7 +25,7 @@ project, and MVP or something else.
 Add Exception Hunter to your application's Gemfile:
 
 ```ruby
-gem 'exception_hunter', '~> 0.3.0'
+gem 'exception_hunter', '~> 0.4.0'
 ```
 
 You may also need to add [Devise](https://github.com/heartcombo/devise) to your Gemfile

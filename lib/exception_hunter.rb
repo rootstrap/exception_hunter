@@ -2,7 +2,6 @@ require 'pagy'
 
 require 'exception_hunter/engine'
 require 'exception_hunter/middleware/request_hunter'
-require 'exception_hunter/middleware/sidekiq_hunter' if defined?(Sidekiq)
 require 'exception_hunter/config'
 require 'exception_hunter/error_creator'
 require 'exception_hunter/error_reaper'

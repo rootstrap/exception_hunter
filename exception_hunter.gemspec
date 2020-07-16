@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
 
   spec.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
 
-  spec.add_dependency 'pagy', '~> 3.8'
+  spec.add_dependency 'pagy', '~> 3'
 
   spec.add_development_dependency 'brakeman', '~> 4.8'
   spec.add_development_dependency 'factory_bot_rails'
@@ -25,5 +25,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rails_best_practices', '~> 1.20'
   spec.add_development_dependency 'reek', '~> 5.6'
   spec.add_development_dependency 'rubocop', '~> 0.80.1'
-  spec.add_development_dependency 'simplecov', '~> 0.18.5'
+  spec.add_development_dependency 'simplecov', '~> 0.17.1'
 end
