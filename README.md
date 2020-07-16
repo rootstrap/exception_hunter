@@ -25,7 +25,7 @@ project, and MVP or something else.
 Add Exception Hunter to your application's Gemfile:
 
 ```ruby
-gem 'exception_hunter', '~> 0.3.0'
+gem 'exception_hunter', '~> 0.4.0'
 ```
 
 You may also need to add [Devise](https://github.com/heartcombo/devise) to your Gemfile
