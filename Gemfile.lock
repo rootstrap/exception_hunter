@@ -30,7 +30,7 @@ GIT
 PATH
   remote: .
   specs:
-    exception_hunter (0.4.0)
+    exception_hunter (0.4.1)
       pagy (~> 3)
 
 GEM
@@ -156,7 +156,7 @@ GEM
     nokogiri (1.10.9)
       mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
-    pagy (3.8.2)
+    pagy (3.8.3)
     parallel (1.19.1)
     parser (2.7.1.3)
       ast (~> 2.4.0)
