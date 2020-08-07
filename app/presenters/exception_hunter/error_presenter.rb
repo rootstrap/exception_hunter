@@ -16,7 +16,7 @@ module ExceptionHunter
     end
 
     def environment_data
-      error.environment_data.except('params')
+      error.environment_data&.except('params') || {}
     end
 
     def tracked_params
