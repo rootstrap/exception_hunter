@@ -6,19 +6,30 @@ module ExceptionHunter
 
     describe '#environment_data' do
       subject { error_presenter.environment_data }
-      let(:error) do
-        create(:error,
-               environment_data: {
-                 'something' => 123,
-                 'something_else' => 'abcd',
-                 'params' => {
-                   'name' => 'John'
-                 }
-               })
+
+      context 'when the error has environment data' do
+        let(:error) do
+          create(:error,
+                 environment_data: {
+                   'something' => 123,
+                   'something_else' => 'abcd',
+                   'params' => {
+                     'name' => 'John'
+                   }
+                 })
+        end
+
+        it 'returns the error environment data without the params' do
+          expect(subject).to eq({ 'something' => 123, 'something_else' => 'abcd' })
+        end
       end
 
-      it 'returns the error environment data without the params' do
-        expect(subject).to eq({ 'something' => 123, 'something_else' => 'abcd' })
+      context 'when the error does not have environment data' do
+        let(:error) { create(:error, environment_data: nil) }
+
+        it 'returns an empty hash' do
+          expect(subject).to eq({})
+        end
       end
     end
 
