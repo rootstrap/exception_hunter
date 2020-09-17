@@ -7,7 +7,8 @@ module ExceptionHunter
         message: exception.message,
         backtrace: exception.backtrace,
         custom_data: custom_data,
-        user: user
+        user: user,
+        environment_data: {}
       )
 
       nil

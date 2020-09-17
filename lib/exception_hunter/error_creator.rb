@@ -10,8 +10,8 @@ module ExceptionHunter
 
         ActiveRecord::Base.transaction do
           error_attrs = extract_user_data(error_attrs)
-          error = Error.new(error_attrs)
-          error_group = ErrorGroup.find_matching_group(error) || ErrorGroup.new
+          error = ::ExceptionHunter::Error.new(error_attrs)
+          error_group = ::ExceptionHunter::ErrorGroup.find_matching_group(error) || ::ExceptionHunter::ErrorGroup.new
           update_error_group(error_group, error, tag)
           error.error_group = error_group
           error.save!

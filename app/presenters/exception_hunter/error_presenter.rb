@@ -10,7 +10,7 @@ module ExceptionHunter
     end
 
     def backtrace
-      error.backtrace.map do |line|
+      (error.backtrace || []).map do |line|
         format_backtrace_line(line)
       end
     end
