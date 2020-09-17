@@ -1,5 +1,5 @@
 module ExceptionHunter
-  class Error < ApplicationRecord
+  class Error < ::ExceptionHunter::ApplicationRecord
     validates :class_name, presence: true
     validates :occurred_at, presence: true
 

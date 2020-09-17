@@ -1,5 +1,5 @@
 module ExceptionHunter
-  class ErrorGroup < ApplicationRecord
+  class ErrorGroup < ::ExceptionHunter::ApplicationRecord
     SIMILARITY_THRESHOLD = 0.75
 
     validates :error_class_name, presence: true
