@@ -30,7 +30,7 @@ GIT
 PATH
   remote: .
   specs:
-    exception_hunter (0.4.1)
+    exception_hunter (0.4.2)
       pagy (~> 3)
 
 GEM
