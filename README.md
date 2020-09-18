@@ -62,6 +62,23 @@ a week would be ideal. You can also purge errors by running `ExceptionHunter::Er
 
 The time it takes for an error to go stale defaults to 45 days but it's configurable via the initializer.
 
+## Manual login
+
+ExceptionHunter also includes a facility to manually log from anywhere in the code. Imagine the following case:
+
+```ruby
+case current_user.status
+when :inactive then do_something
+when :active then do_something_else
+when :banned then do_something_else_else
+else
+  ExceptionHunter.track(ArgumentError.new('This should never happen'), custom_data: { status: current_user.status }, current_user: user)
+end
+```
+
+In this scenario we don't really want to raise an exception but we might want to be alerted if by any chance a user
+has an invalid status.
+
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 
