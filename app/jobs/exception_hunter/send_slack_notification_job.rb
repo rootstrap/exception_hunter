@@ -1,5 +1,7 @@
 module ExceptionHunter
   class SendSlackNotificationJob < ApplicationJob
+    require 'slack-notifier'
+
     queue_as :default
 
     def perform(error)

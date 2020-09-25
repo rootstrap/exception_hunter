@@ -15,7 +15,7 @@ module ExceptionHunter
           update_error_group(error_group, error, tag)
           error.error_group = error_group
           error.save!
-          SendSlackNotificationJob.perform_later(error) if ExceptionHunter::Config.notify_slack
+          ExceptionHunter::SendSlackNotificationJob.perform_later(error) if ExceptionHunter::Config.notify_slack
           error
         end
       rescue ActiveRecord::RecordInvalid
