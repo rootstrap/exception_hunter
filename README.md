@@ -86,9 +86,18 @@ You have to do the following:
 
 1. Create a Slack app.
 2. Add it to your workspace.
-3. Add a webhook linked to the channel you want to receive the notifications.
-4. Set `config.notify_slack` to `true` in `exception_hunter` initializer.
-5. Add `SLACK_WEBHOOK_URL` environment variable with the generated webhook url to your `application.yml`.
+3. Add one or more webhooks linked to the channels you want to receive the notifications.
+4. Set the webhook urls in the `exception_hunter` initializer.
+
+```ruby
+config.notifiers << {
+  name: :slack,
+  options: {
+    webhooks: ['SLACK_WEBHOOK_URL_1', 'SLACK_WEBHOOK_URL_2', ...]
+  }
+}
+```
+
 6. Add the code below to the environment config file where you are using ExceptionHunter with the correct server url.
 
 ```ruby

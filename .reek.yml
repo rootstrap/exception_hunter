@@ -33,6 +33,7 @@ detectors:
       - ExceptionHunter::Middleware::RequestHunter#catch_prey
       - ExceptionHunter::Middleware::SidekiqHunter#track_exception
       - ExceptionHunter::DashboardPresenter#calculate_tabs_counts
+      - ExceptionHunter::SendSlackNotificationJob#perform
 
   InstanceVariableAssumption:
     enabled: false

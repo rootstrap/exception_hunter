@@ -5,6 +5,7 @@ require 'exception_hunter/middleware/request_hunter'
 require 'exception_hunter/config'
 require 'exception_hunter/error_creator'
 require 'exception_hunter/error_reaper'
+require 'exception_hunter/notifications_sender'
 require 'exception_hunter/tracking'
 require 'exception_hunter/user_attributes_collector'
 

@@ -48,21 +48,36 @@ module ExceptionHunter
           end
 
           context 'with slack notifications' do
+            let!(:original_queue_adapter) { ActiveJob::Base.queue_adapter }
+
+            let(:notifier) do
+              {
+                name: :slack,
+                options: {
+                  webhooks: ['test_webhook']
+                }
+              }
+            end
+
             before do
-              allow(ExceptionHunter::Config).to receive(:notify_slack).and_return(true)
+              ActiveJob::Base.queue_adapter = :test
+
+              allow(ExceptionHunter::Config)
+                .to receive(:notifiers)
+                .and_return([notifier])
+            end
+
+            after do
+              ActiveJob::Base.queue_adapter = original_queue_adapter
             end
 
             it 'enqueues job to send slack message' do
-              original_queue_adapter = ActiveJob::Base.queue_adapter
-              ActiveJob::Base.queue_adapter = :test
-
               expect {
                 subject
-              }.to have_enqueued_job(SendSlackNotificationJob).with { |error|
+              }.to have_enqueued_job(SendSlackNotificationJob).with { |error, notifier|
                 expect(error).to eq Error.last
+                expect(notifier).to eq notifier
               }
-
-              ActiveJob::Base.queue_adapter = original_queue_adapter
             end
           end
         end

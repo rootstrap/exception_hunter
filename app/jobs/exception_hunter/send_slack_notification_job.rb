@@ -4,9 +4,18 @@ module ExceptionHunter
 
     queue_as :default
 
-    def perform(error)
-      notifier = Slack::Notifier.new(ENV.fetch('SLACK_WEBHOOK_URL'))
-      notifier.ping(slack_notification_message(error))
+    def perform(error, notifier)
+      notifier = JSON.parse(notifier, symbolize_names: true)
+      webhooks = notifier.dig(:options, :webhooks)
+      return if webhooks.blank?
+
+      webhooks.each do |webhook|
+        slack_notifier = Slack::Notifier.new(webhook)
+        slack_notifier.ping(slack_notification_message(error))
+      end
+    rescue Exception # rubocop:disable Lint/RescueException
+      # Suppress all exceptions to avoid loop as this would create a new error in EH.
+      false
     end
 
     private
