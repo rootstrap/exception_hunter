@@ -1,7 +1,7 @@
 describe ExceptionHunter::SendNotificationJob, type: :job do
   let(:error) { create(:error) }
   let(:slack_notifier) { ExceptionHunter::Notifiers::SlackNotifier.new(error, notifier) }
-  let(:serialized_slack_notifier) { ExceptionHunter::Serializers::SlackNotifierSerializer.serialize(slack_notifier) }
+  let(:serialized_slack_notifier) { ExceptionHunter::Notifiers::Serializers::SlackNotifierSerializer.serialize(slack_notifier) }
 
   let(:notifier) do
     {

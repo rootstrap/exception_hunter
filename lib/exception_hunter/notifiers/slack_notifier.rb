@@ -1,13 +1,13 @@
+require 'slack-notifier'
+
 module ExceptionHunter
   module Notifiers
     class SlackNotifier
-      require 'slack-notifier'
-
       attr_reader :error, :notifier
 
       def initialize(error, notifier)
         @error = error
-        @notifier = notifier.deep_symbolize_keys
+        @notifier = notifier
       end
 
       def notify

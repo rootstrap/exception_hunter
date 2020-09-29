@@ -53,7 +53,8 @@ module ExceptionHunter
       def notify(error)
         ExceptionHunter::Config.notifiers.each do |notifier|
           slack_notifier = ExceptionHunter::Notifiers::SlackNotifier.new(error, notifier)
-          serialized_slack_notifier = ExceptionHunter::Serializers::SlackNotifierSerializer.serialize(slack_notifier)
+          serializer = ExceptionHunter::Notifiers::Serializers::SlackNotifierSerializer
+          serialized_slack_notifier = serializer.serialize(slack_notifier)
           ExceptionHunter::SendNotificationJob.perform_later(serialized_slack_notifier)
         end
       end
