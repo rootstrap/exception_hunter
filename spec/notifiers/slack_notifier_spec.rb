@@ -1,12 +1,13 @@
-describe ExceptionHunter::SendSlackNotificationJob, type: :job do
+describe ExceptionHunter::Notifiers::SlackNotifier do
   let(:error_group) { create(:error_group) }
-  let(:error)       { create(:error, error_group: error_group) }
+  let(:error) { create(:error, error_group: error_group) }
+  let(:slack_notifier) { ExceptionHunter::Notifiers::SlackNotifier.new(error, notifier) }
 
   let(:notifier) do
     {
       name: :slack,
       options: {
-        webhooks: ['test_webhook']
+        webhook: 'test_webhook'
       }
     }
   end
@@ -36,9 +37,9 @@ describe ExceptionHunter::SendSlackNotificationJob, type: :job do
     end
   end
 
-  describe '#perform' do
+  describe '#notify' do
     subject do
-      ExceptionHunter::SendSlackNotificationJob.perform_now(error, notifier.to_json)
+      slack_notifier.notify
     end
 
     context 'sends notification to slack' do

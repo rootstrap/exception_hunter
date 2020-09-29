@@ -93,7 +93,14 @@ You have to do the following:
 config.notifiers << {
   name: :slack,
   options: {
-    webhooks: ['SLACK_WEBHOOK_URL_1', 'SLACK_WEBHOOK_URL_2', ...]
+    webhook: 'SLACK_WEBHOOK_URL_1'
+  }
+}
+
+config.notifiers << {
+  name: :slack,
+  options: {
+    webhook: 'SLACK_WEBHOOK_URL_2'
   }
 }
 ```

@@ -49,12 +49,22 @@ module ExceptionHunter
 
           context 'with slack notifications' do
             let!(:original_queue_adapter) { ActiveJob::Base.queue_adapter }
+            let(:notifiers) { [notifier_1, notifier_2] }
 
-            let(:notifier) do
+            let(:notifier_1) do
               {
                 name: :slack,
                 options: {
-                  webhooks: ['test_webhook']
+                  webhook: 'test_webhook_1'
+                }
+              }
+            end
+
+            let(:notifier_2) do
+              {
+                name: :slack,
+                options: {
+                  webhook: 'test_webhook_2'
                 }
               }
             end
@@ -64,20 +74,20 @@ module ExceptionHunter
 
               allow(ExceptionHunter::Config)
                 .to receive(:notifiers)
-                .and_return([notifier])
+                .and_return(notifiers)
             end
 
             after do
               ActiveJob::Base.queue_adapter = original_queue_adapter
             end
 
-            it 'enqueues job to send slack message' do
-              expect {
-                subject
-              }.to have_enqueued_job(SendSlackNotificationJob).with { |error, notifier|
-                expect(error).to eq Error.last
-                expect(notifier).to eq notifier
-              }
+            it 'enqueues job to send slack message to all webhooks' do
+              subject
+              jobs = ActiveJob::Base.queue_adapter.enqueued_jobs.map do |job|
+                job['arguments'].last['notifier']['options']['webhook']
+              end
+
+              expect(jobs).to contain_exactly('test_webhook_1', 'test_webhook_2')
             end
           end
         end

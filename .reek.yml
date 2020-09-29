@@ -28,12 +28,8 @@ detectors:
     allow_calls: []
 
   FeatureEnvy:
-    enabled: true
-    exclude:
-      - ExceptionHunter::Middleware::RequestHunter#catch_prey
-      - ExceptionHunter::Middleware::SidekiqHunter#track_exception
-      - ExceptionHunter::DashboardPresenter#calculate_tabs_counts
-      - ExceptionHunter::SendSlackNotificationJob#perform
+    enabled: false
+    exclude: []
 
   InstanceVariableAssumption:
     enabled: false

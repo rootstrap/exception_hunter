@@ -42,8 +42,20 @@ ExceptionHunter.setup do |config|
   # == Slack notifications
   #
   # You can configure if you want to send notifications to slack for each error occurrence.
-  # Don't forget to set the SLACK_WEBHOOK_URL variable and the url settings if set to true.
-  # Default: false
+  # You can enter multiple webhook urls.
+  # Default: []
   #
-  # config.notify_slack = false
+  # config.notifiers << {
+  #   name: :slack,
+  #   options: {
+  #     webhook: 'SLACK_WEBHOOK_URL_1'
+  #   }
+  # }
+  #
+  # config.notifiers << {
+  #   name: :slack,
+  #   options: {
+  #     webhook: SLACK_WEBHOOK_URL_2'
+  #   }
+  # }
 end
