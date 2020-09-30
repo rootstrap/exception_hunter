@@ -49,6 +49,19 @@ you can run the command with the `--skip-users` flag.
 Additionally it should add the 'ExceptionHunter.routes(self)' line to your routes, which means you can go to
 `/exception_hunter/errors` in your browser and start enjoying some good old fashioned exception tracking!
 
+#### Testing it on dev:
+
+ExceptionHunter is disabled on dev by default so if you want to test it before shipping it to another
+environment, which we highly recommend, you should enable it by going to the initializer and changing the
+line that says `config.enabled = !(Rails.env.development? || Rails.env.test?)` with something like
+`config.enabled = !(Rails.env.test?)` while you test. Don't forget to change it back if you don't
+want a bunch of errors in your local DB!
+
+You can then open a `rails console` and manually track an exception to check that it
+works `ExceptionHunter.track(StandardError.new("It works!"))`. You should now see the exception
+on [http://localhost:3000/exception_hunter]().
+
+
 ## Stale data
 
 You can get rid of stale errors by running the rake task to purge them:
@@ -62,7 +75,7 @@ a week would be ideal. You can also purge errors by running `ExceptionHunter::Er
 
 The time it takes for an error to go stale defaults to 45 days but it's configurable via the initializer.
 
-## Manual login
+## Manual tracking
 
 ExceptionHunter also includes a facility to manually log from anywhere in the code. Imagine the following case:
 
