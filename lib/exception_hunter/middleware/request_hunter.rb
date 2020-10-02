@@ -53,8 +53,16 @@ module ExceptionHunter
 
       def filtered_sensitive_params(env)
         params = env['action_dispatch.request.parameters']
-        parameter_filter = ::ActiveSupport::ParameterFilter.new(FILTERED_PARAMS)
+        parameter_filter = params_filter.new(FILTERED_PARAMS)
         parameter_filter.filter(params || {})
+      end
+
+      def params_filter
+        if defined?(::ActiveSupport::ParameterFilter)
+          ::ActiveSupport::ParameterFilter
+        else
+          ::ActionDispatch::Http::ParameterFilter
+        end
       end
     end
   end

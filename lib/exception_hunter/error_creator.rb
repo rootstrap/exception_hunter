@@ -15,6 +15,7 @@ module ExceptionHunter
           update_error_group(error_group, error, tag)
           error.error_group = error_group
           error.save!
+          notify(error)
           error
         end
       rescue ActiveRecord::RecordInvalid
@@ -47,6 +48,15 @@ module ExceptionHunter
 
         error_attrs.delete(:user)
         error_attrs
+      end
+
+      def notify(error)
+        ExceptionHunter::Config.notifiers.each do |notifier|
+          slack_notifier = ExceptionHunter::Notifiers::SlackNotifier.new(error, notifier)
+          serializer = ExceptionHunter::Notifiers::Serializers::SlackNotifierSerializer
+          serialized_slack_notifier = serializer.serialize(slack_notifier)
+          ExceptionHunter::SendNotificationJob.perform_later(serialized_slack_notifier)
+        end
       end
     end
   end

@@ -38,4 +38,24 @@ ExceptionHunter.setup do |config|
   # happen automatically.
   #
   # config.errors_stale_time = 45.days
+
+  # == Slack notifications
+  #
+  # You can configure if you want to send notifications to slack for each error occurrence.
+  # You can enter multiple webhook urls.
+  # Default: []
+  #
+  # config.notifiers << {
+  #   name: :slack,
+  #   options: {
+  #     webhook: 'SLACK_WEBHOOK_URL_1'
+  #   }
+  # }
+  #
+  # config.notifiers << {
+  #   name: :slack,
+  #   options: {
+  #     webhook: SLACK_WEBHOOK_URL_2'
+  #   }
+  # }
 end

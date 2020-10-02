@@ -92,6 +92,42 @@ end
 In this scenario we don't really want to raise an exception but we might want to be alerted if by any chance a user
 has an invalid status.
 
+## Slack notifications
+
+You can configure ExceptionHunter to send a message to slack every time an error occurs.
+You have to do the following:
+
+1. Create a Slack app.
+2. Add it to your workspace.
+3. Add one or more webhooks linked to the channels you want to receive the notifications.
+4. Set the webhook urls in the `exception_hunter` initializer.
+
+```ruby
+config.notifiers << {
+  name: :slack,
+  options: {
+    webhook: 'SLACK_WEBHOOK_URL_1'
+  }
+}
+
+config.notifiers << {
+  name: :slack,
+  options: {
+    webhook: 'SLACK_WEBHOOK_URL_2'
+  }
+}
+```
+
+6. Add the code below to the environment config file where you are using ExceptionHunter with the correct server url.
+
+```ruby
+ExceptionHunter::Engine.configure do |config|
+  config.routes.default_url_options = { host: "your_server_url" }
+end
+```
+
+This uses ActiveJob to send notification in the background, so [make sure you configure](https://guides.rubyonrails.org/active_job_basics.html#setting-the-backend) it with the adapter you are using, if not notifications will be sent synchronously.
+
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 

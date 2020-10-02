@@ -46,6 +46,50 @@ module ExceptionHunter
               expect(error_group.reload.tags).to eq(['HTTP'])
             end
           end
+
+          context 'with slack notifications' do
+            let!(:original_queue_adapter) { ActiveJob::Base.queue_adapter }
+            let(:notifiers) { [notifier_1, notifier_2] }
+
+            let(:notifier_1) do
+              {
+                name: :slack,
+                options: {
+                  webhook: 'test_webhook_1'
+                }
+              }
+            end
+
+            let(:notifier_2) do
+              {
+                name: :slack,
+                options: {
+                  webhook: 'test_webhook_2'
+                }
+              }
+            end
+
+            before do
+              ActiveJob::Base.queue_adapter = :test
+
+              allow(ExceptionHunter::Config)
+                .to receive(:notifiers)
+                .and_return(notifiers)
+            end
+
+            after do
+              ActiveJob::Base.queue_adapter = original_queue_adapter
+            end
+
+            it 'enqueues job to send slack message to all webhooks' do
+              subject
+              jobs = ActiveJob::Base.queue_adapter.enqueued_jobs.map do |job|
+                job['arguments'].last['notifier']['options']['webhook']
+              end
+
+              expect(jobs).to contain_exactly('test_webhook_1', 'test_webhook_2')
+            end
+          end
         end
 
         context 'without a matching error group' do
