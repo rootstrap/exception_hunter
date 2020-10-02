@@ -113,6 +113,8 @@ ExceptionHunter::Engine.configure do |config|
 end
 ```
 
+This uses ActiveJob to send notification in the background, so [make sure you configure](https://guides.rubyonrails.org/active_job_basics.html#setting-the-backend) it with the adapter you are using, if not notifications will be sent synchronously.
+
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 
