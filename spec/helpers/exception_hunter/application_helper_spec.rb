@@ -4,7 +4,7 @@ module ExceptionHunter
 
     describe '#application_name' do
       it 'returns a name of parent module' do
-        expect(application_name).to eq('Site')
+        expect(application_name).to eq('Dummy')
       end
     end
   end
