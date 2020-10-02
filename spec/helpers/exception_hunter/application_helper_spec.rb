@@ -1,6 +1,6 @@
 module ExceptionHunter
-  describe ApplicationHelper do
-    extend ApplicationHelper
+  describe ::ExceptionHunter::ApplicationHelper do
+    extend ::ExceptionHunter::ApplicationHelper
 
     describe '#application_name' do
       it 'returns a name of parent module' do

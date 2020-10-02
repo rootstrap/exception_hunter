@@ -32,7 +32,9 @@ module ExceptionHunter
                                                     'job_class' => 'ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper',
                                                     'queue_name' => 'default'
                                                   })
-        expect(error.environment_data['enqueued_at']).not_to be_nil
+        if Gem::Version.new(Rails.version) >= Gem::Version.new('6')
+          expect(error.environment_data['enqueued_at']).not_to be_nil
+        end
         expect(error.environment_data['job_id']).not_to be_nil
       end
     end
@@ -58,7 +60,10 @@ module ExceptionHunter
 
         error = Error.last
 
-        expect(error.environment_data).to eq({ 'job_class' => 'Delayed::PerformableMethod' })
+        expect(error.environment_data).to eq({
+                                               'attempts' => 0,
+                                               'job_class' => 'Delayed::PerformableMethod'
+                                             })
       end
     end
   end

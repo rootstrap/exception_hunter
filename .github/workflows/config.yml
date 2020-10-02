@@ -5,6 +5,12 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby-version: [2.5.8, 2.6.6, 2.7]
+        rails-version: [5_2, 6_0]
+      fail-fast: false
+
     # Service containers to run with `runner-job`
     services:
       postgres:
@@ -21,7 +27,18 @@ jobs:
 
       - uses: actions/setup-ruby@v1
         with:
-          ruby-version: 2.6
+          ruby-version: ${{ matrix.ruby-version }}
+
+      - name: Copy Gemfile
+        run: yes | cp -rf Gemfile_$RAILS_VERSION Gemfile
+        env:
+          RAILS_VERSION: ${{ matrix.rails-version }}
+
+      - name: Copy Application.rb
+        run: yes | cp -rf spec/dummy/config/application_$RAILS_VERSION.rb spec/dummy/config/application.rb
+        env:
+          RAILS_VERSION: ${{ matrix.rails-version }}
+
 
       - name: Install PostgreSQL 11 client
         run: |
@@ -29,8 +46,8 @@ jobs:
 
       - name: Bundle install
         run: |
-          gem install bundler -v '2.1.4'
-          bundle install --jobs 4 --retry 3
+          gem install bundler
+          bundle update --jobs 4 --retry 3
 
       - name: Setup Database
         env:
@@ -38,6 +55,7 @@ jobs:
           PGUSER: postgres
           PGPASSWORD: postgres
           RAILS_ENV: test
+          RAILS_VERSION: ${{ matrix.rails-version }}
         run: |
           bundle exec rails db:setup
 
@@ -55,6 +73,7 @@ jobs:
           PGUSER: postgres
           PGPASSWORD: postgres
           RAILS_ENV: test
+          RAILS_VERSION: ${{ matrix.rails-version }}
         run: COVERAGE=true bundle exec rspec --require rails_helper
 
       - name: Run code analysis
