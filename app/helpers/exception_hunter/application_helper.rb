@@ -2,7 +2,7 @@ module ExceptionHunter
   module ApplicationHelper
     include Pagy::Frontend
 
-    def module_parent_name
+    def application_name
       if defined? Rails.application.class.module_parent_name
         Rails.application.class.module_parent_name
       else
