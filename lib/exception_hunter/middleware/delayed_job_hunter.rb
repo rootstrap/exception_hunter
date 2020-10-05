@@ -40,7 +40,7 @@ module ExceptionHunter
 
       def self.environment_data(job)
         job_data =
-          JOB_TRACKED_DATA.each_with_object({}) do |data_param, dict|
+          JOB_TRACKED_DATA.reduce({}) do |dict, data_param|
             dict.merge(data_param => job.try(data_param))
           end
 

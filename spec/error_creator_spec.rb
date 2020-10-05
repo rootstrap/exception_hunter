@@ -84,7 +84,7 @@ module ExceptionHunter
             it 'enqueues job to send slack message to all webhooks' do
               subject
               jobs = ActiveJob::Base.queue_adapter.enqueued_jobs.map do |job|
-                job['arguments'].last['notifier']['options']['webhook']
+                (job['arguments'] || job[:args]).last['notifier']['options']['webhook']
               end
 
               expect(jobs).to contain_exactly('test_webhook_1', 'test_webhook_2')
