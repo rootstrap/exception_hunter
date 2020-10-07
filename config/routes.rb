@@ -4,6 +4,8 @@ ExceptionHunter::Engine.routes.draw do
   end
 
   resources :resolved_errors, only: %i[create]
+  resources :ignored_errors, only: %i[create]
+  post :reopen, to: 'ignored_errors#reopen'
 
   get '/', to: redirect('/exception_hunter/errors')
 

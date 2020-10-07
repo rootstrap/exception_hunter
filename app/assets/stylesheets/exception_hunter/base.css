@@ -71,3 +71,12 @@ form {
 .button.button-dismiss:hover, .button.button-dismiss:focus, .button.button-dismiss:active {
     color: var(--inactive-grey);
 }
+
+.column-8{
+    flex: 0 0 8% !important;
+    max-width: 8% !important;
+}
+
+.mr-5{
+    margin-right: 5px;
+}

@@ -41,6 +41,8 @@ module ExceptionHunter
         ErrorGroup.active
       when DashboardPresenter::RESOLVED_ERRORS_TAB
         ErrorGroup.resolved
+      when DashboardPresenter::IGNORED_ERRORS_TAB
+        ErrorGroup.ignored
       end
     end
   end

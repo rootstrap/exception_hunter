@@ -15,6 +15,8 @@ module ExceptionHunter
           update_error_group(error_group, error, tag)
           error.error_group = error_group
           error.save!
+          return if error_group.ignored?
+
           notify(error)
           error
         end

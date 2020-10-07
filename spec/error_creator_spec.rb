@@ -143,6 +143,26 @@ module ExceptionHunter
           expect { subject }.not_to change(Error, :count)
         end
       end
+
+      context 'ignored errors' do
+        let(:error_attributes) do
+          { class_name: 'SomeError', message: 'Something went very wrong 123' }
+        end
+
+        let!(:ignored_error_group) do
+          create(:error_group, :ignored_group,
+                 error_class_name: 'SomeError',
+                 message: 'Something went very wrong 567')
+        end
+        it 'returns nil' do
+          expect(subject).to be_nil
+        end
+
+        it 'creates an error ' do
+          expect { subject }.to change(Error, :count).by(1)
+          expect(ErrorGroup.last.status).to eq('ignored')
+        end
+      end
     end
   end
 end
