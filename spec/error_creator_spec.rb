@@ -160,7 +160,7 @@ module ExceptionHunter
 
         it 'creates an error ' do
           expect { subject }.to change(Error, :count).by(1)
-          expect(ErrorGroup.last.status).to eq('ignored')
+          expect(ErrorGroup.last.status).to eq(ErrorGroup.ignored.last.status)
         end
       end
     end

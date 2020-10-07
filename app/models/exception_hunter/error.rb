@@ -6,7 +6,7 @@ module ExceptionHunter
     belongs_to :error_group, touch: true
 
     before_validation :set_occurred_at, on: :create
-    after_create :unresolve_error_group, unless: -> { error_group.ignored? }
+    after_create :unresolve_error_group, if: -> { error_group.resolved? }
 
     scope :most_recent, lambda { |error_group_id|
       where(error_group_id: error_group_id).order(occurred_at: :desc)

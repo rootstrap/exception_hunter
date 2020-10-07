@@ -6,6 +6,7 @@
 
 * [#88](https://github.com/rootstrap/exception_hunter/pull/88) Add slack notifications. ([@andresg4][])
 * [#93](https://github.com/rootstrap/exception_hunter/pull/93) Show project name instead of repo name on navbar. ([@yurichandra][])
+* [#94](https://github.com/rootstrap/exception_hunter/pull/101) Allow user to ignore certain errors. ([@ajazfarhad][])
 
 ### Bug fixes
 
