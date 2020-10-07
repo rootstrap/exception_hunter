@@ -199,5 +199,35 @@ module ExceptionHunter
         expect(subject).not_to include(active_errors)
       end
     end
+
+    describe 'from_ignored_error_groups' do
+      subject { Error.from_ignored_error_groups }
+
+      let(:ignored_error_group) { create(:error_group, status: :ignored) }
+      let(:active_error_group) { create(:error_group, status: :active) }
+
+      let(:ignored_errors) do
+        [
+          create(:error, error_group: ignored_error_group),
+          create(:error, error_group: ignored_error_group),
+          create(:error, error_group: ignored_error_group)
+        ]
+      end
+
+      let(:active_errors) do
+        [
+          create(:error, error_group: active_error_group),
+          create(:error, error_group: active_error_group)
+        ]
+      end
+
+      it 'returns ignored errors' do
+        expect(subject).to match_array(ignored_errors)
+      end
+
+      it 'does not return active errors' do
+        expect(subject).not_to include(active_errors)
+      end
+    end
   end
 end

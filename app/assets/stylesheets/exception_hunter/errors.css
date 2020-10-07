@@ -153,6 +153,31 @@ li.errors-tab {
     border-color: var(--focused-grey);
 }
 
+.button_to .button.button-outlined.ignore-button {
+    color: var(--highlight-color);
+    border-color: var(--highlight-color);
+    font-size: 10px;
+    padding: 0 1rem;
+    height: 3rem;
+    line-height: 3rem;
+  }
+
+  .button_to .button.ignore-button {
+    color: #FFF;
+    background-color: var(--highlight-color);
+    border-color: var(--highlight-color);
+    font-size: 10px;
+    padding: 0 1rem;
+    height: 3rem;
+    line-height: 3rem;
+    margin-bottom: 0;
+  }
+
+  .button.ignore-button:hover, .button.ignore-button:focus {
+    color: var(--focused-grey);
+    border-color: var(--focused-grey);
+  }
+
 .error-occurred_at {
     color: var(--highlight-color);
     font-size: 14px;

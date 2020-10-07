@@ -4,7 +4,8 @@ module ExceptionHunter
     CURRENT_MONTH_TAB = 'current_month'.freeze
     TOTAL_ERRORS_TAB = 'total_errors'.freeze
     RESOLVED_ERRORS_TAB = 'resolved'.freeze
-    TABS = [LAST_7_DAYS_TAB, CURRENT_MONTH_TAB, TOTAL_ERRORS_TAB, RESOLVED_ERRORS_TAB].freeze
+    IGNORED_ERRORS_TAB = 'ignored'.freeze
+    TABS = [LAST_7_DAYS_TAB, CURRENT_MONTH_TAB, TOTAL_ERRORS_TAB, RESOLVED_ERRORS_TAB, IGNORED_ERRORS_TAB].freeze
     DEFAULT_TAB = LAST_7_DAYS_TAB
 
     attr_reader :current_tab
@@ -22,7 +23,7 @@ module ExceptionHunter
       case current_tab
       when LAST_7_DAYS_TAB
         'exception_hunter/errors/last_7_days_errors_table'
-      when CURRENT_MONTH_TAB, TOTAL_ERRORS_TAB, RESOLVED_ERRORS_TAB
+      when CURRENT_MONTH_TAB, TOTAL_ERRORS_TAB, RESOLVED_ERRORS_TAB, IGNORED_ERRORS_TAB
         'exception_hunter/errors/errors_table'
       end
     end
@@ -47,7 +48,8 @@ module ExceptionHunter
         LAST_7_DAYS_TAB => active_errors.in_last_7_days.count,
         CURRENT_MONTH_TAB => active_errors.in_current_month.count,
         TOTAL_ERRORS_TAB => active_errors.count,
-        RESOLVED_ERRORS_TAB => Error.from_resolved_error_groups.count
+        RESOLVED_ERRORS_TAB => Error.from_resolved_error_groups.count,
+        IGNORED_ERRORS_TAB => Error.from_ignored_error_groups.count
       }
     end
   end

@@ -52,6 +52,19 @@
           </div>
         <% end %>
       </div>
+
+      <div class="errors-tab errors-tab__ignored <%= 'errors-tab--active' if @dashboard.tab_active?(@dashboard.class::IGNORED_ERRORS_TAB) %>">
+        <%= link_to errors_path(tab: @dashboard.class::IGNORED_ERRORS_TAB) do %>
+          <div class="errors-tab__content">
+            <div class="errors-tab__badge">
+              <%= @dashboard.errors_count(@dashboard.class::IGNORED_ERRORS_TAB) || '-' %>
+            </div>
+            <div class="errors-tab__description">
+              Ignored
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 
@@ -66,11 +79,12 @@
 <div class="errors__container">
   <div class="row error-row error-row--header">
     <div class="column column-10">Tags</div>
-    <div class="column column-40">Message</div>
+    <div class="column column-33">Message</div>
     <div class="column column-15">First Occurrence</div>
     <div class="column column-15">Last Occurrence</div>
-    <div class="column column-10">Total</div>
-    <div class="column column-10"></div>
+    <div class="column column-8">Total</div>
+    <div class="column column-18"></div>
+
   </div>
 
   <%= render partial: @dashboard.partial_for_tab, locals: { errors: @errors } %>

@@ -71,3 +71,7 @@ form {
 .button.button-dismiss:hover, .button.button-dismiss:focus, .button.button-dismiss:active {
     color: var(--inactive-grey);
 }
+
+.mr-5{
+    margin-right: 5px;
+}

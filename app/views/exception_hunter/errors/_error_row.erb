@@ -6,7 +6,7 @@
       </div>
     <% end %>
   </div>
-  <div class="column column-40 error-cell error-cell__message">
+  <div class="column column-33 error-cell error-cell__message">
     <%= link_to error.message, error_path(error.id), class: %w[error-message] %>
   </div>
 
@@ -26,19 +26,27 @@
     <% end %>
   </div>
 
-  <div class="column column-10 error-cell">
+  <div class="column column-8 error-cell">
     <%= error.total_occurrences %>
   </div>
 
-  <div class="column column-10 error-cell">
-    <% if error.active? %>
-      <div class="color-green">
-        <%= button_to('Resolve', resolved_errors_path(error_group: { id: error.id }),
-                      method: :post,
+   <div class="column column-18 error-cell">
+    <div class="row">
+      <% if error.active? %>
+        <div class="column mr-5">
+        <%= display_action_button('resolve', error) %>
+        </div>
+        <div class="column">
+          <%= display_action_button('ignore', error) %>
+        </div>
+      <% elsif error.ignored? %>
+        <div class="column">
+          <%= button_to('Reopen', reopen_path(error_group: { id: error.id }),
                       class: %w[button button-outline resolve-button],
-                      data: { confirm: 'Are you sure you want to resolve this error?' }) %>
-      </div>
-    <% end %>
-  </div>
+                      data: { confirm: 'Are you sure you want to reopen this error?' }) %>
+        </div>
+      <% end %>
+    </div>
+   </div>
 </div>
 
