@@ -1,5 +1,7 @@
 module ExceptionHunter
   module Middleware
+    # {https://www.rubyguides.com/2018/09/rack-middleware Rack Middleware} used to
+    # rescue from exceptions track them and then re-raise them.
     class RequestHunter
       ENVIRONMENT_KEYS =
         %w[PATH_INFO
@@ -69,6 +71,7 @@ module ExceptionHunter
 end
 
 module ExceptionHunter
+  # @private
   class Railtie < Rails::Railtie
     initializer 'exception_hunter.add_middleware', after: :load_config_initializers do |app|
       app.config.middleware.insert_after(

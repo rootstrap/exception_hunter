@@ -2,6 +2,8 @@ require 'slack-notifier'
 
 module ExceptionHunter
   module Notifiers
+    # Notifier that sends a message to a Slack channel every time an
+    # exception is tracked.
     class SlackNotifier
       attr_reader :error, :notifier
 

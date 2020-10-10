@@ -130,7 +130,7 @@ module ExceptionHunter
           it 'raises an error' do
             expect {
               subject
-            }.to raise_error(ExceptionHunter::Notifiers::Exceptions::MisconfiguredNotifiers) { |error|
+            }.to raise_error(ExceptionHunter::Notifiers::MisconfiguredNotifiers) { |error|
               expect(error.message).to eq("Notifier has incorrect configuration: #{notifier_2.inspect}")
             }
           end
@@ -147,7 +147,7 @@ module ExceptionHunter
           it 'raises an error' do
             expect {
               subject
-            }.to raise_error(ExceptionHunter::Notifiers::Exceptions::MisconfiguredNotifiers) { |error|
+            }.to raise_error(ExceptionHunter::Notifiers::MisconfiguredNotifiers) { |error|
               expect(error.message).to eq("Notifier has incorrect configuration: #{notifier_2.inspect}")
             }
           end
@@ -163,7 +163,7 @@ module ExceptionHunter
           it 'raises an error' do
             expect {
               subject
-            }.to raise_error(ExceptionHunter::Notifiers::Exceptions::MisconfiguredNotifiers) { |error|
+            }.to raise_error(ExceptionHunter::Notifiers::MisconfiguredNotifiers) { |error|
               expect(error.message).to eq("Notifier has incorrect configuration: #{notifier_2.inspect}")
             }
           end
@@ -181,7 +181,7 @@ module ExceptionHunter
           it 'raises an error' do
             expect {
               subject
-            }.to raise_error(ExceptionHunter::Notifiers::Exceptions::MisconfiguredNotifiers) { |error|
+            }.to raise_error(ExceptionHunter::Notifiers::MisconfiguredNotifiers) { |error|
               expect(error.message).to eq("Notifier has incorrect configuration: #{notifier_2.inspect}")
             }
           end

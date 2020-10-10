@@ -273,6 +273,7 @@ GEM
     websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    yard (0.9.25)
     zeitwerk (2.4.0)
 
 PLATFORMS
@@ -299,6 +300,7 @@ DEPENDENCIES
   shoulda-matchers (~> 4.3)
   sidekiq (~> 6.0.4)
   simplecov (~> 0.17.1)
+  yard (~> 0.9.25)
 
 BUNDLED WITH
    2.1.4
