@@ -1,8 +1,6 @@
 module ExceptionHunter
-
   # Mixin used to track manual exceptions.
   module Tracking
-
     # Used to manually track errors in cases where raising might
     # not be adequate and but some insight is desired.
     #
@@ -11,7 +9,9 @@ module ExceptionHunter
     #   when :active then do_something()
     #   when :inactive then do_something_else()
     #   else
-    #     ExceptionHunter.track(StandardError.new("User with unknown status"), custom_data: { status: user.status }, user: user)
+    #     ExceptionHunter.track(StandardError.new("User with unknown status"),
+    #                                             custom_data: { status: user.status },
+    #                                             user: user)
     #   end
     #
     # @param [Exception] exception to track.
