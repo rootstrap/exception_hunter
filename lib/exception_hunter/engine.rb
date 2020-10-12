@@ -1,4 +1,5 @@
 module ExceptionHunter
+  # @private
   class Engine < ::Rails::Engine
     isolate_namespace ExceptionHunter
 

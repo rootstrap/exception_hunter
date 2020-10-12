@@ -1,10 +1,16 @@
 module ExceptionHunter
+  # Core class in charge of the actual persistence of errors and notifications.
   class ErrorCreator
     HTTP_TAG = 'HTTP'.freeze
     WORKER_TAG = 'Worker'.freeze
     MANUAL_TAG = 'Manual'.freeze
 
     class << self
+      # Creates an error with the given attributes and persists it to
+      # the database.
+      #
+      # @param [HTTP_TAG, WORKER_TAG, MANUAL_TAG] tag to append to the error if any
+      # @return [ExceptionHunter::Error, false] the error or false if it was not possible to create it
       def call(tag: nil, **error_attrs)
         return unless should_create?
 
@@ -41,12 +47,7 @@ module ExceptionHunter
 
       def extract_user_data(**error_attrs)
         user = error_attrs[:user]
-        error_attrs[:user_data] =
-          if user.nil?
-            {}
-          else
-            UserAttributesCollector.collect_attributes(user)
-          end
+        error_attrs[:user_data] = UserAttributesCollector.collect_attributes(user)
 
         error_attrs.delete(:user)
         error_attrs
@@ -55,7 +56,7 @@ module ExceptionHunter
       def notify(error)
         ExceptionHunter::Config.notifiers.each do |notifier|
           slack_notifier = ExceptionHunter::Notifiers::SlackNotifier.new(error, notifier)
-          serializer = ExceptionHunter::Notifiers::Serializers::SlackNotifierSerializer
+          serializer = ExceptionHunter::Notifiers::SlackNotifierSerializer
           serialized_slack_notifier = serializer.serialize(slack_notifier)
           ExceptionHunter::SendNotificationJob.perform_later(serialized_slack_notifier)
         end

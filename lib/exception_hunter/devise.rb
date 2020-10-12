@@ -1,5 +1,7 @@
 module ExceptionHunter
   module Devise
+    # Used so we can integrate with {https://github.com/heartcombo/devise Devise} and
+    # provide a custom login on the dashboard.
     class SessionsController < ::Devise::SessionsController
       skip_before_action :verify_authenticity_token
 

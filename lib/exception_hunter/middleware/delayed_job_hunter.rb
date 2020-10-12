@@ -2,6 +2,7 @@ require 'delayed_job'
 
 module ExceptionHunter
   module Middleware
+    # DelayedJob plugin to track exceptions on apps using DelayedJob.
     class DelayedJobHunter < ::Delayed::Plugin
       TRACK_AT_RETRY = [0, 3, 6, 10].freeze
       JOB_TRACKED_DATA = %w[

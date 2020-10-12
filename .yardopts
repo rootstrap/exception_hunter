@@ -1,0 +1,7 @@
+--output-dir './docs'
+--hide-void-return
+--no-private
+--embed-mixin ExceptionHunter::Tracking
+--exclude app
+--exclude lib/generators
+--exclude lib/devise

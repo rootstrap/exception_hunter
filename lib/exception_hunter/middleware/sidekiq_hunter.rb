@@ -2,7 +2,6 @@ module ExceptionHunter
   module Middleware
     # Middleware to report errors
     # when a Sidekiq worker fails
-    #
     class SidekiqHunter
       TRACK_AT_RETRY = [0, 3, 6, 10].freeze
       JOB_TRACKED_DATA = %w[

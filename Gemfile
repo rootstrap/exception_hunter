@@ -12,6 +12,7 @@ group :development, :test do
   gem 'devise', '~> 4.7'
   gem 'rails', '~> 6.0'
   gem 'sidekiq', '~> 6.0.4'
+  gem 'yard', '~> 0.9.25'
 end
 
 group :test do

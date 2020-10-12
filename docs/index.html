@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  File: README
+  
+    &mdash; Documentation by YARD 0.9.25
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "README";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><div id='filecontents'>
+<h1 id="label-ExceptionHunter">ExceptionHunter</h1>
+
+<p><img src="https://github.com/rootstrap/exception_hunter/workflows/Rails%20tests/badge.svg"> <a href="https://codeclimate.com/github/rootstrap/exception_hunter/maintainability"><img src="https://api.codeclimate.com/v1/badges/86f6aaa2377c894f8ee4/maintainability"></a> <a href="https://codeclimate.com/github/rootstrap/exception_hunter/test_coverage"><img src="https://api.codeclimate.com/v1/badges/86f6aaa2377c894f8ee4/test_coverage"></a></p>
+
+<p><img src="doc/screenshot.png"></p>
+
+<p>Exception Hunter is a Rails engine meant to track errors in your Rails project. It works by using your Postgres database to save errors with their corresponding metadata (like backtrace or environment data at the time of failure).</p>
+
+<p>To do so we hook to various points of your application where we can rescue from errors, track and then re-raise those errors so they are handled normally. As such, the gem does not conflict with any other service so you can have your favorite error tracking service running in parallel with Exception Hunter while you decide which you like best.</p>
+
+<h2 id="label-Motivation">Motivation</h2>
+
+<p>Error tracking is one of the most important tools a developer can have in their toolset. As such we think it&#39;d be nice to provide a way for everyone to have it in their project, be it a personal project, and MVP or something else.</p>
+
+<h2 id="label-Installation">Installation</h2>
+
+<p>Add Exception Hunter to your application&#39;s Gemfile:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>exception_hunter</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>~&gt; 0.4.2</span><span class='tstring_end'>&#39;</span></span>
+</code></pre>
+
+<p>You may also need to add <a href="https://github.com/heartcombo/devise">Devise</a> to your Gemfile if you haven&#39;t already done so and plan to use the gem&#39;s built in authentication:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>devise</span><span class='tstring_end'>&#39;</span></span>
+</code></pre>
+
+<p>After installing the dependencies you&#39;ll want to run:</p>
+
+<pre class="code ruby"><code class="ruby">$ rails generate exception_hunter:install
+</code></pre>
+
+<p>This will create an initializer and invoke Devise to create an <code>AdminUser</code> which will be used for authentication to access the dashboard. If you already have this user created (<a href="https://github.com/activeadmin/activeadmin">ActiveAdmin</a> uses the same model) you can run the command with the <code>--skip-users</code> flag.</p>
+
+<p>Additionally it should add the &#39;ExceptionHunter.routes(self)&#39; line to your routes, which means you can go to <code>/exception_hunter/errors</code> in your browser and start enjoying some good old fashioned exception tracking!</p>
+
+<h4 id="label-Testing+it+on+dev-3A">Testing it on dev:</h4>
+
+<p>ExceptionHunter is disabled on dev by default so if you want to test it before shipping it to another environment, which we highly recommend, you should enable it by going to the initializer and changing the line that says <code>config.enabled = !(Rails.env.development? || Rails.env.test?)</code> with something like <code>config.enabled = !(Rails.env.test?)</code> while you test. Don&#39;t forget to change it back if you don&#39;t want a bunch of errors in your local DB!</p>
+
+<p>You can then open a <code>rails console</code> and manually track an exception to check that it works <code>ExceptionHunter.track(StandardError.new(&quot;It works!&quot;))</code>. You should now see the exception on <a href="http://localhost:3000/exception_hunter" target="_parent" title="http://localhost:3000/exception_hunter">http://localhost:3000/exception_hunter</a>[].</p>
+
+<h2 id="label-Stale+data">Stale data</h2>
+
+<p>You can get rid of stale errors by running the rake task to purge them:</p>
+
+<pre class="code ruby"><code class="ruby">$ rake exception_hunter:purge_errors
+</code></pre>
+
+<p>We recommend you run this task once in a while to de-clutter your DB, using a recurring tasks once a week would be ideal. You can also purge errors by running <code>ExceptionHunter::ErrorReaper.purge</code>.</p>
+
+<p>The time it takes for an error to go stale defaults to 45 days but it&#39;s configurable via the initializer.</p>
+
+<h2 id="label-Manual+tracking">Manual tracking</h2>
+
+<p>ExceptionHunter also includes a facility to manually log from anywhere in the code. Imagine the following case:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='kw'>case</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_status'>status</span>
+<span class='kw'>when</span> <span class='symbol'>:inactive</span> <span class='kw'>then</span> <span class='id identifier rubyid_do_something'>do_something</span>
+<span class='kw'>when</span> <span class='symbol'>:active</span> <span class='kw'>then</span> <span class='id identifier rubyid_do_something_else'>do_something_else</span>
+<span class='kw'>when</span> <span class='symbol'>:banned</span> <span class='kw'>then</span> <span class='id identifier rubyid_do_something_else_else'>do_something_else_else</span>
+<span class='kw'>else</span>
+  <span class='const'><span class='object_link'><a href="ExceptionHunter.html" title="ExceptionHunter (module)">ExceptionHunter</a></span></span><span class='period'>.</span><span class='id identifier rubyid_track'><span class='object_link'><a href="ExceptionHunter/Tracking.html#track-instance_method" title="ExceptionHunter::Tracking#track (method)">track</a></span></span><span class='lparen'>(</span><span class='const'>ArgumentError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>This should never happen</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='comma'>,</span> <span class='label'>custom_data:</span> <span class='lbrace'>{</span> <span class='label'>status:</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_status'>status</span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>current_user:</span> <span class='id identifier rubyid_user'>user</span><span class='rparen'>)</span>
+<span class='kw'>end</span>
+</code></pre>
+
+<p>In this scenario we don&#39;t really want to raise an exception but we might want to be alerted if by any chance a user has an invalid status.</p>
+
+<h2 id="label-Slack+notifications">Slack notifications</h2>
+
+<p>You can configure ExceptionHunter to send a message to slack every time an error occurs. You have to do the following:</p>
+<ol><li>
+<p>Create a Slack app.</p>
+</li><li>
+<p>Add it to your workspace.</p>
+</li><li>
+<p>Add one or more webhooks linked to the channels you want to receive the notifications.</p>
+</li><li>
+<p>Set the webhook urls in the <code>exception_hunter</code> initializer.</p>
+</li></ol>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_notifiers'>notifiers</span> <span class='op'>&lt;&lt;</span> <span class='lbrace'>{</span>
+  <span class='label'>name:</span> <span class='symbol'>:slack</span><span class='comma'>,</span>
+  <span class='label'>options:</span> <span class='lbrace'>{</span>
+    <span class='label'>webhook:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>SLACK_WEBHOOK_URL_1</span><span class='tstring_end'>&#39;</span></span>
+  <span class='rbrace'>}</span>
+<span class='rbrace'>}</span>
+
+<span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_notifiers'>notifiers</span> <span class='op'>&lt;&lt;</span> <span class='lbrace'>{</span>
+  <span class='label'>name:</span> <span class='symbol'>:slack</span><span class='comma'>,</span>
+  <span class='label'>options:</span> <span class='lbrace'>{</span>
+    <span class='label'>webhook:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>SLACK_WEBHOOK_URL_2</span><span class='tstring_end'>&#39;</span></span>
+  <span class='rbrace'>}</span>
+<span class='rbrace'>}</span>
+</code></pre>
+<ol><li>
+<p>Add the code below to the environment config file where you are using ExceptionHunter with the correct server url.</p>
+</li></ol>
+
+<pre class="code ruby"><code class="ruby"><span class='const'><span class='object_link'><a href="ExceptionHunter.html" title="ExceptionHunter (module)">ExceptionHunter</a></span></span><span class='op'>::</span><span class='const'>Engine</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_config'>config</span><span class='op'>|</span>
+  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_routes'>routes</span><span class='period'>.</span><span class='id identifier rubyid_default_url_options'>default_url_options</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='label'>host:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>your_server_url</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span>
+<span class='kw'>end</span>
+</code></pre>
+
+<p>This uses ActiveJob to send notification in the background, so <a href="https://guides.rubyonrails.org/active_job_basics.html#setting-the-backend">make sure you configure</a> it with the adapter you are using, if not notifications will be sent synchronously.</p>
+
+<h2 id="label-License">License</h2>
+
+<p>The gem is available as open source under the terms of the <a href="https://opensource.org/licenses/MIT">MIT License</a>.</p>
+
+<h2 id="label-Credits">Credits</h2>
+
+<p>Exception Hunter is maintained by <a href="http://www.rootstrap.com">Rootstrap</a> with the help of our <a href="https://github.com/rootstrap/exception_hunter/contributors">contributors</a>.</p>
+
+<p><a href="http://www.rootstrap.com"><img src="https://s3-us-west-1.amazonaws.com/rootstrap.com/img/rs.png" width="100"/></a></p>
+</div></div>
+
+      <div id="footer">
+  Generated on Sat Oct 10 11:00:33 2020 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.25 (ruby-2.6.5).
+</div>
+
+    </div>
+  </body>
+</html>

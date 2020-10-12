@@ -4,7 +4,7 @@ module ExceptionHunter
 
     def perform(serialized_notifier)
       # Use SlackNotifierSerializer as it's the only one for now.
-      serializer = ExceptionHunter::Notifiers::Serializers::SlackNotifierSerializer
+      serializer = ExceptionHunter::Notifiers::SlackNotifierSerializer
       deserialized_notifier = serializer.deserialize(serialized_notifier)
       deserialized_notifier.notify
     rescue Exception # rubocop:disable Lint/RescueException
