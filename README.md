@@ -21,6 +21,10 @@ Error tracking is one of the most important tools a developer can have in their 
 we think it'd be nice to provide a way for everyone to have it in their project, be it a personal
 project, and MVP or something else.
 
+## Docs
+
+You can check the full documentation at [https://rootstrap.github.io/exception_hunter]().
+
 ## Installation
 Add Exception Hunter to your application's Gemfile:
 
