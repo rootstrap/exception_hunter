@@ -58,4 +58,11 @@ ExceptionHunter.setup do |config|
   #     webhook: SLACK_WEBHOOK_URL_2'
   #   }
   # }
+
+  # == Filter sensitive parameters
+  #
+  # You can configure if you want to filter some fields when saving and showing the errors.
+  # Default: []
+  #
+  # config.sensitive_parameters = [:id, :name]
 end

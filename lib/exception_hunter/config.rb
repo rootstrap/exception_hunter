@@ -16,6 +16,7 @@ module ExceptionHunter
     cattr_accessor :errors_stale_time, default: 45.days
     # @return [Array<Hash>] configured notifiers for the application (see {ExceptionHunter::Notifiers})
     cattr_accessor :notifiers, default: []
+    cattr_accessor :values_to_hide, default: []
 
     # Returns true if there's an admin user class configured to
     # authenticate against.

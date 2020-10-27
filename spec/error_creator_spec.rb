@@ -5,7 +5,15 @@ module ExceptionHunter
 
       context 'with correct attributes' do
         let(:error_attributes) do
-          { class_name: 'SomeError', message: 'Something went very wrong 123' }
+          {
+            class_name: 'SomeError',
+            message: 'Something went very wrong 123',
+            environment_data: {
+              hide: { value_to_hide: 'hide this value' },
+              "hide_this_too": { "hide_this": 'hide this' },
+              hide_this_hash: { "hide_this_hash": 'hide this' }
+            }
+          }
         end
 
         context 'with a matching error group' do
@@ -44,6 +52,23 @@ module ExceptionHunter
               subject
 
               expect(error_group.reload.tags).to eq(['HTTP'])
+            end
+          end
+
+          context 'with value to hide' do
+            before do
+              allow(ExceptionHunter::Config)
+                .to receive(:values_to_hide)
+                .and_return(%i[value_to_hide hide_this hide_this_hash])
+
+              subject
+            end
+
+            it 'saves the error with hidden values' do
+              environment_data = Error.last.environment_data
+              expect(environment_data['hide']['value_to_hide']).to eq('*********')
+              expect(environment_data['hide_this_too']['hide_this']).to eq('*********')
+              expect(environment_data['hide_this_hash']).to eq('*********')
             end
           end
 
