@@ -10,6 +10,7 @@ require 'exception_hunter/user_attributes_collector'
 require 'exception_hunter/notifiers/slack_notifier'
 require 'exception_hunter/notifiers/slack_notifier_serializer'
 require 'exception_hunter/notifiers/misconfigured_notifiers'
+require 'exception_hunter/data_redacter'
 
 # @api public
 module ExceptionHunter

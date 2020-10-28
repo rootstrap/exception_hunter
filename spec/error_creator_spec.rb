@@ -10,7 +10,7 @@ module ExceptionHunter
             message: 'Something went very wrong 123',
             environment_data: {
               hide: { value_to_hide: 'hide this value' },
-              "hide_this_too": { "hide_this": 'hide this' },
+              "hide_this_too": 'hide this',
               hide_this_hash: { "hide_this_hash": 'hide this' }
             }
           }
@@ -58,7 +58,7 @@ module ExceptionHunter
           context 'with value to hide' do
             before do
               allow(ExceptionHunter::Config)
-                .to receive(:values_to_hide)
+                .to receive(:sensitive_fields)
                 .and_return(%i[value_to_hide hide_this hide_this_hash])
 
               subject
@@ -66,9 +66,9 @@ module ExceptionHunter
 
             it 'saves the error with hidden values' do
               environment_data = Error.last.environment_data
-              expect(environment_data['hide']['value_to_hide']).to eq('*********')
-              expect(environment_data['hide_this_too']['hide_this']).to eq('*********')
-              expect(environment_data['hide_this_hash']).to eq('*********')
+              expect(environment_data['hide']['value_to_hide']).to eq('[FILTERED]')
+              expect(environment_data['hide_this_too']).to eq('[FILTERED]')
+              expect(environment_data['hide_this_hash']).to eq('[FILTERED]')
             end
           end
 

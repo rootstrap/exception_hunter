@@ -16,7 +16,7 @@ module ExceptionHunter
 
         ActiveRecord::Base.transaction do
           error_attrs = extract_user_data(error_attrs)
-          hide_sensitive_values(error_attrs)
+          error_attrs = hide_sensitive_values(error_attrs)
           error = ::ExceptionHunter::Error.new(error_attrs)
           error_group = ::ExceptionHunter::ErrorGroup.find_matching_group(error) || ::ExceptionHunter::ErrorGroup.new
           update_error_group(error_group, error, tag)
@@ -64,18 +64,10 @@ module ExceptionHunter
       end
 
       def hide_sensitive_values(error_attrs)
-        values_to_hide = ExceptionHunter::Config.values_to_hide
-        return if values_to_hide.blank?
+        sensitive_fields = ExceptionHunter::Config.sensitive_fields
+        return error_attrs if sensitive_fields.blank?
 
-        error_attrs.each_key do |key|
-          if values_to_hide.include?(key)
-            error_attrs[key] = '*********'
-          elsif values_to_hide.map(&:to_s).include?(key.to_s)
-            error_attrs[key.to_s] = '*********'
-          elsif error_attrs[key].is_a?(Hash)
-            hide_sensitive_values(error_attrs[key])
-          end
-        end
+        ExceptionHunter::DataRedacter.redact(error_attrs, sensitive_fields)
       end
     end
   end
