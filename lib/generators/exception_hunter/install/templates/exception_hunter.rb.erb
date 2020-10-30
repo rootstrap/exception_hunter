@@ -58,4 +58,13 @@ ExceptionHunter.setup do |config|
   #     webhook: SLACK_WEBHOOK_URL_2'
   #   }
   # }
+
+  # == Filter sensitive parameters
+  #
+  # You can configure if you want to filter some fields on the error's data for security or privacy issues.
+  # We use ActiveSupport::ParameterFilter for this, any accepted pattern will work.
+  # https://api.rubyonrails.org/classes/ActiveSupport/ParameterFilter.html
+  # Default: []
+  #
+  # config.sensitive_parameters = [:id, :name]
 end

@@ -16,6 +16,7 @@ module ExceptionHunter
 
         ActiveRecord::Base.transaction do
           error_attrs = extract_user_data(error_attrs)
+          error_attrs = hide_sensitive_values(error_attrs)
           error = ::ExceptionHunter::Error.new(error_attrs)
           error_group = ::ExceptionHunter::ErrorGroup.find_matching_group(error) || ::ExceptionHunter::ErrorGroup.new
           update_error_group(error_group, error, tag)
@@ -60,6 +61,11 @@ module ExceptionHunter
           serialized_slack_notifier = serializer.serialize(slack_notifier)
           ExceptionHunter::SendNotificationJob.perform_later(serialized_slack_notifier)
         end
+      end
+
+      def hide_sensitive_values(error_attrs)
+        sensitive_fields = ExceptionHunter::Config.sensitive_fields
+        ExceptionHunter::DataRedacter.new(error_attrs, sensitive_fields).redact
       end
     end
   end
