@@ -6,7 +6,8 @@
 
 * [#88](https://github.com/rootstrap/exception_hunter/pull/88) Add slack notifications. ([@andresg4][])
 * [#93](https://github.com/rootstrap/exception_hunter/pull/93) Show project name instead of repo name on navbar. ([@yurichandra][])
-* [#94](https://github.com/rootstrap/exception_hunter/pull/101) Allow user to ignore certain errors. ([@ajazfarhad][])
+* [#101](https://github.com/rootstrap/exception_hunter/pull/101) Allow user to ignore certain errors. ([@ajazfarhad][])
+* [#104](https://github.com/rootstrap/exception_hunter/pull/104) Filter sensitive data. ([@andresg4][])
 
 ### Bug fixes
 
@@ -14,7 +15,7 @@
 
 ### Changes
 
-* [#99](https://github.com/rootstrap/exception_hunter/pull/100) Add CHANGELOG. ([@brunvez][])
+* [#100](https://github.com/rootstrap/exception_hunter/pull/100) Add CHANGELOG. ([@brunvez][])
 * [#99](https://github.com/rootstrap/exception_hunter/pull/99) Add matrix testing. ([@brunvez][])
 * [#92](https://github.com/rootstrap/exception_hunter/pull/92) Add documentation on how to test on dev. ([@brunvez][])
 * [#87](https://github.com/rootstrap/exception_hunter/pull/87) Add manual tracking to documentation. ([@brunvez][])

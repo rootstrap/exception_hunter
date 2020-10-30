@@ -61,7 +61,9 @@ ExceptionHunter.setup do |config|
 
   # == Filter sensitive parameters
   #
-  # You can configure if you want to filter some fields when saving and showing the errors.
+  # You can configure if you want to filter some fields on the error's data for security or privacy issues.
+  # We use ActiveSupport::ParameterFilter for this, any accepted pattern will work.
+  # https://api.rubyonrails.org/classes/ActiveSupport/ParameterFilter.html
   # Default: []
   #
   # config.sensitive_parameters = [:id, :name]

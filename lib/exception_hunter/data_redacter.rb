@@ -1,21 +1,28 @@
 module ExceptionHunter
   class DataRedacter
-    class << self
-      def redact(params, params_to_filter)
-        return params if params.blank?
+    MASK = '**********'.freeze
 
-        parameter_filter = params_filter.new(params_to_filter)
-        parameter_filter.filter(params)
-      end
+    attr_reader :params, :params_to_filter
 
-      private
+    def initialize(params, params_to_filter)
+      @params = params
+      @params_to_filter = params_to_filter
+    end
 
-      def params_filter
-        if defined?(::ActiveSupport::ParameterFilter)
-          ::ActiveSupport::ParameterFilter
-        else
-          ::ActionDispatch::Http::ParameterFilter
-        end
+    def redact
+      return params if params.blank?
+
+      parameter_filter = params_filter.new(params_to_filter, mask: MASK)
+      parameter_filter.filter(params)
+    end
+
+    private
+
+    def params_filter
+      if defined?(::ActiveSupport::ParameterFilter)
+        ::ActiveSupport::ParameterFilter
+      else
+        ::ActionDispatch::Http::ParameterFilter
       end
     end
   end

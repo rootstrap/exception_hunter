@@ -65,9 +65,7 @@ module ExceptionHunter
 
       def hide_sensitive_values(error_attrs)
         sensitive_fields = ExceptionHunter::Config.sensitive_fields
-        return error_attrs if sensitive_fields.blank?
-
-        ExceptionHunter::DataRedacter.redact(error_attrs, sensitive_fields)
+        ExceptionHunter::DataRedacter.new(error_attrs, sensitive_fields).redact
       end
     end
   end

@@ -55,7 +55,7 @@ module ExceptionHunter
 
       def filtered_sensitive_params(env)
         params = env['action_dispatch.request.parameters']
-        ExceptionHunter::DataRedacter.redact(params, FILTERED_PARAMS)
+        ExceptionHunter::DataRedacter.new(params, FILTERED_PARAMS).redact
       end
     end
   end

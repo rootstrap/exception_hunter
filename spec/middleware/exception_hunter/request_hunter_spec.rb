@@ -127,10 +127,10 @@ module ExceptionHunter
               subject rescue nil
 
               error = Error.last
-              expect(error.environment_data['params']['password']).to eq('[FILTERED]')
-              expect(error.environment_data['params']['password_confirmation']).to eq('[FILTERED]')
-              expect(error.environment_data['params']['really_anything_with_password_in_it']).to eq('[FILTERED]')
-              expect(error.environment_data['params']['nested_param']['password']).to eq('[FILTERED]')
+              expect(error.environment_data['params']['password']).to eq('**********')
+              expect(error.environment_data['params']['password_confirmation']).to eq('**********')
+              expect(error.environment_data['params']['really_anything_with_password_in_it']).to eq('**********')
+              expect(error.environment_data['params']['nested_param']['password']).to eq('**********')
             end
           end
         end

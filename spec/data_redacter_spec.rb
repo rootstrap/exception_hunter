@@ -1,7 +1,7 @@
 module ExceptionHunter
   describe DataRedacter do
     describe '.redact' do
-      subject { described_class.redact(attributes, attributes_to_filter) }
+      subject { described_class.new(attributes, attributes_to_filter).redact }
 
       let(:attributes_to_filter) { %i[class_name hide hide_this_too hide_this_hash] }
 
@@ -20,12 +20,12 @@ module ExceptionHunter
 
         it 'hides the values' do
           expect(subject).to eq(
-            class_name: '[FILTERED]',
+            class_name: '**********',
             message: 'Something went very wrong 123',
             environment_data: {
-              hide: '[FILTERED]',
-              "hide_this_too": '[FILTERED]',
-              hide_this_hash: '[FILTERED]'
+              hide: '**********',
+              "hide_this_too": '**********',
+              hide_this_hash: '**********'
             }
           )
         end
