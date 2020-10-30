@@ -66,9 +66,9 @@ module ExceptionHunter
 
             it 'saves the error with hidden values' do
               environment_data = Error.last.environment_data
-              expect(environment_data['hide']['value_to_hide']).to eq('**********')
-              expect(environment_data['hide_this_too']).to eq('**********')
-              expect(environment_data['hide_this_hash']).to eq('**********')
+              expect(environment_data['hide']['value_to_hide']).to eq('[FILTERED]')
+              expect(environment_data['hide_this_too']).to eq('[FILTERED]')
+              expect(environment_data['hide_this_hash']).to eq('[FILTERED]')
             end
           end
 

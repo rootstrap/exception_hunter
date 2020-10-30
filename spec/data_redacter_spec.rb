@@ -20,12 +20,12 @@ module ExceptionHunter
 
         it 'hides the values' do
           expect(subject).to eq(
-            class_name: '**********',
+            class_name: '[FILTERED]',
             message: 'Something went very wrong 123',
             environment_data: {
-              hide: '**********',
-              "hide_this_too": '**********',
-              hide_this_hash: '**********'
+              hide: '[FILTERED]',
+              "hide_this_too": '[FILTERED]',
+              hide_this_hash: '[FILTERED]'
             }
           )
         end

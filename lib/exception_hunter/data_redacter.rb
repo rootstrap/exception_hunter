@@ -1,7 +1,5 @@
 module ExceptionHunter
   class DataRedacter
-    MASK = '**********'.freeze
-
     attr_reader :params, :params_to_filter
 
     def initialize(params, params_to_filter)
@@ -12,7 +10,7 @@ module ExceptionHunter
     def redact
       return params if params.blank?
 
-      parameter_filter = params_filter.new(params_to_filter, mask: MASK)
+      parameter_filter = params_filter.new(params_to_filter)
       parameter_filter.filter(params)
     end
 
