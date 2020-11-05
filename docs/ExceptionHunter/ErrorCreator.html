@@ -292,7 +292,10 @@
 26
 27
 28
-29</pre>
+29
+30
+31
+32</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/exception_hunter/error_creator.rb', line 14</span>
@@ -302,11 +305,14 @@
 
   <span class='const'>ActiveRecord</span><span class='op'>::</span><span class='const'>Base</span><span class='period'>.</span><span class='id identifier rubyid_transaction'>transaction</span> <span class='kw'>do</span>
     <span class='id identifier rubyid_error_attrs'>error_attrs</span> <span class='op'>=</span> <span class='id identifier rubyid_extract_user_data'>extract_user_data</span><span class='lparen'>(</span><span class='id identifier rubyid_error_attrs'>error_attrs</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_error_attrs'>error_attrs</span> <span class='op'>=</span> <span class='id identifier rubyid_hide_sensitive_values'>hide_sensitive_values</span><span class='lparen'>(</span><span class='id identifier rubyid_error_attrs'>error_attrs</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_error'>error</span> <span class='op'>=</span> <span class='op'>::</span><span class='const'><span class='object_link'><a href="../ExceptionHunter.html" title="ExceptionHunter (module)">ExceptionHunter</a></span></span><span class='op'>::</span><span class='const'>Error</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_error_attrs'>error_attrs</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_error_group'>error_group</span> <span class='op'>=</span> <span class='op'>::</span><span class='const'><span class='object_link'><a href="../ExceptionHunter.html" title="ExceptionHunter (module)">ExceptionHunter</a></span></span><span class='op'>::</span><span class='const'>ErrorGroup</span><span class='period'>.</span><span class='id identifier rubyid_find_matching_group'>find_matching_group</span><span class='lparen'>(</span><span class='id identifier rubyid_error'>error</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='op'>::</span><span class='const'><span class='object_link'><a href="../ExceptionHunter.html" title="ExceptionHunter (module)">ExceptionHunter</a></span></span><span class='op'>::</span><span class='const'>ErrorGroup</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
     <span class='id identifier rubyid_update_error_group'>update_error_group</span><span class='lparen'>(</span><span class='id identifier rubyid_error_group'>error_group</span><span class='comma'>,</span> <span class='id identifier rubyid_error'>error</span><span class='comma'>,</span> <span class='id identifier rubyid_tag'>tag</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_error'>error</span><span class='period'>.</span><span class='id identifier rubyid_error_group'>error_group</span> <span class='op'>=</span> <span class='id identifier rubyid_error_group'>error_group</span>
     <span class='id identifier rubyid_error'>error</span><span class='period'>.</span><span class='id identifier rubyid_save!'>save!</span>
+    <span class='kw'>return</span> <span class='kw'>if</span> <span class='id identifier rubyid_error_group'>error_group</span><span class='period'>.</span><span class='id identifier rubyid_ignored?'>ignored?</span>
+
     <span class='id identifier rubyid_notify'>notify</span><span class='lparen'>(</span><span class='id identifier rubyid_error'>error</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_error'>error</span>
   <span class='kw'>end</span>
@@ -323,7 +329,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Oct 10 11:00:34 2020 by
+  Generated on Thu Nov  5 15:27:48 2020 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.25 (ruby-2.6.5).
 </div>
