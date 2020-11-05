@@ -29,7 +29,7 @@ You can check the full documentation at [https://rootstrap.github.io/exception_h
 Add Exception Hunter to your application's Gemfile:
 
 ```ruby
-gem 'exception_hunter', '~> 0.4.2'
+gem 'exception_hunter', '~> 1.0.0'
 ```
 
 You may also need to add [Devise](https://github.com/heartcombo/devise) to your Gemfile
