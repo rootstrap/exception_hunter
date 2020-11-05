@@ -84,7 +84,7 @@
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/exception_hunter.rb<span class="defines">,<br />
-  lib/exception_hunter/config.rb,<br /> lib/exception_hunter/devise.rb,<br /> lib/exception_hunter/engine.rb,<br /> lib/exception_hunter/version.rb,<br /> lib/exception_hunter/tracking.rb,<br /> lib/exception_hunter/error_reaper.rb,<br /> lib/exception_hunter/error_creator.rb,<br /> lib/exception_hunter/notifiers/slack_notifier.rb,<br /> lib/exception_hunter/middleware/request_hunter.rb,<br /> lib/exception_hunter/middleware/request_hunter.rb,<br /> lib/exception_hunter/middleware/sidekiq_hunter.rb,<br /> lib/exception_hunter/user_attributes_collector.rb,<br /> lib/exception_hunter/middleware/delayed_job_hunter.rb,<br /> lib/exception_hunter/notifiers/misconfigured_notifiers.rb,<br /> lib/exception_hunter/notifiers/slack_notifier_serializer.rb</span>
+  lib/exception_hunter/config.rb,<br /> lib/exception_hunter/devise.rb,<br /> lib/exception_hunter/engine.rb,<br /> lib/exception_hunter/version.rb,<br /> lib/exception_hunter/tracking.rb,<br /> lib/exception_hunter/error_reaper.rb,<br /> lib/exception_hunter/data_redacter.rb,<br /> lib/exception_hunter/error_creator.rb,<br /> lib/exception_hunter/notifiers/slack_notifier.rb,<br /> lib/exception_hunter/middleware/request_hunter.rb,<br /> lib/exception_hunter/middleware/request_hunter.rb,<br /> lib/exception_hunter/middleware/sidekiq_hunter.rb,<br /> lib/exception_hunter/user_attributes_collector.rb,<br /> lib/exception_hunter/middleware/delayed_job_hunter.rb,<br /> lib/exception_hunter/notifiers/misconfigured_notifiers.rb,<br /> lib/exception_hunter/notifiers/slack_notifier_serializer.rb</span>
 </dd>
   </dl>
   
@@ -107,7 +107,7 @@
     
   
     
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="ExceptionHunter/Config.html" title="ExceptionHunter::Config (class)">Config</a></span>, <span class='object_link'><a href="ExceptionHunter/ErrorCreator.html" title="ExceptionHunter::ErrorCreator (class)">ErrorCreator</a></span>, <span class='object_link'><a href="ExceptionHunter/ErrorReaper.html" title="ExceptionHunter::ErrorReaper (class)">ErrorReaper</a></span>
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="ExceptionHunter/Config.html" title="ExceptionHunter::Config (class)">Config</a></span>, <span class='object_link'><a href="ExceptionHunter/DataRedacter.html" title="ExceptionHunter::DataRedacter (class)">DataRedacter</a></span>, <span class='object_link'><a href="ExceptionHunter/ErrorCreator.html" title="ExceptionHunter::ErrorCreator (class)">ErrorCreator</a></span>, <span class='object_link'><a href="ExceptionHunter/ErrorReaper.html" title="ExceptionHunter::ErrorReaper (class)">ErrorReaper</a></span>
     
   
 </p>
@@ -295,14 +295,14 @@
       <pre class="lines">
 
 
-40
 41
 42
 43
-44</pre>
+44
+45</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/exception_hunter.rb', line 40</span>
+      <pre class="code"><span class="info file"># File 'lib/exception_hunter.rb', line 41</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_routes'>routes</span><span class='lparen'>(</span><span class='id identifier rubyid_router'>router</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="ExceptionHunter/Config.html" title="ExceptionHunter::Config (class)">Config</a></span></span><span class='period'>.</span><span class='id identifier rubyid_enabled'><span class='object_link'><a href="ExceptionHunter/Config.html#enabled-instance_method" title="ExceptionHunter::Config#enabled (method)">enabled</a></span></span>
@@ -340,13 +340,13 @@
       <pre class="lines">
 
 
-25
 26
 27
-28</pre>
+28
+29</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/exception_hunter.rb', line 25</span>
+      <pre class="code"><span class="info file"># File 'lib/exception_hunter.rb', line 26</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_setup'>setup</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_block'>block</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="ExceptionHunter/Config.html" title="ExceptionHunter::Config (class)">Config</a></span></span><span class='rparen'>)</span>
@@ -465,7 +465,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Oct 10 11:00:34 2020 by
+  Generated on Thu Nov  5 15:27:47 2020 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.25 (ruby-2.6.5).
 </div>

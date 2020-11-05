@@ -4,7 +4,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/86f6aaa2377c894f8ee4/maintainability)](https://codeclimate.com/github/rootstrap/exception_hunter/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/86f6aaa2377c894f8ee4/test_coverage)](https://codeclimate.com/github/rootstrap/exception_hunter/test_coverage)
 
-![Index screenshot](doc/screenshot.png)
+![Index screenshot](docs/index-screenshot.png)
 
 Exception Hunter is a Rails engine meant to track errors in your Rails project. It works
 by using your Postgres database to save errors with their corresponding metadata (like backtrace
