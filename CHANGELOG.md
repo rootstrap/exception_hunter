@@ -6,6 +6,8 @@
 
 ### Bug fixes
 
+* [#107](https://github.com/rootstrap/exception_hunter/pull/107) Excluded code_analysis task from the build. ([@andresg4][])
+
 ### Changes
 
 ## 1.0.0 (2020-11-05)
