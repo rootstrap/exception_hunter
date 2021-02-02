@@ -4,6 +4,7 @@ module ExceptionHunter
     HTTP_TAG = 'HTTP'.freeze
     WORKER_TAG = 'Worker'.freeze
     MANUAL_TAG = 'Manual'.freeze
+    NOTIFICATION_DELAY = 1.minute
 
     class << self
       # Creates an error with the given attributes and persists it to
@@ -59,7 +60,9 @@ module ExceptionHunter
           slack_notifier = ExceptionHunter::Notifiers::SlackNotifier.new(error, notifier)
           serializer = ExceptionHunter::Notifiers::SlackNotifierSerializer
           serialized_slack_notifier = serializer.serialize(slack_notifier)
-          ExceptionHunter::SendNotificationJob.perform_later(serialized_slack_notifier)
+          ExceptionHunter::SendNotificationJob.set(
+            wait: NOTIFICATION_DELAY
+          ).perform_later(serialized_slack_notifier)
         end
       end
 
