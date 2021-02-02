@@ -114,6 +114,15 @@ module ExceptionHunter
 
               expect(jobs).to contain_exactly('test_webhook_1', 'test_webhook_2')
             end
+
+            it 'enqueues job to send slack message to all webhooks with a delay between 50 and 70 seconds' do
+              one_minute_from_now = Time.now.to_i + 1.minute
+              subject
+
+              ActiveJob::Base.queue_adapter.enqueued_jobs.each do |job|
+                expect(job[:at]).to be_within(10.seconds).of(one_minute_from_now)
+              end
+            end
           end
         end
 

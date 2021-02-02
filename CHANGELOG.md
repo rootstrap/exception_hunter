@@ -8,6 +8,9 @@
 
 * [#110](https://github.com/rootstrap/exception_hunter/pull/110) Fix: purge errors task. (
 [@martinjaimem][])
+* [#111](https://github.com/rootstrap/exception_hunter/pull/111) Send notifications with delay. (
+[@martinjaimem][])
+
 ### Changes
 
 ## 1.0.1 (2020-12-18)
