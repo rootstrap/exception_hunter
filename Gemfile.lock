@@ -30,7 +30,7 @@ GIT
 PATH
   remote: .
   specs:
-    exception_hunter (1.0.1)
+    exception_hunter (1.0.2)
       pagy (~> 3)
       slack-notifier (~> 2.3)
 
