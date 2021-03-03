@@ -1,5 +1,6 @@
 module ExceptionHunter
   # Core class in charge of the actual persistence of errors and notifications.
+  # :reek:DataClump
   class ErrorCreator
     HTTP_TAG = 'HTTP'.freeze
     WORKER_TAG = 'Worker'.freeze
@@ -15,6 +16,12 @@ module ExceptionHunter
       def call(tag: nil, **error_attrs)
         return unless should_create?
 
+        log_error(tag, error_attrs)
+      rescue ActiveRecord::RecordInvalid
+        false
+      end
+
+      def create_error(tag, error_attrs)
         ActiveRecord::Base.transaction do
           error_attrs = extract_user_data(error_attrs)
           error_attrs = hide_sensitive_values(error_attrs)
@@ -28,14 +35,24 @@ module ExceptionHunter
           notify(error)
           error
         end
-      rescue ActiveRecord::RecordInvalid
-        false
       end
 
       private
 
+      def log_error(tag, error_attrs)
+        if async_logging?
+          ExceptionHunter::AsyncLoggingJob.perform_later(tag, error_attrs)
+        else
+          create_error(tag, error_attrs)
+        end
+      end
+
       def should_create?
         Config.enabled
+      end
+
+      def async_logging?
+        Config.async_logging
       end
 
       def update_error_group(error_group, error, tag)

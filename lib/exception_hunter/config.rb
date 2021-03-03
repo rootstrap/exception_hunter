@@ -17,6 +17,9 @@ module ExceptionHunter
     # @return [Array<Hash>] configured notifiers for the application (see {ExceptionHunter::Notifiers})
     cattr_accessor :notifiers, default: []
     cattr_accessor :sensitive_fields, default: []
+    # @!attribute
+    # @return [Boolean] whether ExceptionHunter should log async or not
+    cattr_accessor :async_logging, default: false
 
     # Returns true if there's an admin user class configured to
     # authenticate against.

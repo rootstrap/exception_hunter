@@ -26,6 +26,7 @@ project, and MVP or something else.
 You can check the full documentation at [https://rootstrap.github.io/exception_hunter]().
 
 ## Installation
+
 Add Exception Hunter to your application's Gemfile:
 
 ```ruby
@@ -64,7 +65,6 @@ want a bunch of errors in your local DB!
 You can then open a `rails console` and manually track an exception to check that it
 works `ExceptionHunter.track(StandardError.new("It works!"))`. You should now see the exception
 on [http://localhost:3000/exception_hunter]().
-
 
 ## Stale data
 
@@ -122,7 +122,7 @@ config.notifiers << {
 }
 ```
 
-6. Add the code below to the environment config file where you are using ExceptionHunter with the correct server url.
+5. Add the code below to the environment config file where you are using ExceptionHunter with the correct server url.
 
 ```ruby
 ExceptionHunter::Engine.configure do |config|
@@ -132,7 +132,19 @@ end
 
 This uses ActiveJob to send notification in the background, so [make sure you configure](https://guides.rubyonrails.org/active_job_basics.html#setting-the-backend) it with the adapter you are using, if not notifications will be sent synchronously.
 
+## Async Logging
+
+You can configure ExceptionHunter to log async when an error occurs.
+You have to do the following:
+
+```ruby
+config.async_logging = true;
+```
+
+This uses ActiveJob to log the error in the background, so [make sure you configure](https://guides.rubyonrails.org/active_job_basics.html#setting-the-backend) it with the adapter you are using, if not the error will be logged synchronously.
+
 ## License
+
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 
 ## Credits

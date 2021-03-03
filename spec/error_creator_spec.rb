@@ -124,6 +124,28 @@ module ExceptionHunter
               end
             end
           end
+
+          context 'when async logging is set to true' do
+            let!(:original_queue_adapter) { ActiveJob::Base.queue_adapter }
+            let(:async_logging)           { true }
+            let(:tag)                     { nil }
+
+            before do
+              ActiveJob::Base.queue_adapter = :test
+
+              allow(ExceptionHunter::Config)
+                .to receive(:async_logging)
+                .and_return(async_logging)
+            end
+
+            after do
+              ActiveJob::Base.queue_adapter = original_queue_adapter
+            end
+
+            it 'enqueues job to log async' do
+              expect { subject }.to have_enqueued_job(AsyncLoggingJob).with(tag, error_attributes)
+            end
+          end
         end
 
         context 'without a matching error group' do
