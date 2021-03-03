@@ -102,9 +102,9 @@ You can configure ExceptionHunter to send a message to slack every time an error
 You have to do the following:
 
 1. Create a Slack app.
-2. Add it to your workspace.
-3. Add one or more webhooks linked to the channels you want to receive the notifications.
-4. Set the webhook urls in the `exception_hunter` initializer.
+1. Add it to your workspace.
+1. Add one or more webhooks linked to the channels you want to receive the notifications.
+1. Set the webhook urls in the `exception_hunter` initializer.
 
 ```ruby
 config.notifiers << {
@@ -122,7 +122,7 @@ config.notifiers << {
 }
 ```
 
-5. Add the code below to the environment config file where you are using ExceptionHunter with the correct server url.
+1. Add the code below to the environment config file where you are using ExceptionHunter with the correct server url.
 
 ```ruby
 ExceptionHunter::Engine.configure do |config|

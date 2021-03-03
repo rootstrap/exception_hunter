@@ -62,7 +62,7 @@ ExceptionHunter.setup do |config|
   # == Async Logging
   #
   # You can configure if you want to log errors async
-  # Default: true
+  # Default: false
   #
   # config.async_logging = true
 end
