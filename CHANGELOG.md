@@ -6,6 +6,10 @@
 
 ### Bug fixes
 
+### Others
+
+* [#116](https://github.com/rootstrap/exception_hunter/pull/116) Fix documentation link on the README. ([@brunvez][])
+
 ## 1.0.2 (2020-02-03)
 
 ### Bug fixes
