@@ -2,7 +2,7 @@ module ExceptionHunter
   describe ErrorCreator do
     describe '.call' do
       subject { described_class.call(tag: tag, **error_attributes) }
-      let(:tag) { ErrorCreator::HTTP_TAG }
+      let(:tag) { ExceptionHunter::ErrorCreator::HTTP_TAG }
 
       context 'with correct attributes' do
         let(:error_attributes) do
@@ -130,7 +130,7 @@ module ExceptionHunter
           context 'when async logging is set to true' do
             let!(:original_queue_adapter) { ActiveJob::Base.queue_adapter }
             let(:async_logging) { true }
-            let(:tag) { ErrorCreator::HTTP_TAG }
+            let(:tag) { ExceptionHunter::ErrorCreator::HTTP_TAG }
 
             before do
               ActiveJob::Base.queue_adapter = :test
