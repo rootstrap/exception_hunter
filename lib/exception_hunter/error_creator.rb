@@ -16,7 +16,8 @@ module ExceptionHunter
         return unless should_create?
 
         if async_logging
-          ::ExceptionHunter::AsyncLoggingJob.perform_later(tag, error_attrs.merge(occurred_at: Time.now))
+          # Time is sent in unix format and then converted to Time to avoid ActiveJob::SerializationError
+          ::ExceptionHunter::AsyncLoggingJob.perform_later(tag, error_attrs.merge(occurred_at: Time.now.to_i))
         else
           create_error(tag, error_attrs)
         end

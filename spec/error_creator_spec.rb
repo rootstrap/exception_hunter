@@ -14,7 +14,7 @@ module ExceptionHunter
               "hide_this_too": 'hide this',
               hide_this_hash: { "hide_this_hash": 'hide this' }
             },
-            occurred_at: Time.now
+            occurred_at: Time.now.to_i
           }
         end
 
