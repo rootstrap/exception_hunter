@@ -6,6 +6,10 @@
 
 ### Bug fixes
 
+### Others
+
+* [#115](https://github.com/rootstrap/exception_hunter/pull/115) Fix Github actions running multiple times. ([@brunvez][])
+
 ## 1.0.2 (2020-02-03)
 
 ### Bug fixes
