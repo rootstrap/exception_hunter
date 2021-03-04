@@ -31,6 +31,7 @@ module ExceptionHunter
         return unless should_track?(job.attempts)
 
         ErrorCreator.call(
+          async_logging: false,
           tag: ErrorCreator::WORKER_TAG,
           class_name: exception.class.to_s,
           message: exception.message,

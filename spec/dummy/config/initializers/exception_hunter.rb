@@ -58,4 +58,11 @@ ExceptionHunter.setup do |config|
   #     webhook: SLACK_WEBHOOK_URL_2'
   #   }
   # }
+
+  # == Async Logging
+  #
+  # You can configure if you want to log errors async
+  # Default: false
+  #
+  # config.async_logging = true
 end
