@@ -4,7 +4,7 @@ module ExceptionHunter
 
     def perform(tag, error_attrs)
       ErrorCreator.call(async_logging: false, tag: tag, **error_attrs)
-    rescue Exception # rubocop:disable Lint/RescueException
+    rescue Exception
       # Suppress all exceptions to avoid loop as this would create a new error in EH.
       false
     end

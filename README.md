@@ -143,6 +143,8 @@ config.async_logging = true;
 
 This uses ActiveJob to log the error in the background, so [make sure you configure](https://guides.rubyonrails.org/active_job_basics.html#setting-the-backend) it with the adapter you are using, if not the error will be logged synchronously.
 
+Note: Errors from jobs will still be logged synchronously to not queue a job from a job (which sound like a bad idea)
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

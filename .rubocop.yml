@@ -1,9 +1,9 @@
 AllCops:
   TargetRubyVersion: 2.5.4
   Exclude:
-    - 'spec/dummy/config/**/*'
-    - 'spec/dummy/db/**/*'
-    - 'config/initializers/**/*'
+    - "spec/dummy/config/**/*"
+    - "spec/dummy/db/**/*"
+    - "config/initializers/**/*"
 
 Documentation:
   Enabled: false
@@ -15,6 +15,7 @@ Lint/AmbiguousBlockAssociation:
 Lint/RescueException:
   Exclude:
     - lib/exception_hunter/request_hunter.rb
+    - app/jobs/exception_hunter/async_logging_job.rb
 
 Metrics/AbcSize:
   Enabled: false
@@ -23,7 +24,7 @@ Metrics/AbcSize:
   Max: 18
 
 Metrics/BlockLength:
-  CountComments: false  # count full line comments?
+  CountComments: false # count full line comments?
   Max: 25
   Exclude:
     - config/**/*
@@ -35,7 +36,7 @@ Metrics/BlockNesting:
   Enabled: false
 
 Metrics/ClassLength:
-  CountComments: false  # count full line comments?
+  CountComments: false # count full line comments?
   Max: 200
   Enabled: false
 
@@ -45,12 +46,12 @@ Metrics/CyclomaticComplexity:
   Enabled: false
 
 Metrics/MethodLength:
-  CountComments: false  # count full line comments?
+  CountComments: false # count full line comments?
   Max: 24
   Severity: warning
 
 Metrics/ModuleLength:
-  CountComments: false  # count full line comments?
+  CountComments: false # count full line comments?
   Max: 200
   Enabled: false
 
