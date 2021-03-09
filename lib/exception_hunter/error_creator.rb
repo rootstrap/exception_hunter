@@ -12,9 +12,22 @@ module ExceptionHunter
       #
       # @param [HTTP_TAG, WORKER_TAG, MANUAL_TAG] tag to append to the error if any
       # @return [ExceptionHunter::Error, false] the error or false if it was not possible to create it
-      def call(tag: nil, **error_attrs)
+      def call(async_logging: Config.async_logging, tag: nil, **error_attrs)
         return unless should_create?
 
+        if async_logging
+          # Time is sent in unix format and then converted to Time to avoid ActiveJob::SerializationError
+          ::ExceptionHunter::AsyncLoggingJob.perform_later(tag, error_attrs.merge(occurred_at: Time.now.to_i))
+        else
+          create_error(tag, error_attrs)
+        end
+      rescue ActiveRecord::RecordInvalid
+        false
+      end
+
+      private
+
+      def create_error(tag, error_attrs)
         ActiveRecord::Base.transaction do
           error_attrs = extract_user_data(error_attrs)
           error_attrs = hide_sensitive_values(error_attrs)
@@ -28,11 +41,7 @@ module ExceptionHunter
           notify(error)
           error
         end
-      rescue ActiveRecord::RecordInvalid
-        false
       end
-
-      private
 
       def should_create?
         Config.enabled
