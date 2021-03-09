@@ -89,7 +89,7 @@ when :inactive then do_something
 when :active then do_something_else
 when :banned then do_something_else_else
 else
-  ExceptionHunter.track(ArgumentError.new('This should never happen'), custom_data: { status: current_user.status }, current_user: user)
+  ExceptionHunter.track(ArgumentError.new('This should never happen'), custom_data: { status: current_user.status }, user: current_user)
 end
 ```
 
