@@ -9,8 +9,10 @@
 
 ### Bug fixes
 
-### Others
 
+## Others
+
+- [#114](https://github.com/rootstrap/exception_hunter/pull/114) Fix development vulnerabilities ([@brunvez][])
 - [#117](https://github.com/rootstrap/exception_hunter/pull/117) Fix specification on example for Manual tracking on the README ([@lalopsb][])
 
 ## 1.0.2 (2020-02-03)
