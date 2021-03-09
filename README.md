@@ -23,7 +23,7 @@ project, and MVP or something else.
 
 ## Docs
 
-You can check the full documentation at [https://rootstrap.github.io/exception_hunter]().
+You can check the full documentation at [https://rootstrap.github.io/exception_hunter](https://rootstrap.github.io/exception_hunter).
 
 ## Installation
 
