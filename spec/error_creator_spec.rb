@@ -1,7 +1,8 @@
 module ExceptionHunter
   describe ErrorCreator do
     describe '.call' do
-      subject { described_class.call(error_attributes) }
+      subject { described_class.call(tag: tag, **error_attributes) }
+      let(:tag) { ExceptionHunter::ErrorCreator::HTTP_TAG }
 
       context 'with correct attributes' do
         let(:error_attributes) do
@@ -12,7 +13,8 @@ module ExceptionHunter
               hide: { value_to_hide: 'hide this value' },
               "hide_this_too": 'hide this',
               hide_this_hash: { "hide_this_hash": 'hide this' }
-            }
+            },
+            occurred_at: Time.now.to_i
           }
         end
 
@@ -122,6 +124,28 @@ module ExceptionHunter
               ActiveJob::Base.queue_adapter.enqueued_jobs.each do |job|
                 expect(job[:at]).to be_within(10.seconds).of(one_minute_from_now)
               end
+            end
+          end
+
+          context 'when async logging is set to true' do
+            let!(:original_queue_adapter) { ActiveJob::Base.queue_adapter }
+            let(:async_logging) { true }
+            let(:tag) { ExceptionHunter::ErrorCreator::HTTP_TAG }
+
+            before do
+              ActiveJob::Base.queue_adapter = :test
+
+              allow(ExceptionHunter::Config)
+                .to receive(:async_logging)
+                .and_return(async_logging)
+            end
+
+            after do
+              ActiveJob::Base.queue_adapter = original_queue_adapter
+            end
+
+            it 'enqueues job to log async' do
+              expect { subject }.to have_enqueued_job(AsyncLoggingJob).with(tag, error_attributes)
             end
           end
         end
