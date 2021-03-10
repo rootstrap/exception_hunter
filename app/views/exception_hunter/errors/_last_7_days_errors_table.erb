@@ -1,11 +1,7 @@
 <% today_errors = errors.select { |error| error.show_for_day?(Date.current) } %>
 <%= render partial: 'exception_hunter/errors/error_row', collection: today_errors, as: :error %>
 
-<% yesterday_errors = errors.select { |error| error.show_for_day?(Date.yesterday) } %>
-<div class="errors-date-group">Yesterday</div>
-<%= render partial: 'exception_hunter/errors/error_row', collection: yesterday_errors, as: :error %>
-
-<% (2..6).each do |i| %>
+<% (1..6).each do |i| %>
   <% errors_on_day = errors.select { |error| error.show_for_day?(i.days.ago) } %>
   <div class="errors-date-group"><%= ExceptionHunter::ErrorGroupPresenter.format_occurrence_day(i.days.ago) %></div>
   <%= render partial: 'exception_hunter/errors/error_row', collection: errors_on_day, as: :error %>
