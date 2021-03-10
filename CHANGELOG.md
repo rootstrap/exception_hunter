@@ -15,7 +15,7 @@
 - [#115](https://github.com/rootstrap/exception_hunter/pull/115) Fix Github actions running multiple times. ([@brunvez][])
 - [#116](https://github.com/rootstrap/exception_hunter/pull/116) Fix documentation link on the README. ([@brunvez][])
 - [#117](https://github.com/rootstrap/exception_hunter/pull/117) Fix specification on example for Manual tracking on the README ([@lalopsb][])
-
+- [#118](https://github.com/rootstrap/exception_hunter/pull/118) Refactor code duplication on errors for last week partial ([@lalopsb][])
 ## 1.0.2 (2020-02-03)
 
 ### Bug fixes
