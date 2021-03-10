@@ -20,6 +20,7 @@ detectors:
     enabled: true
     exclude:
       - ExceptionHunter::ErrorCreator
+      - ExceptionHunter::Tracking
     max_copies: 2
     min_clump_size: 2
 

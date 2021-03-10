@@ -67,7 +67,7 @@ module ExceptionHunter
         context 'when the error is tracked within a transaction' do
           before do
             allow(ActiveRecord::Base.connection).to receive(:open_transactions).and_return(1)
-            allow(Thread).to receive(:new).and_yield
+            allow(Thread).to receive(:new).and_call_original
           end
 
           it 'creates a new error within a new thread' do
