@@ -17,6 +17,8 @@ module ExceptionHunter
       let(:user) { OpenStruct.new(id: 3, email: 'example@example.com', name: 'John') }
 
       context 'when tracking is enabled' do
+        before { allow(ActiveRecord::Base.connection).to receive(:open_transactions).and_return(0) }
+
         let(:error) { Error.last }
 
         it 'creates a new error' do
@@ -54,6 +56,24 @@ module ExceptionHunter
           subject
 
           expect(error.error_group.tags).to eq(['Manual'])
+        end
+
+        it ' does not create a new thread' do
+          expect(Thread).to_not receive(:new)
+
+          subject
+        end
+
+        context 'when the error is tracked within a transaction' do
+          before do
+            allow(ActiveRecord::Base.connection).to receive(:open_transactions).and_return(1)
+            allow(Thread).to receive(:new).and_yield
+          end
+
+          it 'creates a new error within a new thread' do
+            expect { subject }.to change(Error, :count).by(1)
+            expect(Thread).to have_received(:new)
+          end
         end
       end
 
