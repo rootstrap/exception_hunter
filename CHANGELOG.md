@@ -5,7 +5,8 @@
 ### New features
 
 - [#113](https://github.com/rootstrap/exception_hunter/pull/113) Add configuration to turn on/off async logging using ActionJob. (
-  [@matteo95g][])
+  [@matteo95g][]) 
+- [#119](https://github.com/rootstrap/exception_hunter/pull/119) Add support for tracking manual exceptions within transactions. ([@lalopsb][])
 
 ### Bug fixes
 
