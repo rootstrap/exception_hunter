@@ -19,6 +19,26 @@ module ExceptionHunter
     # @param [User] user in the current session. (optional)
     # @return [void]
     def track(exception, custom_data: {}, user: nil)
+      if open_transactions?
+        create_error_within_new_thread(exception, custom_data, user)
+      else
+        create_error(exception, custom_data, user)
+      end
+
+      nil
+    end
+
+    private
+
+    def create_error_within_new_thread(exception, custom_data, user)
+      Thread.new {
+        ActiveRecord::Base.connection_pool.with_connection do
+          create_error(exception, custom_data, user)
+        end
+      }.join
+    end
+
+    def create_error(exception, custom_data, user)
       ErrorCreator.call(
         tag: ErrorCreator::MANUAL_TAG,
         class_name: exception.class.to_s,
@@ -28,8 +48,10 @@ module ExceptionHunter
         user: user,
         environment_data: {}
       )
+    end
 
-      nil
+    def open_transactions?
+      ActiveRecord::Base.connection.open_transactions.positive?
     end
   end
 end
