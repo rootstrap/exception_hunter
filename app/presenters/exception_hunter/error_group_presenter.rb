@@ -11,7 +11,8 @@ module ExceptionHunter
     end
 
     def self.format_occurrence_day(day)
-      day.to_date.strftime('%A, %B %d')
+      date = day.to_date
+      date == Date.yesterday ? 'Yesterday' : date.strftime('%A, %B %d')
     end
 
     def show_for_day?(day)

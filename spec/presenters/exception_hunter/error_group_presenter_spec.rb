@@ -14,6 +14,14 @@ module ExceptionHunter
       it 'returns the last occurrence date formatted as a string' do
         expect(ErrorGroupPresenter.format_occurrence_day(day)).to eq('Saturday, May 30')
       end
+
+      context 'when the last occurrence happened yesterday' do
+        let(:day) { Date.yesterday }
+
+        it 'returns Yesterday instead of the date formatted as a string' do
+          expect(ErrorGroupPresenter.format_occurrence_day(day)).to eq('Yesterday')
+        end
+      end
     end
 
     describe '#show_for_day?' do
