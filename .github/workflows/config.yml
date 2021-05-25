@@ -8,7 +8,7 @@ jobs:
     strategy:
       matrix:
         ruby-version: [2.6, 2.7, 3.0]
-        rails-version: [5_2, 6_0]
+        rails-version: [5_2, 6_0, 6_1]
       fail-fast: false
 
     # Service containers to run with `runner-job`
