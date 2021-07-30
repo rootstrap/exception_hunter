@@ -6,7 +6,7 @@
 <title>
   Module: ExceptionHunter::Tracking
   
-    &mdash; Documentation by YARD 0.9.25
+    &mdash; Documentation by YARD 0.9.26
   
 </title>
 
@@ -256,25 +256,17 @@
 26
 27
 28
-29
-30
-31
-32
-33</pre>
+29</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/exception_hunter/tracking.rb', line 21</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_track'>track</span><span class='lparen'>(</span><span class='id identifier rubyid_exception'>exception</span><span class='comma'>,</span> <span class='label'>custom_data:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>user:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="ErrorCreator.html" title="ExceptionHunter::ErrorCreator (class)">ErrorCreator</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="ErrorCreator.html#call-class_method" title="ExceptionHunter::ErrorCreator.call (method)">call</a></span></span><span class='lparen'>(</span>
-    <span class='label'>tag:</span> <span class='const'><span class='object_link'><a href="ErrorCreator.html" title="ExceptionHunter::ErrorCreator (class)">ErrorCreator</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ErrorCreator.html#MANUAL_TAG-constant" title="ExceptionHunter::ErrorCreator::MANUAL_TAG (constant)">MANUAL_TAG</a></span></span><span class='comma'>,</span>
-    <span class='label'>class_name:</span> <span class='id identifier rubyid_exception'>exception</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span>
-    <span class='label'>message:</span> <span class='id identifier rubyid_exception'>exception</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span><span class='comma'>,</span>
-    <span class='label'>backtrace:</span> <span class='id identifier rubyid_exception'>exception</span><span class='period'>.</span><span class='id identifier rubyid_backtrace'>backtrace</span><span class='comma'>,</span>
-    <span class='label'>custom_data:</span> <span class='id identifier rubyid_custom_data'>custom_data</span><span class='comma'>,</span>
-    <span class='label'>user:</span> <span class='id identifier rubyid_user'>user</span><span class='comma'>,</span>
-    <span class='label'>environment_data:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-  <span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_open_transactions?'>open_transactions?</span>
+    <span class='id identifier rubyid_create_error_within_new_thread'>create_error_within_new_thread</span><span class='lparen'>(</span><span class='id identifier rubyid_exception'>exception</span><span class='comma'>,</span> <span class='id identifier rubyid_custom_data'>custom_data</span><span class='comma'>,</span> <span class='id identifier rubyid_user'>user</span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_create_error'>create_error</span><span class='lparen'>(</span><span class='id identifier rubyid_exception'>exception</span><span class='comma'>,</span> <span class='id identifier rubyid_custom_data'>custom_data</span><span class='comma'>,</span> <span class='id identifier rubyid_user'>user</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
 
   <span class='kw'>nil</span>
 <span class='kw'>end</span></pre>
@@ -288,9 +280,9 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Dec 18 14:15:02 2020 by
+  Generated on Fri Jul 30 14:37:31 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.25 (ruby-2.6.5).
+  0.9.26 (ruby-2.6.5).
 </div>
 
     </div>

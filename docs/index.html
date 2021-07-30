@@ -6,7 +6,7 @@
 <title>
   File: README
   
-    &mdash; Documentation by YARD 0.9.25
+    &mdash; Documentation by YARD 0.9.26
   
 </title>
 
@@ -74,7 +74,7 @@
 
 <h2 id="label-Docs">Docs</h2>
 
-<p>You can check the full documentation at <a href="https://rootstrap.github.io/exception_hunter" target="_parent" title="https://rootstrap.github.io/exception_hunter">https://rootstrap.github.io/exception_hunter</a>[].</p>
+<p>You can check the full documentation at <a href="https://rootstrap.github.io/exception_hunter">rootstrap.github.io/exception_hunter</a>.</p>
 
 <h2 id="label-Installation">Installation</h2>
 
@@ -123,7 +123,7 @@
 <span class='kw'>when</span> <span class='symbol'>:active</span> <span class='kw'>then</span> <span class='id identifier rubyid_do_something_else'>do_something_else</span>
 <span class='kw'>when</span> <span class='symbol'>:banned</span> <span class='kw'>then</span> <span class='id identifier rubyid_do_something_else_else'>do_something_else_else</span>
 <span class='kw'>else</span>
-  <span class='const'><span class='object_link'><a href="ExceptionHunter.html" title="ExceptionHunter (module)">ExceptionHunter</a></span></span><span class='period'>.</span><span class='id identifier rubyid_track'><span class='object_link'><a href="ExceptionHunter/Tracking.html#track-instance_method" title="ExceptionHunter::Tracking#track (method)">track</a></span></span><span class='lparen'>(</span><span class='const'>ArgumentError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>This should never happen</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='comma'>,</span> <span class='label'>custom_data:</span> <span class='lbrace'>{</span> <span class='label'>status:</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_status'>status</span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>current_user:</span> <span class='id identifier rubyid_user'>user</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="ExceptionHunter.html" title="ExceptionHunter (module)">ExceptionHunter</a></span></span><span class='period'>.</span><span class='id identifier rubyid_track'><span class='object_link'><a href="ExceptionHunter/Tracking.html#track-instance_method" title="ExceptionHunter::Tracking#track (method)">track</a></span></span><span class='lparen'>(</span><span class='const'>ArgumentError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>This should never happen</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='comma'>,</span> <span class='label'>custom_data:</span> <span class='lbrace'>{</span> <span class='label'>status:</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_status'>status</span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>user:</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='rparen'>)</span>
 <span class='kw'>end</span>
 </code></pre>
 
@@ -167,6 +167,17 @@
 
 <p>This uses ActiveJob to send notification in the background, so <a href="https://guides.rubyonrails.org/active_job_basics.html#setting-the-backend">make sure you configure</a> it with the adapter you are using, if not notifications will be sent synchronously.</p>
 
+<h2 id="label-Async+Logging">Async Logging</h2>
+
+<p>You can configure ExceptionHunter to log async when an error occurs. You have to do the following:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_async_logging'>async_logging</span> <span class='op'>=</span> <span class='kw'>true</span><span class='semicolon'>;</span>
+</code></pre>
+
+<p>This uses ActiveJob to log the error in the background, so <a href="https://guides.rubyonrails.org/active_job_basics.html#setting-the-backend">make sure you configure</a> it with the adapter you are using, if not the error will be logged synchronously.</p>
+
+<p>Note: Errors from jobs will still be logged synchronously to not queue a job from a job (which sound like a bad idea)</p>
+
 <h2 id="label-License">License</h2>
 
 <p>The gem is available as open source under the terms of the <a href="https://opensource.org/licenses/MIT">MIT License</a>.</p>
@@ -179,9 +190,9 @@
 </div></div>
 
       <div id="footer">
-  Generated on Fri Dec 18 14:15:02 2020 by
+  Generated on Fri Jul 30 14:37:30 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.25 (ruby-2.6.5).
+  0.9.26 (ruby-2.6.5).
 </div>
 
     </div>

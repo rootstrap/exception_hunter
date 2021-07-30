@@ -6,7 +6,7 @@
 <title>
   Class: ExceptionHunter::Middleware::DelayedJobHunter
   
-    &mdash; Documentation by YARD 0.9.25
+    &mdash; Documentation by YARD 0.9.26
   
 </title>
 
@@ -288,7 +288,6 @@
       <pre class="lines">
 
 
-42
 43
 44
 45
@@ -307,10 +306,11 @@
 58
 59
 60
-61</pre>
+61
+62</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/exception_hunter/middleware/delayed_job_hunter.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'lib/exception_hunter/middleware/delayed_job_hunter.rb', line 43</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_environment_data'>environment_data</span><span class='lparen'>(</span><span class='id identifier rubyid_job'>job</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_job_data'>job_data</span> <span class='op'>=</span>
@@ -374,12 +374,12 @@
       <pre class="lines">
 
 
-63
 64
-65</pre>
+65
+66</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/exception_hunter/middleware/delayed_job_hunter.rb', line 63</span>
+      <pre class="code"><span class="info file"># File 'lib/exception_hunter/middleware/delayed_job_hunter.rb', line 64</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_should_track?'>should_track?</span><span class='lparen'>(</span><span class='id identifier rubyid_attempts'>attempts</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="#TRACK_AT_RETRY-constant" title="ExceptionHunter::Middleware::DelayedJobHunter::TRACK_AT_RETRY (constant)">TRACK_AT_RETRY</a></span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_attempts'>attempts</span><span class='rparen'>)</span>
@@ -423,7 +423,8 @@
 37
 38
 39
-40</pre>
+40
+41</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/exception_hunter/middleware/delayed_job_hunter.rb', line 30</span>
@@ -432,6 +433,7 @@
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_should_track?'>should_track?</span><span class='lparen'>(</span><span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_attempts'>attempts</span><span class='rparen'>)</span>
 
   <span class='const'><span class='object_link'><a href="../ErrorCreator.html" title="ExceptionHunter::ErrorCreator (class)">ErrorCreator</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="../ErrorCreator.html#call-class_method" title="ExceptionHunter::ErrorCreator.call (method)">call</a></span></span><span class='lparen'>(</span>
+    <span class='label'>async_logging:</span> <span class='kw'>false</span><span class='comma'>,</span>
     <span class='label'>tag:</span> <span class='const'><span class='object_link'><a href="../ErrorCreator.html" title="ExceptionHunter::ErrorCreator (class)">ErrorCreator</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ErrorCreator.html#WORKER_TAG-constant" title="ExceptionHunter::ErrorCreator::WORKER_TAG (constant)">WORKER_TAG</a></span></span><span class='comma'>,</span>
     <span class='label'>class_name:</span> <span class='id identifier rubyid_exception'>exception</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span>
     <span class='label'>message:</span> <span class='id identifier rubyid_exception'>exception</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span><span class='comma'>,</span>
@@ -449,9 +451,9 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Dec 18 14:15:02 2020 by
+  Generated on Fri Jul 30 14:37:31 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.25 (ruby-2.6.5).
+  0.9.26 (ruby-2.6.5).
 </div>
 
     </div>
