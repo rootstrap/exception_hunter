@@ -6,7 +6,7 @@
 <title>
   Class: ExceptionHunter::Config
   
-    &mdash; Documentation by YARD 0.9.25
+    &mdash; Documentation by YARD 0.9.26
   
 </title>
 
@@ -139,6 +139,33 @@
   
     <span class="summary_desc"><div class='inline'>
 <p>The name of the admin class (generally AdminUser).</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#async_logging-instance_method" title="#async_logging (instance method)">#<strong>async_logging</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Whether ExceptionHunter should log async or not.</p>
 </div></span>
   
 </li>
@@ -381,6 +408,63 @@
 </div>
     
       
+      <span id="async_logging=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="async_logging-instance_method">
+  
+    #<strong>async_logging</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns whether ExceptionHunter should log async or not.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether ExceptionHunter should log async or not</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+22</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/exception_hunter/config.rb', line 22</span>
+
+<span class='id identifier rubyid_cattr_accessor'>cattr_accessor</span> <span class='symbol'>:async_logging</span><span class='comma'>,</span> <span class='label'>default:</span> <span class='kw'>false</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
       <span id="current_user_method=-instance_method"></span>
       <div class="method_details ">
   <h3 class="signature " id="current_user_method-instance_method">
@@ -545,12 +629,12 @@
       <pre class="lines">
 
 
-25
-26
-27</pre>
+28
+29
+30</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/exception_hunter/config.rb', line 25</span>
+      <pre class="code"><span class="info file"># File 'lib/exception_hunter/config.rb', line 28</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_auth_enabled?'>auth_enabled?</span>
   <span class='id identifier rubyid_admin_user_class'>admin_user_class</span><span class='period'>.</span><span class='id identifier rubyid_present?'>present?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_admin_user_class'>admin_user_class</span><span class='period'>.</span><span class='id identifier rubyid_try'>try</span><span class='lparen'>(</span><span class='symbol'>:underscore</span><span class='rparen'>)</span>
@@ -736,9 +820,9 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Dec 18 14:15:02 2020 by
+  Generated on Fri Jul 30 14:46:20 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.25 (ruby-2.6.5).
+  0.9.26 (ruby-2.6.5).
 </div>
 
     </div>
