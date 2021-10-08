@@ -29,7 +29,7 @@ module ExceptionHunter
 
       def create_error(tag, error_attrs)
         ActiveRecord::Base.transaction do
-          error_attrs = extract_user_data(error_attrs)
+          error_attrs = extract_user_data(**error_attrs)
           error_attrs = hide_sensitive_values(error_attrs)
           error = ::ExceptionHunter::Error.new(error_attrs)
           error_group = ::ExceptionHunter::ErrorGroup.find_matching_group(error) || ::ExceptionHunter::ErrorGroup.new
