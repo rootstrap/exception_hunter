@@ -1,17 +1,17 @@
 <div class="error-occurrences__nav">
-  <%= link_to pagy_url_for(1, pagy) do %>
-    <%= button_tag 'First', class: %w[button button-outline error-occurrences__nav-link], disabled: pagy.prev.nil? %>
+  <%= link_to pagy_url_for(pagy, 1) do %>
+    <%= button_tag "First", class: %w[button button-outline error-occurrences__nav-link], disabled: pagy.prev.nil? %>
   <% end %>
-  <%= link_to pagy_url_for(pagy.prev, pagy) do %>
-    <%= button_tag '<', class: %w[button button-outline error-occurrences__nav-link], disabled: pagy.prev.nil? %>
+  <%= link_to pagy_url_for(pagy, pagy.prev) do %>
+    <%= button_tag "<", class: %w[button button-outline error-occurrences__nav-link], disabled: pagy.prev.nil? %>
   <% end %>
   <div class="error-occurrences__nav-current">
     <%= occurred_at %> (<%= pagy.page %>/<%= pagy.last %>)
   </div>
-  <%= link_to pagy_url_for(pagy.next, pagy) do %>
-    <%= button_tag '>', class: %w[button button-outline error-occurrences__nav-link], disabled: pagy.next.nil? %>
+  <%= link_to pagy_url_for(pagy, pagy.next) do %>
+    <%= button_tag ">", class: %w[button button-outline error-occurrences__nav-link], disabled: pagy.next.nil? %>
   <% end %>
-  <%= link_to pagy_url_for(pagy.last, pagy) do %>
-    <%= button_tag 'Last', class: %w[button button-outline error-occurrences__nav-link], disabled: pagy.next.nil? %>
+  <%= link_to pagy_url_for(pagy, pagy.last) do %>
+    <%= button_tag "Last", class: %w[button button-outline error-occurrences__nav-link], disabled: pagy.next.nil? %>
   <% end %>
 </div>

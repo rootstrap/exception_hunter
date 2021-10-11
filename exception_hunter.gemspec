@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
   EXCLUDED_FILES = %w[lib/tasks/code_analysis.rake].freeze
   spec.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md'] - EXCLUDED_FILES
 
-  spec.add_dependency 'pagy', '~> 3'
+  spec.add_dependency 'pagy', '~> 4'
   spec.add_dependency 'slack-notifier', '~> 2.3'
 
   spec.add_development_dependency 'brakeman', '~> 4.8'
