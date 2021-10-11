@@ -42,20 +42,17 @@ module ExceptionHunter
             expect { subject }.to change { error_group.reload.message }.to('Something went very wrong 123')
           end
 
-          if RUBY_VERSION < '2.7'
-            context 'with repeating tag' do
-              before do
-                error_attributes[:tag] = ErrorCreator::HTTP_TAG
-                described_class.call(error_attributes)
-              end
+          context 'with repeating tag' do
+            before do
+              described_class.call(tag: ErrorCreator::HTTP_TAG, **error_attributes)
+            end
 
-              it 'does not repeat tags' do
-                expect(error_group.reload.tags).to eq(['HTTP'])
+            it 'does not repeat tags' do
+              expect(error_group.reload.tags).to eq(['HTTP'])
 
-                subject
+              subject
 
-                expect(error_group.reload.tags).to eq(['HTTP'])
-              end
+              expect(error_group.reload.tags).to eq(['HTTP'])
             end
           end
 
