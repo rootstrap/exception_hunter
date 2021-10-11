@@ -9,6 +9,9 @@ jobs:
       matrix:
         ruby-version: [2.6, 2.7, 3.0]
         rails-version: [5_2, 6_0, 6_1]
+        exclude:
+          - rails-version: 5_2
+            ruby-version: 3.0
       fail-fast: false
 
     # Service containers to run with `runner-job`
