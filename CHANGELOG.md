@@ -5,6 +5,12 @@
 
 ### Bug fixes
 
+## 1.1.1 (2021-10-08)
+
+### Changes
+
+- [#127](https://github.com/rootstrap/exception_hunter/pull/127) Upgrade to Pagy from 3.x to 4.x ([@megatux][])
+
 ## 1.1.0 (2021-07-30)
 
 ### New features

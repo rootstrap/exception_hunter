@@ -19,7 +19,7 @@ module ExceptionHunter
           # Time is sent in unix format and then converted to Time to avoid ActiveJob::SerializationError
           ::ExceptionHunter::AsyncLoggingJob.perform_later(tag, error_attrs.merge(occurred_at: Time.now.to_i))
         else
-          create_error(tag, error_attrs)
+          create_error(tag, **error_attrs)
         end
       rescue ActiveRecord::RecordInvalid
         false
@@ -27,19 +27,20 @@ module ExceptionHunter
 
       private
 
-      def create_error(tag, error_attrs)
+      def create_error(tag, **error_attrs)
         ActiveRecord::Base.transaction do
-          error_attrs = extract_user_data(error_attrs)
+          error_attrs = extract_user_data(**error_attrs)
           error_attrs = hide_sensitive_values(error_attrs)
           error = ::ExceptionHunter::Error.new(error_attrs)
           error_group = ::ExceptionHunter::ErrorGroup.find_matching_group(error) || ::ExceptionHunter::ErrorGroup.new
           update_error_group(error_group, error, tag)
           error.error_group = error_group
           error.save!
-          return if error_group.ignored?
 
-          notify(error)
-          error
+          unless error_group.ignored?
+            notify(error)
+            error
+          end
         end
       end
 
